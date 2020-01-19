@@ -1,0 +1,12 @@
+{
+    "name": "jlavidange/app",
+    "description": "projet 5 OPC",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jldonne",
+            "email": "jldonne@gmail.com"
+        }
+    ]
+}

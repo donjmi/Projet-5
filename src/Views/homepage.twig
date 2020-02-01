@@ -1,0 +1,22 @@
+<html>
+<head></head>
+<body>
+<h1>page d'accueil</h1>
+
+
+   {% for article in articles %}
+
+                    <h3><a href="ArticlesController/read/{{article.id}}"> {{article.title}} </a></h3>
+                    <p> {{ article.content}}</p>
+                    <p> {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
+                    <p> ------------------------------------- </p>
+
+    {% endfor %} 
+
+
+
+
+</body>
+
+
+</html>

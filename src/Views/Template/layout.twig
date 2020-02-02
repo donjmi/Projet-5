@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {% block head %} {% endblock %}
+        <link href="public/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="container">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img class="card_img" src="public/images/logo 4.png" alt="" style="line-height:80px; height:80px;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+          <div class="navbar-nav mr-auto">
+          <p id="devmo">On Blog le sport !!!!!</p>
+          </div>
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link active" href="?p=home">Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="?p=listPosts">Tous les posts</a>
+          <a class="nav-item nav-link" href="?p=cv">Mon CV</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="?p=reso" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Follow me
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Linkedin</a>
+              <a class="dropdown-item" href="#">Twitter</a>
+              <a class="dropdown-item" href="#">Github</a>
+            </div>
+          </li>
+          <a class="nav-item nav-link" href="?p=contact">Me contacter</a>
+          <a class="nav-item nav-link" href=""></a>
+          <a  href="" type="button" class="btn btn-outline-secondary">S'inscrire</a>
+          <a class="nav-item nav-link" href=""></a>
+          <a  href="" type="button" class="btn btn-success">Se connecter</a>
+        </div>
+      </div>
+    </nav>
+    </section>
+    <br />
+    <div class="container">
+      {% block content %}{% endblock content %}
+    </div>
+    <div container-fluid>
+      {% block footer %}{% endblock %}
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

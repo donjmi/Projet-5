@@ -1,7 +1,7 @@
 <?php
 namespace Blog\Models;
 
-class ArticlesModel extends MainModel{
+class HomeModel extends MainModel{
 
 public function __construct()
 {

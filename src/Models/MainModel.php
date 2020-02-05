@@ -8,7 +8,7 @@ abstract class MainModel{
 
     // Propriétés permettant de personnaliser les requêtes
     public $table;
-    public $id;
+    // public $id;
 
     /**
      * Fonction d'initialisation de la base de données
@@ -35,10 +35,5 @@ abstract class MainModel{
         return $query->fetchAll();
     }
 
-    public function getOne(){
-        $req = "SELECT * FROM ". $this->table ."WHERE id=" .$this->id;
-        $query = $this->_connexion->prepare($req);
-        $query->execute();
-        return $query->fetch();
-    }
+ 
 }

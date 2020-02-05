@@ -39,7 +39,6 @@ abstract class MainController
     public function render(string $file, array $data = [])
     {
         extract($data);
- 
         echo $this->twig->render($file . '.twig', $data);
         
     }

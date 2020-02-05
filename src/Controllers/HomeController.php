@@ -1,9 +1,9 @@
 <?php
 namespace Blog\Controllers;
 
-use Blog\Models\ArticlesModel;
+use Blog\Models\HomeModel;
 
-class ArticlesController extends MainController
+class HomeController extends MainController
 {
 
     public function index()
@@ -17,7 +17,7 @@ class ArticlesController extends MainController
          * page display 'index' 
          * articles use to view in index file
          */
-        $this->render('homepage2', ['articles' => $articles]);  
+        $this->render('homepage', ['articles' => $articles]);  
     }
 
     public function read($id){

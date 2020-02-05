@@ -6,6 +6,10 @@ body {
 #devmo{
   font-size: 20px;
   color : white;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 #img_blog {
@@ -62,3 +66,44 @@ h2 {
       -27px 54px 1px #e2e0df, 
       -28px 56px 1px #e4e3e2;
   }
+
+
+  
+#headerwrap {
+  background: url(../images/series-US.jpg) no-repeat center top;
+  /* background: url(../img/header-bg.jpg) no-repeat center top; */
+  margin-top: -20px;
+  padding-top: 0px;
+  background-attachment: relative;
+  background-position: center center;
+  min-height: 500px;
+  width: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#headerwrap h2 {
+  color: white;
+  font-weight:bold;
+  font-size: 70px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase; 
+  
+}
+
+@media (max-width: 768px ) {
+  #headerwrap h1 {
+    font-size: 50px;
+  }
+
+  #headerwrap h2 {
+    font-size: 30px;
+  }
+}

@@ -14,7 +14,7 @@ abstract class MainController
      */
     public function __construct()
     {
-        $loader = new FilesystemLoader(ROOT.'src/views');
+        $loader = new FilesystemLoader('../src/Views');
         $this->twig = new Environment($loader, [
           'cache' => false,  //__DIR__ .'/tmp'
         ]); 

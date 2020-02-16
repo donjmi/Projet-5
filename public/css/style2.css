@@ -1,0 +1,64 @@
+/*!
+ * Start Bootstrap - Full Width Pics (https://startbootstrap.com/template-overviews/full-width-pics)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-width-pics/blob/master/LICENSE)
+ */
+ body {
+  padding-top: 56px;
+}
+
+.bg-image-full {
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+.container-fluid{
+
+padding-right: 0px;
+padding-left: 0px;
+}
+
+#headerwrap {
+  background: url(../images/series-US.jpg) no-repeat center top;
+  /* background: url(../img/header-bg.jpg) no-repeat center top; */
+  margin-top: 50px;
+  padding-top: 0px;
+  background-attachment: relative;
+  background-position: center center;
+  min-height: 500px;
+  width: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#headerwrap h2 {
+  color: white;
+  font-weight:bold;
+  font-size: 70px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase; 
+  
+}
+
+@media (max-width: 768px ) {
+  #headerwrap h1 {
+    font-size: 50px;
+  }
+
+  #headerwrap h2 {
+    font-size: 30px;
+  }
+}
+
+p{
+text-align: justify;
+}

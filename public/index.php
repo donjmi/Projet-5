@@ -1,16 +1,13 @@
 <?php
 
 use Blog\Router;
+use Tracy\Debugger;
 
-require_once(dirname(__DIR__).'./vendor/autoload.php');
-require_once(dirname(__DIR__).'/config/functions.php');
+require_once ('../vendor/autoload.php');
+require_once ('../config/functions.php');
 
-
-/**
- * @var \Blog\Router $router
- */
 $router = new Router();
-/**
- * @return void
- */
+
+Debugger::enable();
 $router->run();
+

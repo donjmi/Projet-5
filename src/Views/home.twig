@@ -1,6 +1,10 @@
 {% extends 'Template/layout.twig' %}
 
   {% block content %}
+
+  <h1>Liste des derniers POSTS</h1>
+
+  </br></br>
    {% for article in articles %}
 
                     <h3><a href="ArticlesController/read/{{article.id}}"> {{article.title}} </a></h3>

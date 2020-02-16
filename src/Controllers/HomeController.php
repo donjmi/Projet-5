@@ -17,13 +17,13 @@ class HomeController extends MainController
          * page display 'index' 
          * articles use to view in index file
          */
-        $this->render('homepage', ['articles' => $articles]);  
+        $this->render('home', ['articles' => $articles]);  
     }
 
     public function read($id){
         // echo  "l'identifiant est : ".$id;
         $article = $this->loadModel("Articles")->getOne($id);
         // debug($article);
-        $this->render('homepage3', ['article' => $article]); 
+        $this->render('article', ['article' => $article]); 
     }
 }

@@ -19,7 +19,7 @@ abstract class MainModel{
         // On supprime la connexion précédente
         $this->_connexion = null;
         
-        require_once './../config/config.php';     
+        require_once '../config/config.php';     
 
         // On essaie de se connecter à la base
         if ($this->_connexion === null){

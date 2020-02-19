@@ -1,17 +1,35 @@
 {% extends 'Template/layout.twig' %}
 
-  {% block content %}
+{% block content %}
 
-  <h1>Liste des derniers POSTS</h1>
+	<h1>Liste des derniers POSTS</h1>
 
-  </br></br>
-   {% for article in articles %}
+</br></br>
+<ul>
+    {% for article in articles %}
+    <div class="card mb-2">
+    <!-- <div class="card mb-3" style="max-width: 850px;"> -->
+        <div class="row no-gutters">
+            <div class="col-md-3">
+                <img id="img_blog" src="{{ article.url_images }}" class="card-img-top" alt="..." >
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.title}}</h5>
+                    <p class="card-text">{{ article.content}} . This is a wider card with supporting text below as a natural lead-in to additional
+                        content. This content is a little bit longer...
+                        <a href="ArticlesController/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor%}
+</ul>
+{% endblock content %}
 
-                    <h3><a href="ArticlesController/read/{{article.id}}"> {{article.title}} </a></h3>
-                    <p> {{ article.content}}</p>
-                    <p> {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
-                    <p> ------------------------------------- </p>
 
-    {% endfor %} 
-  
-  {% endblock content %}
+{% block content2 %}
+
+{% endblock content2 %}

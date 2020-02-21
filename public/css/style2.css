@@ -62,3 +62,9 @@ padding-left: 0px;
 p{
 text-align: justify;
 }
+
+
+#img_blog {
+  width: 200px;
+  height: 200px;
+}

@@ -1,14 +1,41 @@
 {% extends 'Template/layout.twig' %}
 
+{% block img_accueil %} 
+<div class="container-fluid">
+   <div id="headerwrap">
+    <div class="container-fluid">
+      <div class="row centered">
+        <div class="col-lg-8 col-lg-offset-2">
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- headerwrap -->
+{% endblock img_accueil %}
+
+{% block presentation %} 
+  <!-- Content section -->
+  <section class="py-5">
+    <div class="container">
+      <h1>Les Meilleures Séries US</h1>
+      <p class="lead">Blog étant principalement axé sur les news.</p>
+      <p>vous aurez plein d’infos et de nouveautés concernant les séries en vogue, les nouvelles productions et les séries à voir. Vous connaîtrez les dates de sortie des saisons les plus attendues du grand public et d’autres informations sur les acteurs/personnages, le casting des nouveaux programmes, etc. Je ne fais aucune distinction avec ce blog de série TV : je parle de programmes divers et variés, des séries américaines très regardées comme des séries françaises intéressantes..</p>
+      <br />
+      <p>Consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+    </div>
+  </section>
+{% endblock presentation %}
+
 {% block content %}
 
-	<h1>Liste des derniers POSTS</h1>
+	<h1>Les 5 derniers POSTS</h1>
 
 </br></br>
 <ul>
     {% for article in articles %}
     <div class="card mb-2">
-    <!-- <div class="card mb-3" style="max-width: 850px;"> -->
         <div class="row no-gutters">
             <div class="col-md-3">
                 <img id="img_blog" src="{{ article.url_images }}" class="card-img-top" alt="..." >
@@ -16,8 +43,7 @@
             <div class="col-md-6">
                 <div class="card-body">
                     <h5 class="card-title">{{article.title}}</h5>
-                    <p class="card-text">{{ article.content}} . This is a wider card with supporting text below as a natural lead-in to additional
-                        content. This content is a little bit longer...
+                    <p class="card-text">{{ article.slug}}
                         <a href="ArticlesController/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
                     </p>
                     <p class="card-text"><small class="text-muted">Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
@@ -29,7 +55,4 @@
 </ul>
 {% endblock content %}
 
-
-{% block content2 %}
-
-{% endblock content2 %}
+{% block content2 %}{% endblock content2 %}

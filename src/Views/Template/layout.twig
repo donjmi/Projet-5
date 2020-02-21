@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Start Bootstrap Template</title>
+  <title>BLOG</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -23,43 +23,20 @@
   <!-- Navigation -->
  {{ include('Template/navbar.twig') }}
 
-<div class="container-fluid">
-   <div id="headerwrap">
-    <div class="container-fluid">
-      <div class="row centered">
-        <div class="col-lg-8 col-lg-offset-2">
-        </div>
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
-  </div>
-  <!-- headerwrap -->
-</div>
+{% block img_accueil %} {% endblock %}
+{% block presentation %} {% endblock %}
 
-  <!-- Content section -->
-  <section class="py-5">
-    <div class="container">
-      <h1>Les Meilleures Séries US</h1>
-      <p class="lead">Blog étant principalement axé sur les news.</p>
-      <p>vous aurez plein d’infos et de nouveautés concernant les séries en vogue, les nouvelles productions et les séries à voir. Vous connaîtrez les dates de sortie des saisons les plus attendues du grand public et d’autres informations sur les acteurs/personnages, le casting des nouveaux programmes, etc. Je ne fais aucune distinction avec ce blog de série TV : je parle de programmes divers et variés, des séries américaines très regardées comme des séries françaises intéressantes..</p>
-      <br />
-      <p>Consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
-    </div>
-  </section>
     <section class="py-5">
     <div class="container">
       {# <h1>Liste des derniers posts</h1> #}
       {% block content %} {% endblock %}
       </div>
   </section>
-
-  <!-- Image Section - set the background image for the header in the line below -->
+    <!-- Image Section - set the background image for the header in the line below -->
   <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
     <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
     <div style="height: 200px;"></div>
   </section>
-
   <!-- Content section -->
   <section class="py-5">
     <div class="container">
@@ -71,7 +48,7 @@
   </section>
     <section class="py-5">
     <div class="container">
-      {# <h1>Liste des derniers posts</h1> #}
+
       {% block content2 %} {% endblock %}
       </div>
   </section>
@@ -84,9 +61,7 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  {# <script src="vendor/jquery/jquery.min.js"></script> #}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  {# <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
 </body>

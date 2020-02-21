@@ -1,83 +1,69 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        {% block head %} {% endblock %}
-        <link href="public/css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <section class="container">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><img class="card_img" src="public/images/logo 4.png" alt="" style="line-height:80px; height:80px;"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-          <div class="navbar-nav mr-auto">
-          <p id="devmo">BLOG - Les meilleures séries US</p>
-          </div>
-        <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link active" href="?p=home">Accueil <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="?p=listPosts">Tous les posts</a>
-          <a class="nav-item nav-link" href="?p=cv">Mon CV</a>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="?p=reso" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Follow me
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Linkedin</a>
-              <a class="dropdown-item" href="#">Twitter</a>
-              <a class="dropdown-item" href="#">Github</a>
-            </div>
-          </li>
-          <a class="nav-item nav-link" href="?p=contact">Me contacter</a>
-          <a class="nav-item nav-link" href=""></a>
-          <a  href="" type="button" class="btn btn-outline-secondary">S'inscrire</a>
-          <a class="nav-item nav-link" href=""></a>
-          <a  href="" type="button" class="btn btn-success">Se connecter</a>
-        </div>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BLOG</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="/mc/public/css/style2.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+ {{ include('Template/navbar.twig') }}
+
+{% block img_accueil %} {% endblock %}
+{% block presentation %} {% endblock %}
+
+    <section class="py-5">
+    <div class="container">
+      {# <h1>Liste des derniers posts</h1> #}
+      {% block content %} {% endblock %}
       </div>
-    </nav>
-    </section>
-    <br />
+  </section>
+    <!-- Image Section - set the background image for the header in the line below -->
+  <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
+    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 200px;"></div>
+  </section>
+  <!-- Content section -->
+  <section class="py-5">
+    <div class="container">
+      <h1>Section Heading</h1>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+    </div>
+  </section>
+  </section>
+    <section class="py-5">
     <div class="container">
 
-    <div id="headerwrap">
-    <div class="container">
-      <div class="row centered">
-        <div class="col-lg-8 col-lg-offset-2">
-          <h2><b></b></h2>
-        </div>
+      {% block content2 %} {% endblock %}
       </div>
-      <!-- row -->
+  </section>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
     </div>
-    <!-- container -->
-  </div>
-  <!-- headerwrap -->
-    
+    <!-- /.container -->
+  </footer>
 
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
+</body>
 
-      {% block content %}{% endblock content %}
-    </div>
-    <div container-fluid>
-      {% block footer %}{% endblock %}
-    </div>
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
 </html>

@@ -6,9 +6,6 @@ class Router
    
     public function run()
     {    
-        define('ROOT', str_replace('public/index.php','',$_SERVER['SCRIPT_FILENAME']));
-        // define('ROOT', dirname(__DIR__));
-
         // On sépare les paramètres et on les met dans le tableau $params
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
 
@@ -21,7 +18,7 @@ class Router
             $action = isset($url[1]) ? $url[1] : 'index';
 
             // On appelle le contrôleur
-            require_once(ROOT.'src/Controllers/' . $controller . '.php');
+            require_once('../src/Controllers/' . $controller . '.php');
 
             // On instancie le contrôleur
 
@@ -47,7 +44,7 @@ class Router
 
         } else {
             
-            require_once(ROOT.'src/Controllers/HomeController.php');
+            require_once('../src/Controllers/HomeController.php');
 
             // On instancie le contrôleur
             $controller = 'Blog\\Controllers\\HomeController'; 

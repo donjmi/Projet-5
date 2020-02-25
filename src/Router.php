@@ -12,7 +12,7 @@ class Router
         // Si au moins 1 paramètre existe
         if ($url[0] != "") {
             // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
-            $controller = ucfirst($url[0]);
+            $controller = ucfirst($url[0]) . "Controller";
           
             // On sauvegarde le 2ème paramètre dans $action s'il existe, sinon la méthode index()
             $action = isset($url[1]) ? $url[1] : 'index';

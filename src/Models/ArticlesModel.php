@@ -19,4 +19,8 @@ public function getOne($id){
     $query->execute();
     return $query->fetch();
 }
+
+public function flux(){
+    return simplexml_load_file('http://serieland.net/feed/');
+    }
 }

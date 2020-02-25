@@ -17,7 +17,10 @@ class HomeController extends MainController
          * page display 'index' 
          * articles use to view in index file
          */
-        $this->render('home', ['articles' => $articles]);  
+        $this->render('home', Array(
+            'articles' => $articles,
+            'rssItems' => $this->fluxrss()->channel->item,
+        ));  
     }
 
     public function read($id){
@@ -26,4 +29,11 @@ class HomeController extends MainController
         // debug($article);
         $this->render('article', ['article' => $article]); 
     }
+    
+
+    public function fluxrss()
+    {
+        return $this->loadModel("Articles")->flux();
+    }
+  
 }

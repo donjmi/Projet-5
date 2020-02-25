@@ -44,7 +44,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{article.title}}</h5>
                     <p class="card-text">{{ article.slug}}
-                        <a href="ArticlesController/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
+                        <a href="articles/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
                     </p>
                     <p class="card-text"><small class="text-muted">Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
                 </div>
@@ -55,4 +55,15 @@
 </ul>
 {% endblock content %}
 
-{% block content2 %}{% endblock content2 %}
+{% block content2 %}
+
+{% endblock content2 %}
+
+							{% block rss %}
+              <div class="flux">Les dernières actualités</div>
+								{% for item in rssItems %}
+									<li>{{ item.pubDate|date("d/m/Y") }} - {{ item.title }} </li>
+
+                {% endfor %}
+
+							{% endblock rss %}

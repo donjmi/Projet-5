@@ -2,7 +2,7 @@
 
 {% block img_accueil %} 
 <div class="container-fluid">
-   <div id="headerwrap">
+  <div id="headerwrap">
     <div class="container-fluid">
       <div class="row centered">
         <div class="col-lg-8 col-lg-offset-2">
@@ -13,6 +13,7 @@
     <!-- container -->
   </div>
   <!-- headerwrap -->
+</div>
 {% endblock img_accueil %}
 
 {% block presentation %} 
@@ -30,17 +31,17 @@
 
 {% block content %}
 
-	<h1>Les 5 derniers POSTS</h1>
+	<h1 class="alert alert-dark text-center" role="alert">Les 5 derniers POSTS</h1>
 
 </br></br>
 <ul>
     {% for article in articles %}
     <div class="card mb-2">
         <div class="row no-gutters">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <img id="img_blog" src="{{ article.url_images }}" class="card-img-top" alt="..." >
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card-body">
                     <h5 class="card-title">{{article.title}}</h5>
                     <p class="card-text">{{ article.slug}}
@@ -56,14 +57,17 @@
 {% endblock content %}
 
 {% block content2 %}
-
+{# <div class="embed-responsive embed-responsive-21by9" style="width:300px;height:150px">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+</div> #}
 {% endblock content2 %}
-
-							{% block rss %}
-              <div class="flux">Les dernières actualités</div>
-								{% for item in rssItems %}
-									<li>{{ item.pubDate|date("d/m/Y") }} - {{ item.title }} </li>
-
-                {% endfor %}
-
-							{% endblock rss %}
+	{% block rss %}
+    <div class="alert alert-info text-center" role="alert">
+      Les dernières actualités <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrLn2qgIEYXJBhVVVMXyHt5XTegKpf6yAmh4hIrCZ_vFhhr_ZF" style="width:25px;height:25px">     
+    </div>
+      <ul class="list-group">
+	      {% for item in rssItems %}
+					<li class="list-group-item">{{ item.pubDate|date("d/m/Y") }} - <a href="{{ item.link }}" target="_blank">{{ item.title }} </a></li>
+        {% endfor %}
+      </ul>
+{% endblock rss %}

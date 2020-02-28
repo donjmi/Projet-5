@@ -1,69 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
-<head>
+	<head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
 
-  <title>BLOG</title>
+		<title>Blog - projet 5 OPC</title>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<!-- Bootstrap core CSS -->
+		<link
+		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-  <!-- Custom styles for this template -->
-  <link href="/mc/public/css/style2.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="/mc/public/css/style2.css" rel="stylesheet">
 
-</head>
+	</head>
 
-<body>
+	<body>
+		<!-- Navigation -->
+		{{ include('Template/navbar.twig') }}
 
-  <!-- Navigation -->
- {{ include('Template/navbar.twig') }}
+		{% block img_accueil %}{% endblock %}
+		{% block presentation %}{% endblock %}
 
-{% block img_accueil %} {% endblock %}
-{% block presentation %} {% endblock %}
+		<section class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-8"> {% block content %}{% endblock %}</div>
+					<div class="col-4"> {% block rss %}{% endblock %}</div>
+				</div>
+			</div>
+		</section>
+{# 
+		<!-- Image Section - set the background image for the header in the line below -->
+		<section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
+			<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+				<div style="height: 200px;"></div>
+		</section>
 
-    <section class="py-5">
-    <div class="container">
-      {# <h1>Liste des derniers posts</h1> #}
-      {% block content %} {% endblock %}
-      </div>
-  </section>
-    <!-- Image Section - set the background image for the header in the line below -->
-  <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
-    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-    <div style="height: 200px;"></div>
-  </section>
-  <!-- Content section -->
-  <section class="py-5">
-    <div class="container">
-      <h1>Section Heading</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
-    </div>
-  </section>
-  </section>
-    <section class="py-5">
-    <div class="container">
+			<!-- Content section -->
+		<section class="py-5">
+			<div class="container">
+				<h1>Section Heading</h1>
+					<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+				</div>
+		</section> #}
 
-      {% block content2 %} {% endblock %}
-      </div>
-  </section>
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+		<section class="py-5">
+		<div class="container"> {% block content2 %}{% endblock %}
+			</div>
+		</section>
+		{% include 'Template/footer.twig' %}
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
+		<!-- Bootstrap core JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	</body>
 </html>

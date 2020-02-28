@@ -68,3 +68,28 @@ text-align: justify;
   width: 200px;
   height: 200px;
 }
+
+.flux{
+  color: blueviolet;
+}
+
+
+.jmi{
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 10px 50px rgba(0,0,0,.2);
+
+
+}
+
+.circle{
+  width: 200px;
+  height: 200px;
+  /* background: url(https://fr.web.img5.acsta.net/c_216_288/pictures/19/10/29/09/05/3954913.jpg); */
+  background-size: 100% 100%;
+  border-radius: 50%;
+  float: left;
+  shape-outside: circle();
+  margin: 20px;
+}

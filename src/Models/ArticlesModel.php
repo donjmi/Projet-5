@@ -21,6 +21,6 @@ public function getOne($id){
 }
 
 public function flux(){
-    return simplexml_load_file('http://serieland.net/feed/');
+    return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
     }
 }

@@ -1,12 +1,13 @@
 {% extends 'Template/layout.twig' %}
+
 {% block content %}
 
-<h1>L'article</h1>
-
+<h1>{{ article.title }} </h1>
+<p>Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
 </br>
-                    <h3> {{ article.title }} </h3>
-                    <p> {{ article.content}}</p>
-                    <p> ------------------------------------- </p>
+<div><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></div>
+<p class="jmi"> {{ article.content  }}</p>
+                    
+          
 
 {% endblock %}
-

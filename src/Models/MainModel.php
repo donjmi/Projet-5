@@ -8,7 +8,7 @@ abstract class MainModel{
 
     // Propriétés permettant de personnaliser les requêtes
     public $table;
-    // public $id;
+    public $id;
 
     /**
      * Fonction d'initialisation de la base de données
@@ -35,5 +35,17 @@ abstract class MainModel{
         return $query->fetchAll();
     }
 
- 
+    public function update($data){
+        $req = "UPDATE ". $this->table . "SET ";
+        foreach ($data as $key=>$value){
+            $req .= "$key = '$value'";
+        }
+        $req = substr($req,0,-1);
+        // $req .= " WHERE id='". $this->id ."'";
+        $req .= " WHERE id='9'";
+        echo $req;
+        debug($req);
+
+    }
+
 }

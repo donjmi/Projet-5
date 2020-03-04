@@ -2,6 +2,7 @@
 namespace Blog\Models;
 
 class ArticlesModel extends MainModel{
+public $id;
 
 public function __construct()
 {

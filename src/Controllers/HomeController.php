@@ -19,7 +19,7 @@ class HomeController extends MainController
          */
         $this->render('home', Array(
             'articles' => $articles,
-            'rssItems' => $this->fluxrss()->channel->item,
+            'rssItems' => $this->fluxrss()->channel->item
         ));  
     }
 

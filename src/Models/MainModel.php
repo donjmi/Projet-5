@@ -29,23 +29,38 @@ abstract class MainModel{
     }   
 
     public function getAll(){
-        $req = "SELECT DISTINCT * FROM ". $this->table ." ORDER BY id desc LIMIT 0,5" ;
+        // $req = "SELECT DISTINCT * FROM ". $this->table ." ORDER BY id desc LIMIT 0,5" ;
+        $req = "SELECT DISTINCT * FROM ". $this->table ." ORDER BY id desc" ;
         $query = $this->_connexion->prepare($req);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function update($data){
-        $req = "UPDATE ". $this->table . "SET ";
-        foreach ($data as $key=>$value){
-            $req .= "$key = '$value'";
+    public function getOne($id){
+        $req = "SELECT * FROM ". $this->table ." WHERE id='". $id ."'";
+        $query = $this->_connexion->prepare($req);
+        $query->execute();
+        return $query->fetch();
         }
-        $req = substr($req,0,-1);
-        // $req .= " WHERE id='". $this->id ."'";
-        $req .= " WHERE id='9'";
-        echo $req;
-        debug($req);
 
+    public function test($fields=null){
+        if($fields==null){
+            $fields = "*";
+        }
+        $req = "SELECT $fields FROM ". $this->table . " WHERE id='". $this->id ."'"; ;
+        $data = $this->_connexion->prepare($req);
+        $data->execute();
+        return $data->fetchAll();
+       
     }
+    public function createData(array $data){
+        $keys = implode(', ', array_keys($data));
+        $values = implode('", "', $data);
+        $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';
+        
+        $query = $this->_connexion->prepare($req);
+        return $query->execute();
+    }
+
 
 }

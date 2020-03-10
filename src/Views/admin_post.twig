@@ -1,0 +1,50 @@
+{% extends 'Template/layout.twig' %}
+
+{% block content %}
+<h4> Liste des posts - Admin </h4>
+<br />
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th>id</th>
+        <th>titre</th>
+        <th>slug</th>
+        <th>date creation</th>
+        <th>Editer</th>
+				<th>supprimer</th>
+    </tr>
+    <thead>
+{% for article in articles %}
+    <tr>
+       <td>{{ article.id }}</td>
+       <td>{{ article.title }}</td>
+       <td>{{ article.slug|slice(0, 55) }} ...</td>
+       <td>{{ article.date_creation|date("d/m/Y h:i:s") }}</td>
+       <td>
+					<a href="">
+							<button type="button" class="btn btn-warning">éditer</button>
+						</td>
+				<td>
+					<a href="">
+						<button type="button" class="btn btn-danger">supprimer</button>
+					</td>
+    </tr>
+   {% endfor%}
+</table>
+<br />
+----------------------------------------------------------------------
+<br />
+
+<form method="post" action="admin/edit/" class="text-center border border-light p-5">
+  <p class="h4 mb-4">Ajouter un article</p>
+
+   <p><input type="hidden"  name="id"         value=""></p>
+   <p><input type="text"    name="title"      value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Titre"></p>
+   <p><input type="text"    name="slug"       value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Slug"></p>
+   <p><textarea             name="content"    value "" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description"></textarea></p> 
+   <p><input type="text"    name="url_images" value="" id="defaultContactFormName" class="form-control mb-4" placeholder="copier l'url de l'image"></p>
+   <p><input type="submit"  value="envoyer"></p>
+
+</form>
+{% endblock content %}
+

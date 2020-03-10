@@ -35,7 +35,7 @@
 
 </br></br>
 <ul>
-    {% for article in articles %}
+    {% for article in articles |slice(0,5) %}
     <div class="card mb-2">
         <div class="row no-gutters">
             <div class="col-md-4">

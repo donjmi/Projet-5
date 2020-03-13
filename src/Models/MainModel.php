@@ -62,5 +62,38 @@ abstract class MainModel{
         return $query->execute();
     }
 
+    public function updateData(string $value, array $data, string $key = null)
+    {
+        $set = null;
+
+        foreach ($data as $dataKey => $dataValue) {
+            $set .= $dataKey . ' = "' . $dataValue . '", ';
+        }
+
+        $set = substr_replace($set, '', -2);
+
+        if (isset($key)) {
+            $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE ' . $key . ' = ?';
+        } else {
+            $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ?';
+        }
+
+        $this->database->setData($query, [$value]);
+    }
+    /**
+     * Deletes Data from its id or another key
+     * @param string $value
+     * @param string|null $key
+     */
+    public function deleteData(string $value, string $key = null)
+    {
+        if (isset($key)) {
+            $query = 'DELETE FROM ' . $this->table . ' WHERE ' . $key . ' = ?';
+        } else {
+            $query = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
+        }
+
+        $this->database->setData($query, [$value]);
+    }
 
 }

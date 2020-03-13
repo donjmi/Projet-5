@@ -13,14 +13,6 @@ public function __construct()
     $this->getConnection();
 }
 
-public function getOne($id){
-    $req = "SELECT * FROM ". $this->table ." WHERE id='". $id ."'";
-    // $req = "SELECT * FROM ". $this->table ." WHERE id='10'";
-    $query = $this->_connexion->prepare($req);
-    $query->execute();
-    return $query->fetch();
-}
-
 public function flux(){
     return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
     }

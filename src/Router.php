@@ -13,10 +13,10 @@ class Router
         if ($url[0] != "") {
             // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
             $controller = ucfirst($url[0]) . "Controller";
-          
+            // debug($controller);
             // On sauvegarde le 2ème paramètre dans $action s'il existe, sinon la méthode index()
             $action = isset($url[1]) ? $url[1] : 'index';
-
+           
             // On appelle le contrôleur
             require_once('../src/Controllers/' . $controller . '.php');
 
@@ -24,7 +24,7 @@ class Router
 
             $controller = 'Blog\\Controllers\\' . $controller;
             $controller = new $controller();
-          
+            
 
             // On appelle la méthode
             if (method_exists($controller, $action)) {

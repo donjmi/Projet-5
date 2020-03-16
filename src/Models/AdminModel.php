@@ -1,9 +1,8 @@
 <?php
 namespace Blog\Models;
 
-class ArticlesModel extends MainModel{
-public $id;
-
+class AdminModel extends MainModel{
+      
 public function __construct()
 {
     // Nous définissons la table par défaut de ce modèle
@@ -13,7 +12,4 @@ public function __construct()
     $this->getConnection();
 }
 
-public function flux(){
-    return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
-    }
 }

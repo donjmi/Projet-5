@@ -1,0 +1,20 @@
+{% extends 'Template/layout.twig' %}
+
+{% block content %}
+
+<br />
+
+<form method="post" action="admin/edit/" class="text-center border border-light p-5">
+  <h2>{{ article.title }}</h2>
+  <p class="h4 mb-4">gestion de l'article</p>
+
+   <p><input type="hidden"  name="id"         value="{{ article.id }}"></p>
+   <p><input type="text"    name="title"      value="{{ article.title }}" id="defaultContactFormName" class="form-control mb-4" placeholder="Titre" required></p>
+   <p><input type="text"    name="slug"       value="{{ article.slug }}" id="defaultContactFormName" class="form-control mb-4" placeholder="Slug" required></p>
+   <p><textarea             name="content"    value "{{ article.content }}" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description" required></textarea></p> 
+   <p><input type="text"    name="url_images" value="{{ article.url_images }}" id="defaultContactFormName" class="form-control mb-4" placeholder="copier l'url de l'image" required></p>
+   <p><input type="submit"  value="editer"></p>
+
+</form>
+{% endblock content %}
+

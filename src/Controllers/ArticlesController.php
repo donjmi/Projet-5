@@ -23,7 +23,20 @@ class ArticlesController extends MainController
     public function read($id){
         // echo  "l'identifiant est : ".$id;
         $article = $this->loadModel("Articles")->getOne($id);
-        // debug($article);
         $this->render('article', ['article' => $article]); 
     }
+
+    
+    public function update($id){
+        // echo  "l'identifiant est : ".$id;
+        $article = $this->loadModel("Articles")->getOne($id);
+        $this->render('Article_edit', ['article' => $article]); 
+    }
+
+    public function delete($id){
+       
+        $article = $this->loadModel("Articles")->getOne($id);
+        $this->render('Article_delete', ['article' => $article]); 
+    }
+
 }

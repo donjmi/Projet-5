@@ -3,6 +3,8 @@ namespace Blog\Models;
 
 class HomeModel extends MainModel{
 
+public $id;
+
 public function __construct()
 {
     // Nous définissons la table par défaut de ce modèle

@@ -1,0 +1,19 @@
+{% extends 'Template/layout.twig' %}
+
+{% block content %}
+
+<br />
+
+<form method="post" action="admin/delete/" class="text-center border border-light p-5">
+  <h2>{{ article.title }}</h2>
+  <p class="h4 mb-4">suppression de l'article</p>
+
+   <p><input type="hidden"  name="id"         value="{{ article.id }}"></p>
+   <p><input type="text"    name="title"      value="{{ article.title }}" id="defaultContactFormName" class="form-control mb-4" placeholder="Titre"></p>
+   <p><input type="text"    name="slug"       value="{{ article.slug }}" id="defaultContactFormName" class="form-control mb-4" placeholder="Slug"></p>
+   <p><textarea             name="content"    value "{{ article.content }}" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description"></textarea></p> 
+   <p><input type="text"    name="url_images" value="{{ article.url_images }}" id="defaultContactFormName" class="form-control mb-4" placeholder="copier l'url de l'image"></p>
+   <p><input type="submit"  value="suprimer l'article"></p>
+</form>
+{% endblock content %}
+

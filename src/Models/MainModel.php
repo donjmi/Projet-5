@@ -29,7 +29,6 @@ abstract class MainModel{
     }   
 
     public function getAll(){
-        // $req = "SELECT DISTINCT * FROM ". $this->table ." ORDER BY id desc LIMIT 0,5" ;
         $req = "SELECT DISTINCT * FROM ". $this->table ." ORDER BY id desc" ;
         $query = $this->_connexion->prepare($req);
         $query->execute();
@@ -43,57 +42,37 @@ abstract class MainModel{
         return $query->fetch();
         }
 
-    public function test($fields=null){
-        if($fields==null){
-            $fields = "*";
-        }
-        $req = "SELECT $fields FROM ". $this->table . " WHERE id='". $this->id ."'"; ;
-        $data = $this->_connexion->prepare($req);
-        $data->execute();
-        return $data->fetchAll();
-       
-    }
-    public function createData(array $data){
+    public function createQuery(string $command, array $data){
         $keys = implode(', ', array_keys($data));
         $values = implode('", "', $data);
-        $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';
+
+        switch($command){
+            case 'insert':
+                $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';
+            break;
+
+            case 'update':
+                $set = null;
+                foreach ($data as $dataKey => $dataValue) {
+                    if ($dataKey == 'id'){
+                        continue;
+                    }
+                    $set .= $dataKey . ' = "' . $dataValue . '", ';
+                }
+                $set = substr_replace($set, '', -2);
+                $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = '. $data['id'];
+            break;
+
+            case 'delete':
+                $req = 'DELETE FROM ' . $this->table . ' WHERE id = '. $data['id'];
+            break;
+        }
         
+        // debug($req);
         $query = $this->_connexion->prepare($req);
         return $query->execute();
-    }
 
-    public function updateData(string $value, array $data, string $key = null)
-    {
-        $set = null;
-
-        foreach ($data as $dataKey => $dataValue) {
-            $set .= $dataKey . ' = "' . $dataValue . '", ';
-        }
-
-        $set = substr_replace($set, '', -2);
-
-        if (isset($key)) {
-            $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE ' . $key . ' = ?';
-        } else {
-            $query = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ?';
-        }
-
-        $this->database->setData($query, [$value]);
-    }
-    /**
-     * Deletes Data from its id or another key
-     * @param string $value
-     * @param string|null $key
-     */
-    public function deleteData(string $value, string $key = null)
-    {
-        if (isset($key)) {
-            $query = 'DELETE FROM ' . $this->table . ' WHERE ' . $key . ' = ?';
-        } else {
-            $query = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
-        }
-
-        $this->database->setData($query, [$value]);
+        header('Location: index.php/Admin/edit');
     }
 
 }

@@ -22,10 +22,10 @@
        <td>{{ article.date_creation|date("d/m/Y h:i:s") }}</td>
        <td>
 					<a href="articles/update/{{article.id}}">
-							<button type="button" class="btn btn-warning">éditer</button>
+							<button type="button" class="btn btn-warning">modifier</button>
 						</td>
 				<td>
-					<a href="">
+					<a href="articles/delete/{{article.id}}">
 						<button type="button" class="btn btn-danger">supprimer</button>
 					</td>
     </tr>
@@ -39,10 +39,10 @@
   <p class="h4 mb-4">Ajouter un article</p>
 
    <p><input type="hidden"  name="id"         value=""></p>
-   <p><input type="text"    name="title"      value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Titre"></p>
-   <p><input type="text"    name="slug"       value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Slug"></p>
-   <p><textarea             name="content"    value "" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description"></textarea></p> 
-   <p><input type="text"    name="url_images" value="" id="defaultContactFormName" class="form-control mb-4" placeholder="copier l'url de l'image"></p>
+   <p><input type="text"    name="title"      value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Titre" required></p>
+   <p><input type="text"    name="slug"       value="" id="defaultContactFormName" class="form-control mb-4" placeholder="Slug" required></p>
+   <p><textarea             name="content"    value "" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description" required></textarea></p> 
+   <p><input type="text"    name="url_images" value="" id="defaultContactFormName" class="form-control mb-4" placeholder="copier l'url de l'image" required></p>
    <p><input type="submit"  value="envoyer"></p>
 
 </form>

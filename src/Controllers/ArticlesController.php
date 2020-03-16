@@ -35,8 +35,8 @@ class ArticlesController extends MainController
 
     public function delete($id){
        
-        $article = $this->loadModel("Articles")->deleteOne($id);
-        $this->render('Admin_post', ['article' => $article]); 
+        $article = $this->loadModel("Articles")->getOne($id);
+        $this->render('Article_delete', ['article' => $article]); 
     }
 
 }

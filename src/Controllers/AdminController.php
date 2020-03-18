@@ -41,7 +41,7 @@ class AdminController extends MainController
         )); 
     }       
 
-    public function delete()
+    public function deletexxx()
     {
         if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
             
@@ -57,11 +57,6 @@ class AdminController extends MainController
             $x = $this->loadModel("Admin")->createQuery('delete',$data);
             
         } 
-    }
-
-    public function xxerase($id){
-  
-        $articles = $this->loadModel("Admin")->erase($id); 
     }
     
 }

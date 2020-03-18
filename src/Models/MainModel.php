@@ -70,7 +70,7 @@ abstract class MainModel
                 $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ' . $data['id'];
                 break;
 
-            case 'delete':
+            case 'deletex':
                 $req = 'DELETE FROM ' . $this->table . ' WHERE id = ' . $data['id'];
                 break;
         }

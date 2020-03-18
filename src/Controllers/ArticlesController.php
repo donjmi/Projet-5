@@ -27,7 +27,7 @@ class ArticlesController extends MainController
         $this->render('Article_edit', ['article' => $article]); 
     }
 
-    public function delete($id){
+    public function deletexxx($id){
        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('Article_delete', ['article' => $article]); 
@@ -35,9 +35,12 @@ class ArticlesController extends MainController
     }
     /** new code */
     public function erase($id){
-    
+        $one = $this->loadModel("Articles")->getOne($id);
         $article = $this->loadModel("Articles")->erase($id); 
-        $this->render('article_delete', ['article' => $article]); 
+        $this->render('article_delete', Array(
+            'article' => $article,
+            'one' => $one
+        )); 
     }
 
 }

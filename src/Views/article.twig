@@ -3,23 +3,19 @@
 {% block content %}
 <h1>{{ article.title }} </h1>
 <p>Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
-</br>
-<div><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></div>
-<p class="jmi"> {{ article.content  }}</p>
+
+<figure><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></figure>
+<p class="jmi"> {{ article.content|nl2br  }}</p>
 {% endblock %}
 
 
-{% block content2 %}
-
-<h1>Qu'en pensez vous : {{ article.title }} </h1>
-<h4>Saississez votre commentaire !!! </h4>
-<br />
+{% block form %}
+<h2>{{ article.title }}</h2>
+<h3>Vos commentaires ci-dessous :</h3>
   <form method="post" action="comment/edit/" class="text-center border border-light p-5">
-
   <p><input type="hidden"  name="id"         value="{{ article.id }}"></p>
   <p><input type="text"    name="pseudo"      value="{{ article.pseudo }}" id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
-  <p><textarea             name="content"    value "{{ article.content }}" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description" required></textarea></p>
-  <p><input type="submit"  value="editer"></p>
+  <p><textarea             name="comment"    value "{{ article.content }}" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description" required></textarea></p>
+  <p><input type="submit"  value="envoyez"></p>
 </form>
-
 {% endblock %}

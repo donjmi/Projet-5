@@ -1,5 +1,5 @@
 # DB (uncomment when you start using the template)
-# config/db.php
+config/config.php
 # config/db.sql
 
 # Images

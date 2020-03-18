@@ -9,26 +9,20 @@ class ArticlesController extends MainController
     public function index()
     {
         /**
-         * load the model and his function
+         * load the model and his function + views
          */
         $articles = $this->loadModel("Articles")->getAll();
-            
-        /**
-         * page display 'index' 
-         * articles use to view in index file
-         */
         $this->render('article', ['articles' => $articles]);  
     }
 
     public function read($id){
-        // echo  "l'identifiant est : ".$id;
+        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('article', ['article' => $article]); 
     }
-
     
     public function update($id){
-        // echo  "l'identifiant est : ".$id;
+        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('Article_edit', ['article' => $article]); 
     }
@@ -37,6 +31,13 @@ class ArticlesController extends MainController
        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('Article_delete', ['article' => $article]); 
+        
+    }
+    /** new code */
+    public function erase($id){
+    
+        $article = $this->loadModel("Articles")->erase($id); 
+        $this->render('article_delete', ['article' => $article]); 
     }
 
 }

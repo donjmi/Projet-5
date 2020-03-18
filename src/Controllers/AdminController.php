@@ -16,7 +16,7 @@ class AdminController extends MainController
             $data['content'] = $_POST['content'];
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
-            // debug($data);
+            
 
             $x = $this->loadModel("Admin")->createQuery('update',$data);
 
@@ -28,9 +28,8 @@ class AdminController extends MainController
             $data['content'] = $_POST['content'];
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
-            //debug($data);
 
-            $x = $this->loadModel("Admin")->createQuery('insert',$data);
+            $x = $this->loadModel("Admin")->createQuery('create',$data);
 
         }
         /**
@@ -39,8 +38,8 @@ class AdminController extends MainController
         $articles = $this->loadModel("Admin")->getAll();
         $this->render('Admin_post', Array(
             'articles'  => $articles
-        ));  
-    }
+        )); 
+    }       
 
     public function delete()
     {
@@ -53,10 +52,16 @@ class AdminController extends MainController
             $data['content'] = $_POST['content'];
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
-            // debug($data);
+            
 
             $x = $this->loadModel("Admin")->createQuery('delete',$data);
-
+            
         } 
     }
+
+    public function xxerase($id){
+  
+        $articles = $this->loadModel("Admin")->erase($id); 
+    }
+    
 }

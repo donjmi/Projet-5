@@ -48,6 +48,19 @@ abstract class MainModel
         return $query->execute();
     }
 
+     /**
+     * Creates a new Data entry
+     * @param array $data
+     */
+    public function createData(array $data)
+    {
+        $keys = implode(', ', array_keys($data));
+        $values = implode('", "', $data);
+        $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';
+        $query = $this->connexion->prepare($req);
+        return $query->execute();
+    }
+
     public function createQuery(string $command, array $data)
     {
         $keys = implode(', ', array_keys($data));
@@ -68,10 +81,6 @@ abstract class MainModel
                 }
                 $set = substr_replace($set, '', -2);
                 $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ' . $data['id'];
-                break;
-
-            case 'deletex':
-                $req = 'DELETE FROM ' . $this->table . ' WHERE id = ' . $data['id'];
                 break;
         }
 

@@ -5,16 +5,20 @@ use Blog\Models\ArticlesModel;
 
 class ArticlesController extends MainController
 {
-
     public function index()
     {
         /**
-         * load the model and his function + views
+         * load the models + methods + views
          */
         $articles = $this->loadModel("Articles")->getAll();
         $this->render('article', ['articles' => $articles]);  
     }
 
+    public function create($id){
+        
+        $article = $this->loadModel("Articles")->getOne($id);
+        $this->render('article_edit', ['article' => $article]); 
+    }
     public function read($id){
         
         $article = $this->loadModel("Articles")->getOne($id);
@@ -27,13 +31,6 @@ class ArticlesController extends MainController
         $this->render('Article_edit', ['article' => $article]); 
     }
 
-    public function deletexxx($id){
-       
-        $article = $this->loadModel("Articles")->getOne($id);
-        $this->render('Article_delete', ['article' => $article]); 
-        
-    }
-    /** new code */
     public function delete($id){
         $one = $this->loadModel("Articles")->getOne($id);
         $article = $this->loadModel("Articles")->delete($id); 
@@ -42,5 +39,4 @@ class ArticlesController extends MainController
             'one' => $one
         )); 
     }
-
 }

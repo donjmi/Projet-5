@@ -34,9 +34,9 @@ class ArticlesController extends MainController
         
     }
     /** new code */
-    public function erase($id){
+    public function delete($id){
         $one = $this->loadModel("Articles")->getOne($id);
-        $article = $this->loadModel("Articles")->erase($id); 
+        $article = $this->loadModel("Articles")->delete($id); 
         $this->render('article_delete', Array(
             'article' => $article,
             'one' => $one

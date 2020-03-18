@@ -41,7 +41,7 @@ abstract class MainModel
         return $query->fetch();
     }
 
-    public function erase($id)
+    public function delete($id)
     {
         $req = 'DELETE FROM ' . $this->table . ' WHERE id=' . $id;
         $query = $this->connexion->prepare($req);

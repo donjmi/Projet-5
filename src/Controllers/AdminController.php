@@ -39,24 +39,6 @@ class AdminController extends MainController
         $this->render('Admin_post', Array(
             'articles'  => $articles
         )); 
-    }       
-
-    public function deletexxx()
-    {
-        if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
-            
-            $data= array();
-            $data['id'] = $_POST['id'];
-            $data['title'] = $_POST['title'];
-            $data['slug'] = $_POST['slug'];
-            $data['content'] = $_POST['content'];
-            $data['date_creation'] = date("Y-m-d H:i:s");
-            $data['url_images'] = $_POST['url_images'];
-            
-
-            $x = $this->loadModel("Admin")->createQuery('delete',$data);
-            
-        } 
     }
     
 }

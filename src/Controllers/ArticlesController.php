@@ -5,38 +5,38 @@ use Blog\Models\ArticlesModel;
 
 class ArticlesController extends MainController
 {
-
     public function index()
     {
         /**
-         * load the model and his function
+         * load the models + methods + views
          */
         $articles = $this->loadModel("Articles")->getAll();
-            
-        /**
-         * page display 'index' 
-         * articles use to view in index file
-         */
         $this->render('article', ['articles' => $articles]);  
     }
 
+    public function create($id){
+        
+        $article = $this->loadModel("Articles")->getOne($id);
+        $this->render('article_edit', ['article' => $article]); 
+    }
     public function read($id){
-        // echo  "l'identifiant est : ".$id;
+        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('article', ['article' => $article]); 
     }
-
     
     public function update($id){
-        // echo  "l'identifiant est : ".$id;
+        
         $article = $this->loadModel("Articles")->getOne($id);
         $this->render('Article_edit', ['article' => $article]); 
     }
 
     public function delete($id){
-       
-        $article = $this->loadModel("Articles")->getOne($id);
-        $this->render('Article_delete', ['article' => $article]); 
+        $one = $this->loadModel("Articles")->getOne($id);
+        $article = $this->loadModel("Articles")->delete($id); 
+        $this->render('article_delete', Array(
+            'article' => $article,
+            'one' => $one
+        )); 
     }
-
 }

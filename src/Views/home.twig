@@ -31,9 +31,8 @@
 
 {% block content %}
 
-	<h1 class="alert alert-dark text-center" role="alert">Les 5 derniers POSTS</h1>
+	<h2 class="alert alert-dark text-center" role="alert">Les 5 derniers POSTS</h2>
 
-</br></br>
 <ul>
     {% for article in articles |slice(0,5) %}
     <div class="card mb-2">
@@ -56,9 +55,9 @@
 </ul>
 {% endblock content %}
 
-{% block content2 %}
-{% endblock content2 %}
-	{% block rss %}
+{% block content2 %}{% endblock content2 %}
+
+{% block rss %}
     <div class="alert alert-info text-center" role="alert">
       Les dernières actualités <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrLn2qgIEYXJBhVVVMXyHt5XTegKpf6yAmh4hIrCZ_vFhhr_ZF" style="width:25px;height:25px">     
     </div>

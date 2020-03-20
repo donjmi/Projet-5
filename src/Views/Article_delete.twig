@@ -1,8 +1,14 @@
 {% extends 'Template/layout.twig' %}
 
 {% block content %}
-
-<p>L'article : {{ one.title }} a bien été supprimé</p>
-
+<div id="block">
+    <div class="jumbotron">
+    <h1 class="display-5">L'article n° {{ one.id }}  a bien été supprimé</h1>
+    <br />
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="admin/edit/" role="button">fermer</a>
+    </p>
+    </div>
+</div>
 {% endblock content %}
 

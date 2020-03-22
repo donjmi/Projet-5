@@ -5,6 +5,7 @@ abstract class MainModel
 {
     // Propriétés permettant de personnaliser les requêtes
     protected $table;
+    public $model;
   
     /**
      * Fonction d'initialisation de la base de données
@@ -24,7 +25,7 @@ abstract class MainModel
         }
         return $this->connexion;
     }
-  
+
     public function getAll()
     {
         $req = "SELECT DISTINCT * FROM " . $this->table . " ORDER BY id desc";

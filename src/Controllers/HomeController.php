@@ -2,6 +2,7 @@
 namespace Blog\Controllers;
 
 use Blog\Models\HomeModel;
+use Blog\Models\MainModel;
 
 class HomeController extends MainController
 {

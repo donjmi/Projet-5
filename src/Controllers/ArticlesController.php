@@ -36,14 +36,8 @@ class ArticlesController extends MainController
         $article = $this->loadModel("Articles")->delete($id); 
         $this->render('article_delete', Array(
             'article'   => $article,
-            'one'       => $one,
-            'title'     => $this->titre($id)
+            'one'       => $one            
         )); 
     }
 
-    public function titre($id){
-        
-        return $this->loadModel("Articles")->getOne($id);
-        
-    }
 }

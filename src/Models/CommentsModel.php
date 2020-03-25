@@ -1,12 +1,12 @@
 <?php
 namespace Blog\Models;
 
-class ArticlesModel extends MainModel{
+class CommentsModel extends MainModel{
 
 public function __construct()
 {
     // Nous définissons la table par défaut de ce modèle
-    $this->table = "posts";
+    $this->table = "comments";
 
     // Nous ouvrons la connexion à la base de données
     $this->getConnection();

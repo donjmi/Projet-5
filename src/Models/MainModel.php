@@ -26,13 +26,37 @@ abstract class MainModel
         return $this->connexion;
     }
 
-    public function getAll()
+    public function getAll(string $key=null, string $value=null)
     {
-        $req = "SELECT DISTINCT * FROM " . $this->table . " ORDER BY id desc";
-        $query = $this->connexion->prepare($req);
-        $query->execute();
-        return $query->fetchAll();
+            $req = "SELECT DISTINCT * FROM " . $this->table;
+            
+            if (isset($key) && isset($value)){
+                $req .= " WHERE $key = $value";
+            }
+
+            $req .= " ORDER BY id desc";
+            $query = $this->connexion->prepare($req);
+            $query->execute();
+            return $query->fetchAll();
     }
+
+    public function listAll(array $params=null)
+    {
+            $req = 'SELECT DISTINCT * FROM ' . $this->table;
+            
+            if (isset($params)){
+                foreach($params as $key => $value)
+                {
+                    $req .= ($key == key($params) ? " WHERE" : " AND");
+                    $req .= ' '.$key.' = "'.$value.'"';
+                }   
+            }
+            $req .= " ORDER BY id desc";
+            $query = $this->connexion->prepare($req);
+            $query->execute();
+            return $query->fetchAll();
+    }
+  
 
     public function getOne($id)
     {

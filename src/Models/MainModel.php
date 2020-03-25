@@ -14,12 +14,12 @@ abstract class MainModel
      */
     public function getConnection()
     {
-        // On supprime la connexion précédente
+        // re-init data cnx
         $this->connexion = null;
 
         require_once '../config/config.php';
 
-        // On essaie de se connecter à la base
+        // data cnx
         if ($this->connexion === null) {
             $this->connexion = new \PDO(DB_DSN, DB_USER, DB_PASS, DB_OPTIONS);
         }

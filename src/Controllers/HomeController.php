@@ -24,14 +24,6 @@ class HomeController extends MainController
         ));  
     }
 
-    public function read($id){
-        // echo  "l'identifiant est : ".$id;
-        $article = $this->loadModel("Articles")->getOne($id);
-        // debug($article);
-        $this->render('article', ['article' => $article]); 
-    }
-    
-
     public function fluxrss()
     {
         return $this->loadModel("Articles")->flux();

@@ -14,8 +14,18 @@
 <h3>Vos commentaires ci-dessous :</h3>
   <form method="post" action="comment/edit/" class="text-center border border-light p-5">
   <p><input type="hidden"  name="id"         value="{{ article.id }}"></p>
-  <p><input type="text"    name="pseudo"      value="{{ article.pseudo }}" id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
+  <p><input type="text"    name="pseudo"     value="{{ article.pseudo }}" id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
   <p><textarea             name="comment"    value "{{ article.content }}" id="exampleFormControlTextarea2" class="form-control rounded-0"  rows="3" placeholder="Description" required></textarea></p>
-  <p><input type="submit"  value="envoyez"></p>
+  <p><input type="submit"                    value="envoyez"></p>
 </form>
 {% endblock %}
+
+
+{% block content2 %}
+commentaires test
+  {% for item in comments %}
+   <br/> {{ item.posts_id }}  - {{ item.comment }}   - ({{ item.date_comment }})
+
+  {% endfor%}
+
+{% endblock content2 %}

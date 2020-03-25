@@ -17,12 +17,22 @@ class ArticlesController extends MainController
     public function create($id){
         
         $article = $this->loadModel("Articles")->getOne($id);
-        $this->render('article_edit', ['article' => $article]); 
+        $this->render('article_edit', Array(
+            'article' => $article
+        )); 
     }
     public function read($id){
         
         $article = $this->loadModel("Articles")->getOne($id);
-        $this->render('article', ['article' => $article]); 
+        // $comment = $this->loadModel("comments")->getAll('posts_id', $id);
+        $comment = $this->loadModel("comments")->listAll([
+        'posts_id' => $id, 
+        // 'comment' => 'très'
+        ]);
+        $this->render('article', [
+            'article' => $article,
+            'comments' => $comment
+            ]); 
     }
     
     public function update($id){
@@ -33,10 +43,10 @@ class ArticlesController extends MainController
 
     public function delete($id){
         $one = $this->loadModel("Articles")->getOne($id);
-        $article = $this->loadModel("Articles")->delete($id); 
+        $article = $this->loadModel("Articles")->delete($id);
         $this->render('article_delete', Array(
             'article'   => $article,
-            'one'       => $one            
+            'one'       => $one
         )); 
     }
 

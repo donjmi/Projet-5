@@ -19,7 +19,7 @@
 {% for article in articles %}
     <tr>
        <td>{{ article.id }}</td>
-       <td><img id="img_blog_admin" src="{{ article.url_images }}" class="card-img-top" alt="..." ></td>
+       <td><img id="img_blog_admin" src="{{ article.url_images }}" alt="..." ></td>
        <td>{{ article.title }}</td>
        <td>{{ article.slug|slice(0, 55) }} ...</td>
        <td>{{ article.content|slice(0, 55) }} ...</td>

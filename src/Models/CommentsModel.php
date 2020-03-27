@@ -12,7 +12,4 @@ public function __construct()
     $this->getConnection();
 }
 
-public function flux(){
-    return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
-    }
 }

@@ -7,6 +7,18 @@ abstract class MainModel
     protected $table;
     public $model;
   
+       /**
+     * Allows to load a model
+     * @param string $model
+     * @return void
+     */
+    public static function loadModel(string $model)
+    {
+        // create an instance of this model
+        $model = 'Blog\\Models\\' . $model . 'Model';
+        return new $model();
+    }
+
     /**
      * Fonction d'initialisation de la base de données
      *
@@ -49,7 +61,7 @@ abstract class MainModel
                 {
                     $req .= ($key == key($params) ? " WHERE" : " AND");
                     $req .= ' '.$key.' = "'.$value.'"';
-                }   
+                }
             }
             $req .= " ORDER BY id desc";
             $query = $this->connexion->prepare($req);

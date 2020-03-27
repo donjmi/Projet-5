@@ -1,0 +1,8 @@
+<div class="comment">
+commentaires test
+  {% for item in comments %}
+   <br/> Article : {{ item.posts_id }}  - le  ({{ item.date_comment }})
+   <br > commentaire : {{ item.comment }} 
+
+  {% endfor%}
+</div>

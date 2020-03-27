@@ -2,6 +2,7 @@
 namespace Blog\Controllers;
 
 use Blog\Models\AdminModel;
+use Blog\Models\MainModel;
 
 class AdminController extends MainController
 {
@@ -18,7 +19,7 @@ class AdminController extends MainController
             $data['url_images'] = $_POST['url_images'];
             
 
-            $x = $this->loadModel("Admin")->createQuery('update',$data);
+            $x = MainModel::loadModel("Admin")->createQuery('update',$data);
 
         } elseif (array_key_exists('title', $_POST)){
             
@@ -29,13 +30,13 @@ class AdminController extends MainController
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
 
-            $x = $this->loadModel("Admin")->createQuery('create',$data);
+            $x = MainModel::loadModel("Admin")->createQuery('create',$data);
 
         }
         /**
          * load model and push into view 
          */
-        $articles = $this->loadModel("Admin")->getAll();
+        $articles = MainModel::loadModel("Admin")->getAll();
         $this->render('Admin_post', Array(
             'articles'  => $articles
         )); 

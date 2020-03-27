@@ -12,7 +12,7 @@ class HomeController extends MainController
         /**
          * load the model and his function
          */
-        $articles = $this->loadModel("Articles")->getAll();
+        $articles = MainModel::loadModel("Articles")->getAll();
             
         /**
          * page display 'index' 
@@ -26,7 +26,7 @@ class HomeController extends MainController
 
     public function fluxrss()
     {
-        return $this->loadModel("Articles")->flux();
+        return MainModel::loadModel("Articles")->flux();
     }
   
 }

@@ -62,7 +62,7 @@
       Les dernières actualités <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrLn2qgIEYXJBhVVVMXyHt5XTegKpf6yAmh4hIrCZ_vFhhr_ZF" style="width:25px;height:25px">     
     </div>
       <ul class="list-group">
-	      {% for item in rssItems %}
+	      {% for item in rssItems|slice(0,14) %}
 					<li class="list-group-item">{{ item.pubDate|date("d/m/Y") }} - <a href="{{ item.link }}" target="_blank">{{ item.title }} </a></li>
         {% endfor %}
       </ul>

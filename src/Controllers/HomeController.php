@@ -2,6 +2,7 @@
 namespace Blog\Controllers;
 
 use Blog\Models\HomeModel;
+use Blog\Models\MainModel;
 
 class HomeController extends MainController
 {
@@ -11,7 +12,7 @@ class HomeController extends MainController
         /**
          * load the model and his function
          */
-        $articles = $this->loadModel("Articles")->getAll();
+        $articles = MainModel::loadModel("Articles")->getAll();
             
         /**
          * page display 'index' 
@@ -23,17 +24,9 @@ class HomeController extends MainController
         ));  
     }
 
-    public function read($id){
-        // echo  "l'identifiant est : ".$id;
-        $article = $this->loadModel("Articles")->getOne($id);
-        // debug($article);
-        $this->render('article', ['article' => $article]); 
-    }
-    
-
     public function fluxrss()
     {
-        return $this->loadModel("Articles")->flux();
+        return MainModel::loadModel("Articles")->flux();
     }
   
 }

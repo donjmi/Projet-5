@@ -13,6 +13,7 @@ public function __construct()
 }
 
 public function flux(){
-    return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
+    // return simplexml_load_file('https://www.subfactory.fr/xml/blog.xml');
+    return simplexml_load_file('https://www.cineserie.com/feed/');
     }
 }

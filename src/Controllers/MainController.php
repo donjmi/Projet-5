@@ -21,18 +21,6 @@ abstract class MainController
     }
 
     /**
-     * Allows to load a model
-     * @param string $model
-     * @return void
-     */
-    public function loadModel(string $model)
-    {      
-        // create an instance of this model
-        $model = 'Blog\\Models\\' . $model . 'Model';
-        return new $model();
-    }
-
-    /**
      * extract($data) allows you to create a variable for each field
      * call twig function render
      */

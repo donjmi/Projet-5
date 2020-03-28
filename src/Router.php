@@ -3,53 +3,58 @@ namespace Blog;
 
 class Router
 {
-   
-    public function run()
-    {    
-        // On sépare les paramètres et on les met dans le tableau $params
+    const DEFAULT_PATH = 'Blog\Controllers\\';
+    const DEFAULT_CONTROLLER = 'HomeController';
+    const DEFAULT_METHOD = 'DefaultMethod';
+    private $controller = self::DEFAULT_CONTROLLER;
+    private $method = self::DEFAULT_METHOD;
+    private $params = array();
+    
+    public function __construct()
+    {
+        $this->parseUrl();
+        $this->setController();
+        $this->setMethod();
+    }
+
+    public function parseUrl()
+    {
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
-
-        // Si au moins 1 paramètre existe
-        if ($url[0] != "") {
-            // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
-            $controller = ucfirst($url[0]) . "Controller";
-            // debug($controller);
-            // On sauvegarde le 2ème paramètre dans $action s'il existe, sinon la méthode index()
-            $action = isset($url[1]) ? $url[1] : 'index';
-           
-            // On appelle le contrôleur
-            require_once('../src/Controllers/' . $controller . '.php');
-
-            // On instancie le contrôleur
-
-            $controller = 'Blog\\Controllers\\' . $controller;
-            $controller = new $controller();
-            
-
-            // On appelle la méthode
-            if (method_exists($controller, $action)) {
-                /**
-                 * unset : permet d'initialiser la variable $params
-                 */
-                unset($url[0]);
-                unset($url[1]);
-
-                // appelle une fonction le controlleur et la méthode en ajoutant des paramètres
-                call_user_func_array([$controller, $action], $url);
-
-            } else {
-                http_response_code(404);
-                echo "La page recherchée n'existe pas";
+        
+            if ($url[0] != "") 
+            {
+                // $this->controller = $url[0];
+                $this->controller = array_shift($url);
+                // $this->method = isset($url[1]) ? $url[1] : 'index';
+                $this->method = isset($url[0]) ? array_shift($url) : 'index';
+                $this->params = $url;
             }
+    }
 
-        } else {
-            
-            require_once('../src/Controllers/HomeController.php');
-
-            // On instancie le contrôleur
-            $controller = 'Blog\\Controllers\\HomeController'; 
-            $controller = new $controller();
-            $controller->index();
+    public function setController()
+    {
+        $this->controller = ucfirst(strtolower($this->controller)) . 'Controller';
+        $this->controller = self::DEFAULT_PATH . $this->controller;
+       
+        if (!class_exists($this->controller)) {
+            $this->controller = self::DEFAULT_PATH . self::DEFAULT_CONTROLLER;
         }
+    }
+
+    public function setMethod()
+    {
+        $this->method = ucfirst(strtolower($this->method));
+
+        if (!method_exists($this->controller, $this->method)) {
+            $this->method = self::DEFAULT_METHOD;
+        }  //debug($this->method);
+    }
+
+    public function run()
+    {
+        $this->controller   = new $this->controller();
+        // debug($this->controller);
+        $response           = call_user_func_array([$this->controller, $this->method], $this->params);
+        echo filter_var($response);    //debug($response);
     }
 }

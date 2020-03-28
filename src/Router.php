@@ -23,9 +23,7 @@ class Router
         
             if ($url[0] != "") 
             {
-                // $this->controller = $url[0];
                 $this->controller = array_shift($url);
-                // $this->method = isset($url[1]) ? $url[1] : 'index';
                 $this->method = isset($url[0]) ? array_shift($url) : 'index';
                 $this->params = $url;
             }
@@ -47,14 +45,13 @@ class Router
 
         if (!method_exists($this->controller, $this->method)) {
             $this->method = self::DEFAULT_METHOD;
-        }  //debug($this->method);
+        }
     }
 
     public function run()
     {
         $this->controller   = new $this->controller();
-        // debug($this->controller);
         $response           = call_user_func_array([$this->controller, $this->method], $this->params);
-        echo filter_var($response);    //debug($response);
+        echo filter_var($response);
     }
 }

@@ -1,23 +1,15 @@
 <?php
 namespace Blog\Controllers;
 
-use Blog\Models\HomeModel;
+// use Blog\Models\HomeModel;
 use Blog\Models\MainModel;
 
 class HomeController extends MainController
 {
-
-    public function index()
+    public function defaultMethod()
     {
-        /**
-         * load the model and his function
-         */
         $articles = MainModel::loadModel("Articles")->getAll();
-            
-        /**
-         * page display 'index' 
-         * articles use to view in index file
-         */
+
         $this->render('home', Array(
             'articles' => $articles,
             'rssItems' => $this->fluxrss()->channel->item

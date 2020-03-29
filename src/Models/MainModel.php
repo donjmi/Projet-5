@@ -1,6 +1,10 @@
 <?php
 
 namespace Blog\Models;
+/**
+ * MainModel
+ * Receives the Database Object & creates the Table Name
+ */
 abstract class MainModel
 {
     // Propriétés permettant de personnaliser les requêtes
@@ -37,7 +41,14 @@ abstract class MainModel
         }
         return $this->connexion;
     }
-
+    
+    /**
+     * Lists all Datas from the id or another key
+     *
+     * @param  mixed $key
+     * @param  mixed $value
+     * @return void
+     */
     public function getAll(string $key=null, string $value=null)
     {
             $req = "SELECT DISTINCT * FROM " . $this->table;
@@ -51,7 +62,13 @@ abstract class MainModel
             $query->execute();
             return $query->fetchAll();
     }
-
+    
+    /**
+     * Lists all Datas from the id or multiple key
+     *
+     * @param  mixed $params
+     * @return void
+     */
     public function listAll(array $params=null)
     {
             $req = 'SELECT DISTINCT * FROM ' . $this->table;
@@ -69,7 +86,13 @@ abstract class MainModel
             return $query->fetchAll();
     }
   
-
+    
+    /**
+     * Reads Data from its id or another key
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function getOne($id)
     {
         $req = "SELECT * FROM " . $this->table . " WHERE id='" . $id . "'";
@@ -77,16 +100,27 @@ abstract class MainModel
         $query->execute();
         return $query->fetch();
     }
-
+    
+    /**
+     * Delete entry
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id)
     {
         $req = 'DELETE FROM ' . $this->table . ' WHERE id=' . $id;
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }
-/**
- *  function to create or update 
- */
+   
+    /**
+     * createQuery : function to create or update entry
+     *
+     * @param  mixed $command
+     * @param  mixed $data
+     * @return void
+     */
     public function createQuery(string $command, array $data)
     {
         $keys = implode(', ', array_keys($data));

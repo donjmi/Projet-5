@@ -1,11 +1,15 @@
 <?php
 namespace Blog\Controllers;
 
-use Blog\Models\AdminModel;
 use Blog\Models\MainModel;
 
 class AdminController extends MainController
-{
+{    
+    /**
+     * edit
+     *
+     * @return void
+     */
     public function edit()
     {
         if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
@@ -18,7 +22,6 @@ class AdminController extends MainController
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
             
-
             $x = MainModel::loadModel("Admin")->createQuery('update',$data);
 
         } elseif (array_key_exists('title', $_POST)){

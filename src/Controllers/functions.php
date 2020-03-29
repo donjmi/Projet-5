@@ -5,6 +5,12 @@ function str_secur($string){
 }
 
 
+/**
+ * debug
+ *
+ * @param  mixed $var
+ * @return void
+ */
 function debug($var){
     echo '<pre>';
     var_dump($var);

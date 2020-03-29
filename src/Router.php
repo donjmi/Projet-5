@@ -3,53 +3,95 @@ namespace Blog;
 
 class Router
 {
-   
-    public function run()
-    {    
-        // On sépare les paramètres et on les met dans le tableau $params
+    
+    /**
+     * Default path to all controllers
+     */
+    const DEFAULT_PATH = 'Blog\Controllers\\';
+    
+    /**
+     * Default controllers
+     */
+    const DEFAULT_CONTROLLER = 'HomeController';
+    
+    /**
+     * Default method
+     */
+    const DEFAULT_METHOD = 'DefaultMethod';    
+    /**
+     * Requested controller
+     * @var string
+     */
+    private $controller = self::DEFAULT_CONTROLLER;    
+    /**
+     * Requested method
+     * @var string
+     */
+    private $method = self::DEFAULT_METHOD;    
+    /**
+     * Requested params
+     * @var array
+     */
+    private $params = array();
+        
+    /**
+     *Router constructor
+     * Parses the URL, sets the Controller & his Method
+     */
+    public function __construct()
+    {
+        $this->parseUrl();
+        $this->setController();
+        $this->setMethod();
+    }
+    
+    /**
+     * Parses the URL to get the Controller & his Method & his parameters
+     */
+    public function parseUrl()
+    {
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
-
-        // Si au moins 1 paramètre existe
-        if ($url[0] != "") {
-            // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
-            $controller = ucfirst($url[0]) . "Controller";
-            // debug($controller);
-            // On sauvegarde le 2ème paramètre dans $action s'il existe, sinon la méthode index()
-            $action = isset($url[1]) ? $url[1] : 'index';
-           
-            // On appelle le contrôleur
-            require_once('../src/Controllers/' . $controller . '.php');
-
-            // On instancie le contrôleur
-
-            $controller = 'Blog\\Controllers\\' . $controller;
-            $controller = new $controller();
-            
-
-            // On appelle la méthode
-            if (method_exists($controller, $action)) {
-                /**
-                 * unset : permet d'initialiser la variable $params
-                 */
-                unset($url[0]);
-                unset($url[1]);
-
-                // appelle une fonction le controlleur et la méthode en ajoutant des paramètres
-                call_user_func_array([$controller, $action], $url);
-
-            } else {
-                http_response_code(404);
-                echo "La page recherchée n'existe pas";
+        
+            if ($url[0] != "") 
+            {
+                $this->controller = array_shift($url);
+                $this->method = isset($url[0]) ? array_shift($url) : 'index';
+                $this->params = $url;
             }
-
-        } else {
-            
-            require_once('../src/Controllers/HomeController.php');
-
-            // On instancie le contrôleur
-            $controller = 'Blog\\Controllers\\HomeController'; 
-            $controller = new $controller();
-            $controller->index();
+    }
+    
+    /**
+     * setController
+     */
+    public function setController()
+    {
+        $this->controller = ucfirst(strtolower($this->controller)) . 'Controller';
+        $this->controller = self::DEFAULT_PATH . $this->controller;
+       
+        if (!class_exists($this->controller)) {
+            $this->controller = self::DEFAULT_PATH . self::DEFAULT_CONTROLLER;
         }
+    }
+    
+    /**
+     * setMethod
+     */
+    public function setMethod()
+    {
+        $this->method = ucfirst(strtolower($this->method));
+
+        if (!method_exists($this->controller, $this->method)) {
+            $this->method = self::DEFAULT_METHOD;
+        }
+    }
+    
+    /**
+     * Creates the Controller object & calls the Method + parameters on it
+     */
+    public function run()
+    {
+        $this->controller   = new $this->controller();
+        $response           = call_user_func_array([$this->controller, $this->method], $this->params);
+        echo filter_var($response);
     }
 }

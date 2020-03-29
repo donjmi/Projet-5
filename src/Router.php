@@ -3,20 +3,51 @@ namespace Blog;
 
 class Router
 {
-    const DEFAULT_PATH = 'Blog\Controllers\\';
-    const DEFAULT_CONTROLLER = 'HomeController';
-    const DEFAULT_METHOD = 'DefaultMethod';
-    private $controller = self::DEFAULT_CONTROLLER;
-    private $method = self::DEFAULT_METHOD;
-    private $params = array();
     
+    /**
+     * Default path to all controllers
+     */
+    const DEFAULT_PATH = 'Blog\Controllers\\';
+    
+    /**
+     * Default controllers
+     */
+    const DEFAULT_CONTROLLER = 'HomeController';
+    
+    /**
+     * Default method
+     */
+    const DEFAULT_METHOD = 'DefaultMethod';    
+    /**
+     * Requested controller
+     * @var string
+     */
+    private $controller = self::DEFAULT_CONTROLLER;    
+    /**
+     * Requested method
+     * @var string
+     */
+    private $method = self::DEFAULT_METHOD;    
+    /**
+     * Requested params
+     * @var array
+     */
+    private $params = array();
+        
+    /**
+     *Router constructor
+     * Parses the URL, sets the Controller & his Method
+     */
     public function __construct()
     {
         $this->parseUrl();
         $this->setController();
         $this->setMethod();
     }
-
+    
+    /**
+     * Parses the URL to get the Controller & his Method & his parameters
+     */
     public function parseUrl()
     {
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
@@ -28,7 +59,10 @@ class Router
                 $this->params = $url;
             }
     }
-
+    
+    /**
+     * setController
+     */
     public function setController()
     {
         $this->controller = ucfirst(strtolower($this->controller)) . 'Controller';
@@ -38,7 +72,10 @@ class Router
             $this->controller = self::DEFAULT_PATH . self::DEFAULT_CONTROLLER;
         }
     }
-
+    
+    /**
+     * setMethod
+     */
     public function setMethod()
     {
         $this->method = ucfirst(strtolower($this->method));
@@ -47,7 +84,10 @@ class Router
             $this->method = self::DEFAULT_METHOD;
         }
     }
-
+    
+    /**
+     * Creates the Controller object & calls the Method + parameters on it
+     */
     public function run()
     {
         $this->controller   = new $this->controller();

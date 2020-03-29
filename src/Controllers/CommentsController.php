@@ -4,7 +4,13 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class CommentsController extends MainController
-{
+{    
+    /**
+     * read
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function read($id)
     {
         $comment = MainModel::loadModel("comments")->listAll([
@@ -15,7 +21,13 @@ class CommentsController extends MainController
             'comments' => $comment
             ]);
     }
-
+    
+    /**
+     * edit_com
+     * this function is use in ArticleController
+     * @param  mixed $data
+     * @return void
+     */
     public function edit_com($data)
     {
         $x = MainModel::loadModel("Comments")->createQuery('create',$data);

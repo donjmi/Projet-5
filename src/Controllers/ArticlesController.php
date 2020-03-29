@@ -5,30 +5,45 @@ use Blog\Models\ArticlesModel;
 use Blog\Controllers\CommentsController;
 use Blog\Models\MainModel;
 
+/**
+ * Class ArticlesController
+ * Manages the Article item
+ */
 class ArticlesController extends MainController
-{
-    // public function index()
+{    
+    /**
+     * defaultMethod
+     *
+     * @return void
+     */
     public function defaultMethod()
     {
-        /**
-         * load the models + methods + views
-         */
         $articles = MainModel::loadModel("Articles")->getAll();
-        // debug($articles);
         $this->render('article', ['articles' => $articles]);
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function create($id){
         
         $article = MainModel::loadModel("Articles")->getOne($id);
         $this->render('article_edit', Array(
             'article' => $article
-        )); 
+        ));
     }
+
+    /**
+     * read
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function read($id){
-        // debug($id);
         if (! empty($_POST)) {
-            // debug($_POST);
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOne($id);
@@ -44,12 +59,23 @@ class ArticlesController extends MainController
                 ]);
         }
     }
-    
+        
+    /**
+     * update
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function update($id){
         
         $article = MainModel::loadModel("Articles")->getOne($id);
         $this->render('Article_edit', ['article' => $article]); 
     }
+      
+    /**
+     * createComment
+     * use Comment object  with function edit_com in CommentsController
+     */
     public function createComment()
     {
         $data = array();
@@ -60,9 +86,7 @@ class ArticlesController extends MainController
         $comment = new CommentsController();
         $comment->edit_com($data);
         
-        /**
-         * load the models + methods + views
-         */
+
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
         $comments = MainModel::loadModel("Comments")->getAll('posts_id', $_POST['posts_id']);
         $this->render('article', [
@@ -70,7 +94,13 @@ class ArticlesController extends MainController
             'comments' => $comments
         ]);
     }
-
+    
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id){
         $one = MainModel::loadModel("Articles")->getOne($id);
         $article = MainModel::loadModel("Articles")->delete($id);
@@ -79,5 +109,4 @@ class ArticlesController extends MainController
             'one'       => $one
         )); 
     }
-
 }

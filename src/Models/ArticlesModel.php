@@ -16,11 +16,12 @@ class ArticlesModel extends MainModel{
     }
     
     /**
-     * flux rss
+     * flux rss"http://feeds.feedburner.com/thetvaddict/AXob"  
      *
-     * @return void
+     * @return void 
      */
     public function flux(){
-        return simplexml_load_file('https://www.cineserie.com/feed/');
+        return simplexml_load_file('http://www.critictoo.com/feed/');
+        // return simplexml_load_file('https://www.cineserie.com/feed/');
         }
 }

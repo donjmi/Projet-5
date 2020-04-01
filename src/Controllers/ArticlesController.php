@@ -86,7 +86,6 @@ class ArticlesController extends MainController
         $comment = new CommentsController();
         $comment->edit_com($data);
         
-
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
         $comments = MainModel::loadModel("Comments")->getAll('posts_id', $_POST['posts_id']);
         $this->render('article', [

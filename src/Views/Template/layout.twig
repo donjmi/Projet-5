@@ -16,6 +16,7 @@
 
 		<!-- Custom styles for this template -->
 		<link href="/projet-5/public/css/style2.css" rel="stylesheet">
+		<link href="https://uvc.one/upload/iblock/90b/90b5c0ded6201425e87396df554c9914.css" rel="stylesheet">
 
 	</head>
 
@@ -27,25 +28,17 @@
 		{% block presentation %}{% endblock %}
 
 		<section class="py-5">
-			<div class="container">
+			<div class="container content">
 				<div class="row">
 					<div class="col-8"> {% block content %}{% endblock %}
 					</div>
-						<div class="col-4"> {% block rss %}{% endblock %}
-						</div>
-					</div>
-						<div class="row">
-							<div class="col-6"> {% block form %}{% endblock %}
-					</div>
+					<div class="col-4"> {% block rss %}{% endblock %}
+					</div>	
 				</div>
 			</div>
 		</section>
-
-					<section class="py-5">
-						<div class="container"> {% block content2 %}{% endblock %}
-							</div>
-					</section>
-
-						{% include 'Template/footer.twig' %}
-						</body>
-				</html>
+		<section>
+			{% include 'Template/footer.twig' %}
+		</section>
+	</body>
+</html>

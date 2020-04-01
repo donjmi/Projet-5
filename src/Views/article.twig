@@ -1,4 +1,4 @@
-{% extends 'Template/layout.twig' %}
+{% extends 'Template/layout-article.twig' %}
 
 {% block content %}
 <h1>{{ article.title }} </h1>
@@ -11,15 +11,23 @@
 {% block form %}
 <h2>{{ article.title }} - {{ article.id }}</h2>
 <h3>Vos commentaires ci-dessous :</h3>
-  <form method="post" action="articles/read/{{ article.id }}" class="text-center border border-light p-5">
+  <form method="post" action="articles/read/{{ article.id }}" class="text-center border border-light p-5 comment">
   <p><input type="hidden"  name="id"        value=""></p>
   <p><input type="hidden"  name="posts_id"  value="{{ article.id }}"  id="defaultContactFormName" class="form-control mb-4"></p>
   <p><input type="text"    name="user_id"   value=""  id="defaultContactFormName"                 class="form-control mb-4" placeholder="mettre 0 pour l'instant"></p>
-  <p><input type="text"    name="comment"   value "" id="defaultContactFormName"                  class="form-control mb-4"  placeholder="vos commentaires" required></p>
+  <p><input type="text"    name="comment"   value "" id="defaultContactFormName"                  class="form-control mb-4"  placeholder="ici !! votre commentaire " required
+  style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 84px;"></p>
   <p><input type="submit"                   value="envoyez"></p>
 </form>
+
+
+{% include 'comment.twig' with {'items': comments} %}
+{% block comment %}
+{% endblock comment %}
 {% endblock %}
 
+
+
 {% block rss %}
-{% include 'comment.twig' with {'items': comments} %}
+
 {% endblock rss %}

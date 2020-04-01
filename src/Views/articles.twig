@@ -1,0 +1,27 @@
+{% extends 'Template/layout.twig' %}
+
+{% block content %}
+<h1 class="title-post"> Tous les articles </h1>
+<br />
+<ul>
+    {% for article in articles %}
+    <div class="card mb-2">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img id="img_blog" src="{{ article.url_images }}" class="card-img-top" alt="..." >
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.title}}</h5>
+                    <p class="card-text">{{ article.slug}}
+                        <a href="articles/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor%}
+</ul>
+{% endblock content %}
+

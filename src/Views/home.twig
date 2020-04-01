@@ -18,8 +18,8 @@
 
 {% block presentation %} 
   <!-- Content section -->
-  <section class="py-5">
-    <div class="container">
+  <section class="py-5  presentation">
+    <div class="container hero-unit">
       <h1>Les Meilleures Séries US</h1>
       <p class="lead">Blog étant principalement axé sur les news.</p>
       <p>vous aurez plein d’infos et de nouveautés concernant les séries en vogue, les nouvelles productions et les séries à voir. Vous connaîtrez les dates de sortie des saisons les plus attendues du grand public et d’autres informations sur les acteurs/personnages, le casting des nouveaux programmes, etc. Je ne fais aucune distinction avec ce blog de série TV : je parle de programmes divers et variés, des séries américaines très regardées comme des séries françaises intéressantes..</p>
@@ -31,10 +31,10 @@
 
 {% block content %}
 
-	<h2 class="alert alert-dark text-center" role="alert">Les 5 derniers POSTS</h2>
+	<h2 class="alert title-post text-center" role="alert">Les 5 derniers Articles</h2>
 
 <ul>
-    {% for article in articles |slice(0,5) %}
+    {% for article in articles %}
     <div class="card mb-2">
         <div class="row no-gutters">
             <div class="col-md-4">
@@ -52,13 +52,19 @@
         </div>
     </div>
     {% endfor%}
+    <div class="">
+      <a href="home/listArticles" class="btn btn-primary btn-lg">Cliquez pour voir tous les articles</a>
+    </div>
 </ul>
+
 {% endblock content %}
 
-{% block content2 %}{% endblock content2 %}
+{% block content2 %}
+
+{% endblock content2 %}
 
 {% block rss %}
-    <div class="alert alert-info text-center" role="alert">
+    <div class="alert  text-center kek" role="alert">
       Les dernières actualités <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrLn2qgIEYXJBhVVVMXyHt5XTegKpf6yAmh4hIrCZ_vFhhr_ZF" style="width:25px;height:25px">     
     </div>
       <ul class="list-group">

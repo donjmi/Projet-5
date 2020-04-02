@@ -79,9 +79,9 @@ class ArticlesController extends MainController
     public function createComment()
     {
         $data = array();
-        $data['posts_id'] = $_POST['posts_id'];
-        $data['user_id'] = $_POST['user_id'];
-        $data['comment'] = $_POST['comment'];
+        $data['posts_id'] = htmlspecialchars($_POST['posts_id']);
+        $data['user_id'] = htmlspecialchars($_POST['user_id']);
+        $data['comment'] = htmlspecialchars($_POST['comment']);
         $data['date_comment'] = date("Y-m-d H:i:s");
         $comment = new CommentsController();
         $comment->edit_com($data);

@@ -27,9 +27,9 @@ class AdminController extends MainController
         } elseif (array_key_exists('title', $_POST)){
             
             $data= array();
-            $data['title'] = $_POST['title'];
-            $data['slug'] = $_POST['slug'];
-            $data['content'] = $_POST['content'];
+            $data['title'] = htmlspecialchars($_POST['title']);
+            $data['slug'] = htmlspecialchars($_POST['slug']);
+            $data['content'] = htmlspecialchars($_POST['content']);
             $data['date_creation'] = date("Y-m-d H:i:s");
             $data['url_images'] = $_POST['url_images'];
 

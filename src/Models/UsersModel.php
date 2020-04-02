@@ -4,7 +4,7 @@ namespace Blog\Models;
 /**
  * ArticlesModel
  */
-class ArticlesModel extends MainModel{
+class UsersModel extends MainModel{
     public $id;
 
     public function __construct()

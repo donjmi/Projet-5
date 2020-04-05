@@ -1,0 +1,18 @@
+{% extends 'Template/layout.twig' %}
+
+{% block content %}
+
+<br />
+
+<form method="post" action="users/editUsers/" class="text-center border border-light p-5">
+  <h2>{{ user.pseudo }}</h2>
+  <p class="h4 mb-4">gestion de l'utilisateur</p>
+
+   <p><input type="hidden"  name="id"         value="{{ user.id }}"></p>
+   <p><input type="text"    name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
+   <p><input type="email"   name="email"      value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email" required></p>
+   <p><input type="text"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" required></p>
+   <p><input type="text"    name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" required></p>
+   <p><input type="submit"  value="modifier"></p>
+</form>
+{% endblock content %}

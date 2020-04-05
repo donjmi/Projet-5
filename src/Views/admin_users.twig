@@ -1,0 +1,51 @@
+{% extends 'Template/layout-article.twig' %}
+
+{% block content %}
+<h1> Liste des utilisateurs </h1>
+<br />
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th>id</th>
+        <th>pseudo</th>
+        <th>email</th>
+        <th>mot de passe</th>
+        <th>rôle</th>
+        <th>Editer</th>
+				<th>supprimer</th>
+    </tr>
+    <thead>
+{% for user in users %}
+    <tr>
+       <td>{{ user.id }}</td>
+       <td>{{ user.pseudo }}</td>
+       <td>{{ user.email }}</td>
+       <td>{{ user.password }}</td>
+       <td>{{ user.role }}</td>
+       <td>
+					<a href="users/update/{{user.id}}">
+							<button type="button" class="btn btn-warning">modifier</button>
+				</td>
+				<td>
+					<a href="users/delete/{{user.id}}"> 
+						<button  type="button" class="btn btn-danger" ><div class="top" ><span id="tool" data-toggle="tooltip" data-placement="bottom" title="Supp. définitive">supprimer</span><i></i></div></button>
+				</td> 
+    </tr>
+   {% endfor%}
+</table>
+<br />-----------------------------------------------------------------------
+<br />
+
+<form method="post" action="users/editUsers/" class="text-center border border-light p-5">
+  <p class="h4 mb-4">Ajouter un nouvel utilisateur</p>
+
+   <p><input type="hidden"    name="id"         value=""></p>
+   <p><input type="text"      name="pseudo"     value="" id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
+   <p><input type="email"     name="email"      value="" id="defaultContactFormName" class="form-control mb-4" placeholder="email@email.fr" required></p>
+   <p><input type="password"  name="password"   value="" id="defaultContactFormName" class="form-control mb-4" placeholder="mot de passe" required></p>
+   <p><input type="text"      name="role"       value="" id="defaultContactFormName" class="form-control mb-4" placeholder="1: admin 0: user " required></p>
+   <p><input type="submit"  value="envoyer"></p>
+
+</form>
+{% endblock content %}
+

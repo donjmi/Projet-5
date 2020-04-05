@@ -1,4 +1,4 @@
-{% extends 'Template/layout.twig' %}
+{% extends 'Template/layout-article.twig' %}
 
 {% block content %}
 <h1> Liste des posts - Admin </h1>
@@ -26,7 +26,7 @@
        <td>{{ article.date_creation|date("d/m/Y h:i:s") }}</td>
        <td>
 					<a href="articles/update/{{article.id}}">
-							<button type="button" class="btn btn-warning">modifier</button>
+							<button type="button" class="btn btn-warning">modifier</button></a>
 				</td>
 				<td>
 					<a href="articles/delete/{{article.id}}"> 

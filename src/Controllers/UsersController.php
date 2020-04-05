@@ -21,7 +21,7 @@ class UsersController extends MainController
             // $data['email2']     = htmlspecialchars($_POST['email2']);
             $data['password']   = sha1($_POST['password']);
             // $data['password2']  = sha1($_POST['password2']);
-            $data['role']       = "0";
+            $data['role']       = htmlspecialchars($_POST['role']);
             
             $x = MainModel::loadModel("Users")->createQuery('update',$data);
         
@@ -44,8 +44,23 @@ class UsersController extends MainController
          * load model and push into view 
          */
         $users = MainModel::loadModel("Users")->getAll();
-        $this->render('inscription', Array(
+        $this->render('admin_users', Array(
             'users'  => $users
+        )); 
+    }
+
+    public function update($id){
+        
+        $user = MainModel::loadModel("Users")->getOne($id);
+        $this->render('User_edit', ['user' => $user]); 
+    }
+
+    public function delete($id){
+        $one = MainModel::loadModel("users")->getOne($id);
+        $user = MainModel::loadModel("Users")->delete($id);
+        $this->render('user_delete', Array(
+            'user'   => $user,
+            'one'    => $one
         )); 
     }
     

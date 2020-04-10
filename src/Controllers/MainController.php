@@ -8,6 +8,7 @@ use Blog\Models\ArticlesModel;
 abstract class MainController
 {
     protected $twig = null;
+    protected $notifications = null;
 
     /**
      * MainController constructor
@@ -17,7 +18,8 @@ abstract class MainController
         $loader = new FilesystemLoader('../src/Views');
         $this->twig = new Environment($loader, [
           'cache' => false,  //__DIR__ .'/tmp'
-        ]); 
+        ]);
+        $this->notifications = array();
     }
 
     /**
@@ -28,5 +30,16 @@ abstract class MainController
     {
         extract($data);
         echo $this->twig->render($file . '.twig', $data); 
+    }
+
+    public function redirect($url){
+        switch($url){
+            case 'admin_users':
+                $redirect = '/users/createUsers';
+            break;
+            default:
+        }
+        header("Location: http://localhost/projet-5$redirect");
+        exit();
     }
 }

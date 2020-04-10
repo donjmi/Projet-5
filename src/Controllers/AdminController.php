@@ -16,11 +16,11 @@ class AdminController extends MainController
             
             $data= array();
             $data['id'] = $_POST['id'];
-            $data['title'] = $_POST['title'];
-            $data['slug'] = $_POST['slug'];
-            $data['content'] = $_POST['content'];
-            $data['date_creation'] = date("Y-m-d H:i:s");
-            $data['url_images'] = $_POST['url_images'];
+            $data['title'] = htmlspecialchars($_POST['title']);
+            $data['slug'] = htmlspecialchars($_POST['slug']);
+            $data['content'] = htmlspecialchars($_POST['content']);
+            $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['url_images'] = htmlspecialchars($_POST['url_images']);
             
             $x = MainModel::loadModel("Admin")->createQuery('update',$data);
 
@@ -30,8 +30,8 @@ class AdminController extends MainController
             $data['title'] = htmlspecialchars($_POST['title']);
             $data['slug'] = htmlspecialchars($_POST['slug']);
             $data['content'] = htmlspecialchars($_POST['content']);
-            $data['date_creation'] = date("Y-m-d H:i:s");
-            $data['url_images'] = $_POST['url_images'];
+            $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['url_images'] = htmlspecialchars($_POST['url_images']);
 
             $x = MainModel::loadModel("Admin")->createQuery('create',$data);
 

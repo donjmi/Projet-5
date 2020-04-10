@@ -14,7 +14,7 @@ class CommentsController extends MainController
     public function read($id)
     {
         $comment = MainModel::loadModel("comments")->listAll([
-        'posts_id' => $id, 
+        'posts_id' => [$id, '='], 
         // 'comment' => 'très'
         ]);
         $this->render('comment', [

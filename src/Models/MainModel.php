@@ -51,7 +51,7 @@ abstract class MainModel
      */
     public function getLimit(string $key=null, string $value=null)
     {
-            $req = "SELECT DISTINCT * FROM " . $this->table;
+            $req = "SELECT  * FROM " . $this->table;
             
             if (isset($key) && isset($value)){
                 $req .= " WHERE $key = $value";
@@ -69,15 +69,16 @@ abstract class MainModel
      * @param  mixed $value
      * @return void
      */
-    public function getAll(string $key=null, string $value=null)
+    public function getAll(string $key=null, string $value=null, string $operator='=')
     {
-            $req = "SELECT DISTINCT * FROM " . $this->table;
+            $req = "SELECT  * FROM " . $this->table;
             
             if (isset($key) && isset($value)){
-                $req .= " WHERE $key = $value";
+                $req .= " WHERE $key $operator '$value'";
             }
 
             $req .= " ORDER BY id desc";
+            //debug($req);
             $query = $this->connexion->prepare($req);
             $query->execute();
             return $query->fetchAll();
@@ -91,16 +92,36 @@ abstract class MainModel
      */
     public function listAll(array $params=null)
     {
-            $req = 'SELECT DISTINCT * FROM ' . $this->table;
+            $req = 'SELECT  * FROM ' . $this->table;
             
             if (isset($params)){
                 foreach($params as $key => $value)
                 {
-                    $req .= ($key == key($params) ? " WHERE" : " AND");
-                    $req .= ' '.$key.' = "'.$value.'"';
+                    if (isset($value[1]) && !empty($value[1])){
+                        $operator = $value[1];
+                    } else {
+                        $operator = '=';
+                    }
+                    $req .= ($key == key($params) ? " WHERE " : " AND");
+                    $req .= ' '.$key.' '. $operator;
+                    // debug(gettype($value[0]));
+                    switch($key) {
+                        case 'id':
+                        case 'posts_id':
+                        case 'role':
+                            $req .= ' '.$value[0];
+                        break;
+                        case 'email':
+                        case 'pseudo':
+                        case 'password':
+                            $req .= ' "'.$value[0].'"';
+                        break;
+                        default:
+                    }
                 }
             }
             $req .= " ORDER BY id desc";
+            // debug($req);
             $query = $this->connexion->prepare($req);
             $query->execute();
             return $query->fetchAll();
@@ -166,5 +187,18 @@ abstract class MainModel
 
         $query = $this->connexion->prepare($req);
         return $query->execute();
+    }
+
+    public function getErrors(string $key=null, string $value=null)
+    {
+            $req = "SELECT $key FROM " . $this->table;
+            
+            if (isset($key) && isset($value)){
+                $req .= " WHERE $key = '$value'";
+            }
+            $query = $this->connexion->prepare($req);
+            $query->execute();
+            // debug($query);
+            return $query->fetchAll();
     }
 }

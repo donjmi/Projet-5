@@ -12,31 +12,6 @@ use Blog\Models\MainModel;
 class ArticlesController extends MainController
 {    
     /**
-     * defaultMethod
-     *
-     * @return void
-     */
-    public function defaultMethod()
-    {
-        $articles = MainModel::loadModel("Articles")->getAll();
-        $this->render('article', ['articles' => $articles]);
-    }
-    
-    /**
-     * create
-     *
-     * @param  mixed $id
-     * @return void
-     */
-    public function create($id){
-        
-        $article = MainModel::loadModel("Articles")->getOne($id);
-        $this->render('article_edit', Array(
-            'article' => $article
-        ));
-    }
-
-    /**
      * read
      *
      * @param  mixed $id
@@ -49,7 +24,7 @@ class ArticlesController extends MainController
             $article = MainModel::loadModel("articles")->getOne($id);
             // $comment = MainModel::loadModel("comments")->getAll('posts_id', $id);
             $comment = MainModel::loadModel("comments")->listAll([
-            'posts_id' => $id, 
+            'posts_id' => [$id, ' = '], 
             // 'comment' => 'très'
             ]);
 

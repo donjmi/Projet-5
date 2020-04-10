@@ -3,16 +3,32 @@
 {% block content %}
 
 <br />
+  {% set log %}
+  <p class="h4 mb-4">gestion de l'utilisateur : </p>
+ 
+  <h2>utilisateur : {{ user.pseudo }}</h2>
+   {% endset %}
 
-<form method="post" action="users/editUsers/" class="text-center border border-light p-5">
-  <h2>{{ user.pseudo }}</h2>
-  <p class="h4 mb-4">gestion de l'utilisateur</p>
+   {% if errors %}
+   <div class="alert alert-danger">
+   <p>Le formulaire n'est pas rempli correctement :</p>
+    {% for msg in errors %}
+      <ul>
+         <li>{{ msg }}</li>
+      </ul>
+   {% endfor %}
+   </div>
+   {% endif %}
+<form method="post" action="users/{{ action }}/" class="text-center border border-light p-5">
+   <p><input type="hidden"      name="id"         value="{{ user.id }}"></p>
+   <p><input type="email"       name="email"      value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email" ></p>
+   <p><input type="email"       name="email2"     value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email confirmation" ></p>
+   <p><input type="text"        name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" ></p>
+   <p><input type="password"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" ></p>
+   <p><input type="password"    name="password2"  value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password de confirmation" ></p>
+   <p><input type="text"        name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" ></p>
+   <p><input type="submit"      name="formuser"   value="envoyez"></p>
 
-   <p><input type="hidden"  name="id"         value="{{ user.id }}"></p>
-   <p><input type="text"    name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" required></p>
-   <p><input type="email"   name="email"      value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email" required></p>
-   <p><input type="text"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" required></p>
-   <p><input type="text"    name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" required></p>
-   <p><input type="submit"  value="modifier"></p>
 </form>
+
 {% endblock content %}

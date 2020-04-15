@@ -9,7 +9,7 @@ class UsersController extends MainController
     public function listUsers()
     {
         $users = MainModel::loadModel("Users")->getAll();
-        $this->render('admin_users', Array(
+        $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',
             'errors'    => $this->notifications
@@ -45,7 +45,7 @@ class UsersController extends MainController
                 unset($data['email2']);
                 unset($data['password2']);
                 $user = MainModel::loadModel("Users")->createQuery('create',$data);
-                $this->redirect('admin_users');
+                $this->redirect('admin/admin_users');
             }
 
         $this->render('User_edit', Array(

@@ -92,7 +92,7 @@ abstract class MainModel
      */
     public function listAll(array $params=null)
     {
-            $req = 'SELECT  * FROM ' . $this->table;
+            $req = 'SELECT * FROM ' . $this->table;
             
             if (isset($params)){
                 foreach($params as $key => $value)
@@ -184,7 +184,7 @@ abstract class MainModel
                 $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ' . $data['id'];
                 break;
         }
-
+        // debug($req);
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }

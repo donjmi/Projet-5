@@ -22,10 +22,10 @@
 <form method="post" action="users/{{ action }}/" class="text-center border border-light p-5">
    <p><input type="hidden"      name="id"         value="{{ user.id }}"></p>
    <p><input type="email"       name="email"      value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email" ></p>
-   <p><input type="email"       name="email2"     value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email confirmation" ></p>
-   <p><input type="text"        name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo" ></p>
+   <p><input type="email"       name="email2"     value="{{ user.email2 }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email confirmation" ></p>
+   <p><input type="text"        name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo"></p>
    <p><input type="password"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" ></p>
-   <p><input type="password"    name="password2"  value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password de confirmation" ></p>
+   <p><input type="password"    name="password2"  value="{{ user.password2 }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password de confirmation" ></p>
    <p><input type="text"        name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" ></p>
    <p><input type="submit"      name="formuser"   value="envoyez"></p>
 

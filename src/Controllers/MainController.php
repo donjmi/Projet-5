@@ -35,7 +35,16 @@ abstract class MainController
     public function redirect($url){
         switch($url){
             case 'admin_users':
+                $redirect = '/users/listUsers';
+            break;
+            case 'admin_users_create':
                 $redirect = '/users/createUsers';
+            break;
+            case 'admin_users_update':
+                $redirect = '/users/update';
+            break;
+            case 'admin_users_delete':
+                $redirect = '/users/delete';
             break;
             default:
         }

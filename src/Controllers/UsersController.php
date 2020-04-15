@@ -2,7 +2,6 @@
 namespace Blog\Controllers;
 
 use Blog\Models\MainModel;
-use Blog\Models\Validate;
 
 class UsersController extends MainController
 {    
@@ -45,7 +44,7 @@ class UsersController extends MainController
                 unset($data['email2']);
                 unset($data['password2']);
                 $user = MainModel::loadModel("Users")->createQuery('create',$data);
-                $this->redirect('admin/admin_users');
+                $this->redirect('admin_users');
             }
 
         $this->render('User_edit', Array(

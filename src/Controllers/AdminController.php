@@ -40,7 +40,7 @@ class AdminController extends MainController
          * load model and push into view 
          */
         $articles = MainModel::loadModel("Admin")->getAll();
-        $this->render('Admin_post', Array(
+        $this->render('admin/Admin_post', Array(
             'articles'  => $articles
         )); 
     }

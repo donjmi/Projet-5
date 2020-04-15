@@ -2,50 +2,59 @@
 namespace Blog\Controllers;
 
 use Blog\Models\MainModel;
+use Blog\Models\Validate;
 
 class UsersController extends MainController
 {    
-    
     public function listUsers()
     {
         $users = MainModel::loadModel("Users")->getAll();
-        $this->render('admin_users', Array(
+        $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',
             'errors'    => $this->notifications
         ));  
       
     }
-    
     public function createUsers()
-    {
-        if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
-            
+    {  
             $data= array();
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = sha1($_POST['password']);
-            $data['role']       = htmlspecialchars($_POST['role']);
-            $errors = $this->validateUsers();
-            $user = MainModel::loadModel("Users")->createQuery('update',$data);
-        
-        } elseif (array_key_exists('email', $_POST)){
+            if (isset($_POST['id'])){
+                $data['id']         = htmlspecialchars($_POST['id']);
+            }
+            if (isset($_POST['pseudo'])){
+                $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
+            }
+            if (isset($_POST['email'])){
+                $data['email']      = htmlspecialchars($_POST['email']);
+            }
+            if (isset($_POST['email2'])){
+                $data['email2']      = htmlspecialchars($_POST['email2']);
+            }
+            if (isset($_POST['password']) && !empty($_POST['password'])){
+                $data['password']   = sha1($_POST['password']);
+            }
+            if (isset($_POST['password2']) && !empty($_POST['password2'])){
+                $data['password2']   = sha1($_POST['password2']);
+            }
+            if (isset($_POST['role'])){
+                $data['role']       = htmlspecialchars($_POST['role']);
+            }
             
-            $data= array();
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = sha1($_POST['password']);
-            $data['role']       = "0";
-            
-            $errors = $this->validateUsers();
-            $user = MainModel::loadModel("Users")->createQuery('create',$data);
-        }
+            if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
+                unset($data['email2']);
+                unset($data['password2']);
+                $user = MainModel::loadModel("Users")->createQuery('create',$data);
+                $this->redirect('admin/admin_users');
+            }
 
-        return $this->listUsers();
+        $this->render('User_edit', Array(
+            'user'   => $data,
+            'action'    => 'createUsers',
+            'errors' => $this->notifications
+        ));
+    
     }
-
 
     public function update($id){
         if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
@@ -56,15 +65,15 @@ class UsersController extends MainController
             $data['email']      = htmlspecialchars($_POST['email']);
             $data['password']   = sha1($_POST['password']);
             $data['role']       = htmlspecialchars($_POST['role']);
-            if (! $this->validateUsers()) {
+
+            if (! $this->validateUsers('update')) {
                 $this->render('User_edit', Array(
-                    'user' => $data,
+                    'user'      => $data,
                     'action'    => 'update',
-                    'errors' => $this->notifications
+                    'errors'    => $this->notifications
                 ));
             }
             $user = MainModel::loadModel("Users")->createQuery('update',$data);
-            // debug($data);
             $this->redirect('admin_users');
         } else {
             $user = MainModel::loadModel("Users")->getOne($id);
@@ -74,7 +83,6 @@ class UsersController extends MainController
                 'errors' => $this->notifications
             ));
         }
-
     }
 
     public function delete($id){
@@ -87,7 +95,7 @@ class UsersController extends MainController
         )); 
     }
 
-    public function validateUsers(){
+    public function validateUsers(string $formType){
         
         $isOk = true;
 
@@ -99,14 +107,16 @@ class UsersController extends MainController
             $this->notifications[] = "votre email n'est pas valide";
             $isOk = false;
         }
-        if (empty($_POST['email']) || $_POST['email2']!== $_POST['email']){
+        if ($_POST['email2']!== $_POST['email']){
             $this->notifications[] = "Veuillez saisir le même email ";
             $isOk = false;
         }else {
-            $email = MainModel::loadModel("Users")->listAll([
-                'email' => [$_POST['email']],
-                'id'    => [$_POST['id'], '!=']
-                ]);
+            $options = array();
+            $options['email'] = [$_POST['email']];
+            if ($formType != 'createUsers'){
+                $options['id'] = [$_POST['id'], '!='];
+            }
+            $email = MainModel::loadModel("Users")->listAll($options);
             if (!empty($email)){
                 $this->notifications[] = "Email déjà utilisé";
                 $isOk = false;
@@ -117,11 +127,14 @@ class UsersController extends MainController
             $this->notifications[] = "saisir votre  password";
             $isOk = false;
         }
-        if (empty($_POST['password2']) || $_POST['password2']!== $_POST['password']){
+        if ($_POST['password2']!== $_POST['password']){
             $this->notifications[] = "Veuillez saisir le même password";
             $isOk = false;
         }
         return $isOk;
 
-    }  
+    } 
+
+
+
 }

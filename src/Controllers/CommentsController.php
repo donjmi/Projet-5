@@ -16,7 +16,7 @@ class CommentsController extends MainController
         $comment = MainModel::loadModel("comments")->listAll([
         'posts_id' => [$id, '='], 
         // 'comment' => 'très'
-        ]);
+        ]); debug($comment);
         $this->render('comment', [
             'comments' => $comment
             ]);
@@ -30,7 +30,7 @@ class CommentsController extends MainController
      */
     public function edit_com($data)
     {
-        $x = MainModel::loadModel("Comments")->createQuery('create',$data);
+        $comment = MainModel::loadModel("Comments")->createQuery('create',$data);
 
     }
 }

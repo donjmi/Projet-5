@@ -9,7 +9,7 @@ abstract class MainController
 {
     protected $twig = null;
     protected $notifications = null;
-
+    
     /**
      * MainController constructor
      */

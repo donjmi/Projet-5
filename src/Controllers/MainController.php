@@ -9,7 +9,7 @@ abstract class MainController
 {
     protected $twig = null;
     protected $notifications = null;
-
+    
     /**
      * MainController constructor
      */
@@ -38,7 +38,7 @@ abstract class MainController
                 $redirect = '/users/listUsers';
             break;
             case 'admin_users_create':
-                $redirect = '/users/createUsers';
+                $redirect = '/users/create';
             break;
             case 'admin_users_update':
                 $redirect = '/users/update';

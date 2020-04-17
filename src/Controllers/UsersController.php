@@ -20,41 +20,41 @@ class UsersController extends MainController
     public function createUsers()
     {  
             $data= array();
-            if (isset($_POST['id'])){
+            // if (isset($_POST['id'])){
+            //     $data['id']         = htmlspecialchars($_POST['id']);
+            // }
+            // if (isset($_POST['pseudo'])){
+            //     $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
+            // }
+            // if (isset($_POST['email'])){
+            //     $data['email']      = htmlspecialchars($_POST['email']);;
+            // }
+            // if (isset($_POST['password']) && !empty($_POST['password'])){
+            //     $data['password']   = sha1($_POST['password']);
+            // }
+            // if (isset($_POST['role'])){
+            //     $data['role']       = htmlspecialchars($_POST['role']);
+            // }
+            if (isset($_POST)){
                 $data['id']         = htmlspecialchars($_POST['id']);
-            }
-            if (isset($_POST['pseudo'])){
                 $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            }
-            if (isset($_POST['email'])){
                 $data['email']      = htmlspecialchars($_POST['email']);
-            }
-            if (isset($_POST['email2'])){
-                $data['email2']      = htmlspecialchars($_POST['email2']);
-            }
-            if (isset($_POST['password']) && !empty($_POST['password'])){
                 $data['password']   = sha1($_POST['password']);
-            }
-            if (isset($_POST['password2']) && !empty($_POST['password2'])){
-                $data['password2']   = sha1($_POST['password2']);
-            }
-            if (isset($_POST['role'])){
                 $data['role']       = htmlspecialchars($_POST['role']);
             }
-            
             if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
-                unset($data['email2']);
-                unset($data['password2']);
+                // debug($this->validateUsers('createUsers'));
                 $user = MainModel::loadModel("Users")->createQuery('create',$data);
                 $this->redirect('admin_users');
             }
-
+            
+            // debug($this->notifications);
         $this->render('User_edit', Array(
             'user'   => $data,
             'action'    => 'createUsers',
             'errors' => $this->notifications
         ));
-    
+        
     }
 
     public function update($id){

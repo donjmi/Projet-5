@@ -12,7 +12,7 @@ use Blog\Models\MainModel;
 class ArticlesController extends MainController
 {    
     /**
-     * read
+     * read the article or create the comment article
      *
      * @param  mixed $id
      * @return void
@@ -22,11 +22,15 @@ class ArticlesController extends MainController
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOne($id);
+            $comment = MainModel::loadModel("comments")->listComment($id);
             // $comment = MainModel::loadModel("comments")->getAll('posts_id', $id);
-            $comment = MainModel::loadModel("comments")->listAll([
-            'posts_id' => [$id, ' = '], 
-            // 'comment' => 'très'
-            ]);
+            
+            
+            // $comment = MainModel::loadModel("comments")->listAll([
+            //     'posts_id' => [$id, ' = '], 
+            //     // 'comment' => 'très'
+            //     ]);
+
 
             $this->render('article', [
                 'article' => $article,
@@ -60,6 +64,7 @@ class ArticlesController extends MainController
         $data['date_comment'] = date("Y-m-d H:i:s");
         $comment = new CommentsController();
         $comment->edit_com($data);
+        
         
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
         $comments = MainModel::loadModel("Comments")->getAll('posts_id', $_POST['posts_id']);

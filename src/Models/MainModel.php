@@ -108,6 +108,7 @@ abstract class MainModel
                     switch($key) {
                         case 'id':
                         case 'posts_id':
+                        case 'users_id':
                         case 'role':
                             $req .= ' '.$value[0];
                         break;
@@ -189,16 +190,15 @@ abstract class MainModel
         return $query->execute();
     }
 
-    public function getErrors(string $key=null, string $value=null)
+    private $data;
+
+    public function __construct($data)
     {
-            $req = "SELECT $key FROM " . $this->table;
-            
-            if (isset($key) && isset($value)){
-                $req .= " WHERE $key = '$value'";
-            }
-            $query = $this->connexion->prepare($req);
-            $query->execute();
-            // debug($query);
-            return $query->fetchAll();
+         $this->data = $data;   
     }
+
+    private function getField($field){
+        return $this->data[$field];
+    }
+
 }

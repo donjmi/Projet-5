@@ -16,4 +16,21 @@ class CommentsModel extends MainModel{
         // get cnx
         $this->getConnection();
     }
+
+    public function listComment($id)
+    {       
+            $req = "SELECT Comments.id,
+                            Comments.user_id,
+                            Comments.comment,
+                            Comments.posts_id,
+                            Comments.date_comment,
+                            Users.pseudo
+                    FROM Comments, users
+                    WHERE Comments.posts_id = '" . $id . "'
+                    AND Comments.user_id = Users.id";
+            // debug($req);
+            $query = $this->connexion->prepare($req);
+            $query->execute();
+            return $query->fetchAll();
+    }
 }

@@ -34,8 +34,8 @@
    {% endfor%}
 </table>
 
-<p class="h4 mb-4">Ajouter un nouvel utilisateur</p><a href="users/createUsers" class="badge badge-primary">Ajout</a>
+{# <p class="h4 mb-4">Ajouter un nouvel utilisateur</p><a href="users/createUsers" class="badge badge-primary">Ajout</a> #}
 
-{% include 'User_edit.twig'  with {'form': addUsers, 'errors': errors, 'action': action } %}
+{% include 'User_edit.twig'  with {'errors': errors, 'action': action, 'configs': configs, 'mode': 'bloc' } %}
     
 {% endblock content %}

@@ -106,6 +106,7 @@ h1.title-post{
 ul.list-group{
   margin-bottom: 35px;
   font-size: smaller;
+  text-align: left;
 }
 
 .jmi{

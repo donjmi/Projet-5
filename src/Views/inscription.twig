@@ -1,17 +1,8 @@
-{% if not mode %}
 {% extends 'Template/layout.twig' %}
-{% endif %}
-
 {% block content %}
-
-<br />
-  {# {% set log %} #}
   <p class="h4 mb-4">{{ configs.site.label }} : </p>
- 
-  <h2>utilisateur : {{ user.pseudo }}</h2>
-   {# {% endset %} #}
-
-   {% if errors %}
+  
+ {% if errors %}
    <div class="alert alert-danger">
    <p>Le formulaire n'est pas rempli correctement :</p>
     {% for msg in errors %}
@@ -21,11 +12,9 @@
    {% endfor %}
    </div>
    {% endif %}
-<form method="post" action="users/{{ action }}/" class="text-center border border-light p-5">
+<form method="post" action="inscription/{{ action }}/" class="text-center border border-light p-5">
  
    <p><input type="hidden"      name="id"         value="{{ user.id }}" /></p>
-   {# <p><input type="email"       name="email"      value="{{ user.email }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email" ></p> #}
-   {# <p><input type="email"       name="email2"     value="{{ user.email2 }}"    id="defaultContactFormName" class="form-control mb-4" placeholder="email confirmation" ></p> #}
    <div class="input-group mb-3">
       <div class="input-group-prepend">
          <span class="input-group-text">Email</span>
@@ -48,10 +37,6 @@
       </div>
       <input type="text" name="pseudo" value="{{ user.pseudo }}" class="form-control" />
    </div>
-   {# <p><input type="text"        name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo"></p> #}
-   {# <p><input type="password"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" ></p>
-   <p><input type="password"    name="password2"  value="{{ user.password2 }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password de confirmation" ></p> #}
-   
    <div class="input-group mb-3">
       <div class="input-group-prepend">
          <span class="input-group-text">mot de passe</span>
@@ -70,8 +55,7 @@
    </div>
    
    <p><input type="text"        name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" /></p>
-   <p><input type="submit"      name="formuser"   value="envoyez" /></p>
+   <p><input type="submit"      name="formSignUp"   value="envoyez" /></p>
 
 </form>
-
 {% endblock content %}

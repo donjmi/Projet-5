@@ -46,7 +46,11 @@ abstract class MainController
             case 'admin_users_delete':
                 $redirect = '/users/delete';
             break;
+            case 'inscriptionx':
+                $redirect = '/users/listUsers';
+            break;
             default:
+                $redirect = '';
         }
         header("Location: http://localhost/projet-5$redirect");
         exit();

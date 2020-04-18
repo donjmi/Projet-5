@@ -33,7 +33,7 @@ class UsersController extends MainController
             $data['role']       = htmlspecialchars($_POST['role']);
         }
         if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
-            $data['password']   = sha1($_POST['password']);
+            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user = MainModel::loadModel("Users")->createQuery('create',$data);
             $this->redirect('admin_users');
         }
@@ -70,7 +70,7 @@ class UsersController extends MainController
                     'configs' => $this->configSite(),
                 ));
             }
-            $data['password']   = sha1($_POST['password']);
+            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
             unset($data['email2']);
             unset($data['password2']);
             $user = MainModel::loadModel("Users")->createQuery('update',$data);

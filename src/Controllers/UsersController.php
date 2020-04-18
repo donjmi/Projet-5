@@ -7,11 +7,16 @@ class UsersController extends MainController
 {    
     public function listUsers()
     {
+        $configs = $this->configSite();
+        $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
+
         $users = MainModel::loadModel("Users")->getAll();
+
         $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',
-            'errors'    => $this->notifications
+            'errors'    => $this->notifications,
+            'configs' => $configs,
         ));  
       
     }
@@ -19,40 +24,28 @@ class UsersController extends MainController
     
     public function createUsers()
     {  
-            $data= array();
-            // if (isset($_POST['id'])){
-            //     $data['id']         = htmlspecialchars($_POST['id']);
-            // }
-            // if (isset($_POST['pseudo'])){
-            //     $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            // }
-            // if (isset($_POST['email'])){
-            //     $data['email']      = htmlspecialchars($_POST['email']);;
-            // }
-            // if (isset($_POST['password']) && !empty($_POST['password'])){
-            //     $data['password']   = sha1($_POST['password']);
-            // }
-            // if (isset($_POST['role'])){
-            //     $data['role']       = htmlspecialchars($_POST['role']);
-            // }
-            if (isset($_POST)){
-                $data['id']         = htmlspecialchars($_POST['id']);
-                $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-                $data['email']      = htmlspecialchars($_POST['email']);
-                $data['password']   = sha1($_POST['password']);
-                $data['role']       = htmlspecialchars($_POST['role']);
-            }
-            if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
-                // debug($this->validateUsers('createUsers'));
-                $user = MainModel::loadModel("Users")->createQuery('create',$data);
-                $this->redirect('admin_users');
-            }
+        $data= array();
+        if (isset($_POST)){
+            $data['id']         = htmlspecialchars($_POST['id']);
+            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
+            $data['email']      = htmlspecialchars($_POST['email']);
+            $data['password']   = htmlspecialchars($_POST['password']);
+            $data['role']       = htmlspecialchars($_POST['role']);
+        }
+        if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
+            $data['password']   = sha1($_POST['password']);
+            $user = MainModel::loadModel("Users")->createQuery('create',$data);
+            $this->redirect('admin_users');
+        }
+        $configs = $this->configSite();
+        $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
+
             
-            // debug($this->notifications);
         $this->render('User_edit', Array(
             'user'   => $data,
             'action'    => 'createUsers',
-            'errors' => $this->notifications
+            'errors' => $this->notifications,
+            'configs' => $configs,
         ));
         
     }
@@ -64,24 +57,32 @@ class UsersController extends MainController
             $data['id']         = htmlspecialchars($_POST['id']);
             $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
             $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = sha1($_POST['password']);
+            $data['email2']      = htmlspecialchars($_POST['email2']);
+            $data['password']   = htmlspecialchars($_POST['password']);
+            $data['password2']   = htmlspecialchars($_POST['password2']);
             $data['role']       = htmlspecialchars($_POST['role']);
 
             if (! $this->validateUsers('update')) {
                 $this->render('User_edit', Array(
                     'user'      => $data,
                     'action'    => 'update',
-                    'errors'    => $this->notifications
+                    'errors'    => $this->notifications,
+                    'configs' => $this->configSite(),
                 ));
             }
+            $data['password']   = sha1($_POST['password']);
+            unset($data['email2']);
+            unset($data['password2']);
             $user = MainModel::loadModel("Users")->createQuery('update',$data);
+            // debug($user);
             $this->redirect('admin_users');
         } else {
             $user = MainModel::loadModel("Users")->getOne($id);
             $this->render('User_edit', Array(
                 'user'   => $user,
                 'action'    => 'update',
-                'errors' => $this->notifications
+                'errors' => $this->notifications,
+                'configs' => $this->configSite(),
             ));
         }
     }
@@ -96,14 +97,27 @@ class UsersController extends MainController
         )); 
     }
 
-    public function validateUsers(string $formType){
-        
-        $isOk = true;
+    private function configSite()
+    {
+        return array(
+            'site' => [
+                'label' => "gestion de l'utilisateur",
+            ]
+        );
+    }
 
+    private function isAlpha(){
+        $isOk = true;
         if (empty($_POST['pseudo'])){
             $this->notifications[] = "saisir votre  pseudo";
             $isOk = false;
         }
+
+        return $isOk;
+    }
+
+    private function isEmail(string $formType){
+        $isOk = true;
         if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
             $this->notifications[] = "votre email n'est pas valide";
             $isOk = false;
@@ -123,7 +137,11 @@ class UsersController extends MainController
                 $isOk = false;
             }
         }
-        
+        return $isOk;
+    }
+
+    private function isPassword(){
+        $isOk = true;
         if (empty($_POST['password'])){
             $this->notifications[] = "saisir votre  password";
             $isOk = false;
@@ -132,8 +150,24 @@ class UsersController extends MainController
             $this->notifications[] = "Veuillez saisir le même password";
             $isOk = false;
         }
-        return $isOk;
 
+        return $isOk;
+    }
+    
+    /**
+     * validateUsers
+     *
+     * @param  mixed $formType
+     * @return void
+     */
+    private function validateUsers(string $formType){
+        
+        $isOk[] = $this->isEmail($formType);
+        $isOk[] = $this->isAlpha();
+        $isOk[] = $this->isPassword();
+        
+        return $isOk[0] && $isOk[1] && $isOk[2];
+        //return eval(explode(' && ', $isOk));
     } 
 
 

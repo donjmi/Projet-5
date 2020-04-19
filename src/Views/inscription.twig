@@ -35,7 +35,11 @@
       <div class="input-group-prepend">
          <span class="input-group-text">pseudo</span>
       </div>
+      {% if action == 'update' %}
+      <input type="text" name="pseudo" value="{{ user.pseudo|default(user.pseudo) }}" class="form-control" />
+      {% else %} 
       <input type="text" name="pseudo" value="{{ user.pseudo }}" class="form-control" />
+      {% endif %}
    </div>
    <div class="input-group mb-3">
       <div class="input-group-prepend">

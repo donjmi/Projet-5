@@ -16,7 +16,7 @@ class CommentsController extends MainController
         $comment = MainModel::loadModel("comments")->listAll([
         'posts_id' => [$id, '='], 
         // 'comment' => 'très'
-        ]); debug($comment);
+        ]);
         $this->render('comment', [
             'comments' => $comment
             ]);

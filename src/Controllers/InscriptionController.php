@@ -16,10 +16,12 @@ class InscriptionController extends MainController
             $data['role']       = htmlspecialchars($_POST['role']);
         }
         if (isset($_POST['formSignUp']) && $this->validateUsers('createUsers')){
-            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Inscription")->createQuery('create',$data);
+            // debug($user,'création ok');
             $this->redirect('admin_users');
         }
+
         $configs = $this->configSite();
         $configs['site']['label'] = 'Inscrivez-vous';
 

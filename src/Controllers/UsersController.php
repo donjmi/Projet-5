@@ -11,7 +11,6 @@ class UsersController extends MainController
         $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
 
         $users = MainModel::loadModel("Users")->getAll();
-
         $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',

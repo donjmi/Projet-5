@@ -1,13 +1,25 @@
 {% extends 'Template/layout.twig' %}
 
 {% block content %}
+  <p class="h4 mb-4">{{ configs.site.label }} : </p>
+  
+ {% if errors %}
+   <div class="alert alert-danger">
+   <p>Le formulaire n'est pas rempli correctement :</p>
+    {% for msg in errors %}
+      <ul>
+         <li>{{ msg }}</li>
+      </ul>
+   {% endfor %}
+   </div>
+   {% endif %}
 
-<form method="post" action="Users/login/" class="text-center border border-light p-5">
-  <p class="h4 mb-4">Se connecter</p>
-   <p><input type="email"     name="email"      value=""  id="defaultContactFormName" class="form-control mb-4" placeholder="votre email" required></p>
-   <p><input type="password"  name="password"   value=""  id="defaultContactFormName" class="form-control mb-4" placeholder="mot de passe" required></p>
 
-   <p><input type="submit"    name="formusers"  value="se connecter"></p>
+<form method="post" action="auth/{{ action }}/" class="text-center border border-light p-5">
+   <p><input type="email"     name="email"      value=""  id="defaultContactFormName" class="form-control mb-4" placeholder="votre email"></p>
+   <p><input type="password"  name="password"   value=""  id="defaultContactFormName" class="form-control mb-4" placeholder="mot de passe"></p>
+
+   <p><input type="submit"    name="formAuth"  value="se connecter"></p>
 
 </form>
 {% endblock content %}

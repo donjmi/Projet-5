@@ -8,12 +8,13 @@ class AuthController extends MainController
     public function login()
     {  
         $data= array();
-        $myPost = filter_input_array(INPUT_POST);
-        if ($myPost){
-            $data['email']      = $myPost['email'];
-            $data['password']   = password_hash($myPost["password"],PASSWORD_BCRYPT);
+    
+        $Post = filter_input_array(INPUT_POST);
+        if ($Post){
+            $data['email']      = $Post['email'];
+            $data['password']   = password_hash($Post["password"],PASSWORD_BCRYPT);
         }
-        if (isset($myPost['formAuth']) && $this->validateLogin()){
+        if (isset($Post['formAuth']) && $this->validateLogin()){
             
             debug('yes ok');
             $this->redirect('admin_users');
@@ -78,12 +79,7 @@ class AuthController extends MainController
      */
     private function validateLogin(){
         
-        // $isOk[] = $this->isAlpha();
         $isOk[] = $this->isRegistered();
-        // $isOk[] = $this->isEmail();
-        // $isOk[] = $this->isPassword();   
-        
-        // return $isOk[0] && $isOk[1];
         return $isOk[0];
     } 
 

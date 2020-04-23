@@ -12,26 +12,26 @@ class AdminController extends MainController
      */
     public function edit()
     {
-        if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
+        $post = filter_input_array(INPUT_POST);
+        if (array_key_exists('id', $post) && ! empty($post['id'])){
             
             $data= array();
-            $data['id'] = $_POST['id'];
-            $data['title'] = htmlspecialchars($_POST['title']);
-            $data['slug'] = htmlspecialchars($_POST['slug']);
-            $data['content'] = htmlspecialchars($_POST['content']);
+            $data['title'] = $post['title'];
+            $data['slug'] = $post['slug'];
+            $data['content'] = $post['content'];
             $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
-            $data['url_images'] = htmlspecialchars($_POST['url_images']);
+            $data['url_images'] = $post['url_images'];
             
             $x = MainModel::loadModel("Admin")->createQuery('update',$data);
 
-        } elseif (array_key_exists('title', $_POST)){
+        } elseif (array_key_exists('title', $post)){
             
             $data= array();
-            $data['title'] = htmlspecialchars($_POST['title']);
-            $data['slug'] = htmlspecialchars($_POST['slug']);
-            $data['content'] = htmlspecialchars($_POST['content']);
+            $data['title'] = $post['title'];
+            $data['slug'] = $post['slug'];
+            $data['content'] = $post['content'];
             $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
-            $data['url_images'] = htmlspecialchars($_POST['url_images']);
+            $data['url_images'] = $post['url_images'];
 
             $x = MainModel::loadModel("Admin")->createQuery('create',$data);
 

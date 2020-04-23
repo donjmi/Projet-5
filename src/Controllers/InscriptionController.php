@@ -82,7 +82,7 @@ private function isEmail(string $formType){
         $isOk = false;
     }
     if ($_POST['email2']!== $_POST['email']){
-        $this->notifications[] = "Veuillez saisir le même email ";
+        $this->notifications[] = "Veuillez saisir un email identique ";
         $isOk = false;
     }else {
         $options = array();
@@ -92,7 +92,7 @@ private function isEmail(string $formType){
         }
         $email = MainModel::loadModel("Users")->listAll($options);
         if (!empty($email)){
-            $this->notifications[] = "Email déjà utilisé";
+            $this->notifications[] = "Cet Email déjà utilisé";
             $isOk = false;
         }
     }
@@ -102,11 +102,11 @@ private function isEmail(string $formType){
     private function isPassword(){
         $isOk = true;
         if (empty($_POST['password'])){
-            $this->notifications[] = "saisir votre  password";
+            $this->notifications[] = "Veuillez saisir votre password";
             $isOk = false;
         }
         if ($_POST['password2']!== $_POST['password']){
-            $this->notifications[] = "Veuillez saisir le même password";
+            $this->notifications[] = "Veuillez saisir un password identique";
             $isOk = false;
         }
 

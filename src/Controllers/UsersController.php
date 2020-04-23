@@ -24,12 +24,13 @@ class UsersController extends MainController
     public function createUsers()
     {  
         $data= array();
-        if (isset($_POST)){
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = htmlspecialchars($_POST['password']);
-            $data['role']       = htmlspecialchars($_POST['role']);
+        $post = filter_input_array(INPUT_POST);
+        if (isset($post)){
+            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS );
+            $data['email']      = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
+            $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
         }
         if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
             $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);

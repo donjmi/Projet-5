@@ -24,16 +24,16 @@ class UsersController extends MainController
     public function createUsers()
     {  
         $data= array();
-        $post = filter_input_array(INPUT_POST);
-        if (isset($post)){
-            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS );
-            $data['email']      = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
-            $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
+        // $post = filter_input_array(INPUT_POST);
+        if (isset($_POST)){
+            $data['id']         = htmlspecialchars($_POST['id']);
+            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
+            $data['email']      = htmlspecialchars($_POST['email']);
+            $data['password']   = htmlspecialchars($_POST['password']);
+            $data['role']       = htmlspecialchars($_POST['role']);
         }
         if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
-            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Users")->createQuery('create',$data);
             $this->redirect('admin_users');
         }
@@ -107,17 +107,7 @@ class UsersController extends MainController
     }
 /*  ------------------ form verifications -----------------------  */
 
-    private function isAlpha(){
-        $isOk = true;
-        if (empty($_POST['pseudo'])){
-            $this->notifications[] = "saisir votre  pseudo";
-            $isOk = false;
-        }
-
-        return $isOk;
-    }
-
-    private function isUnik(string $formType){
+    private function okUserPseudo(string $formType){
         $isOk = true;
         if (empty($_POST['pseudo'])){
             $this->notifications[] = "saisir votre  pseudo";
@@ -137,7 +127,7 @@ class UsersController extends MainController
         }
         return $isOk;
     }
-    private function isEmail(string $formType){
+    private function okUserEmail(string $formType){
         $isOk = true;
         if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
             $this->notifications[] = "votre email n'est pas valide";
@@ -161,7 +151,7 @@ class UsersController extends MainController
         return $isOk;
     }
 
-    private function isPassword(){
+    private function okUserPass(){
         $isOk = true;
         if (empty($_POST['password'])){
             $this->notifications[] = "saisir votre  password";
@@ -183,12 +173,11 @@ class UsersController extends MainController
      */
     private function validateUsers(string $formType){
         
-        $isOk[] = $this->isEmail($formType);
-        $isOk[] = $this->isAlpha();
-        $isOk[] = $this->isUnik($formType);
-        $isOk[] = $this->isPassword();
+        $isOk[] = $this->okUserEmail($formType);
+        $isOk[] = $this->okUserPseudo($formType);
+        $isOk[] = $this->okUserPass();
         
-        return $isOk[0] && $isOk[1] && $isOk[2] && $isOk[3];
+        return $isOk[0] && $isOk[1] && $isOk[2];
     } 
 
 

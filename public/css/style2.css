@@ -5,7 +5,8 @@
  */
  body {
   padding-top: 56px;
-  background-color:#eaedf1;
+  /* background-color:#eaedf1; */
+  background-image:radial-gradient(white, black);
   text-align: center;
 
   /* background-color: #ffffff; */

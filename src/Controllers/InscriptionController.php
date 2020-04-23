@@ -16,10 +16,12 @@ class InscriptionController extends MainController
             $data['role']       = htmlspecialchars($_POST['role']);
         }
         if (isset($_POST['formSignUp']) && $this->validateUsers('createUsers')){
-            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Inscription")->createQuery('create',$data);
+            // debug($user,'création ok');
             $this->redirect('admin_users');
         }
+
         $configs = $this->configSite();
         $configs['site']['label'] = 'Inscrivez-vous';
 
@@ -43,38 +45,58 @@ class InscriptionController extends MainController
     
  /*  ------------------ form verifications -----------------------  */
 
-    private function isAlpha(){
-        $isOk = true;
-        if (empty($_POST['pseudo'])){
-            $this->notifications[] = "saisir votre  pseudo";
-            $isOk = false;
-        }
-
-        return $isOk;
+private function isAlpha(){
+    $isOk = true;
+    if (empty($_POST['pseudo'])){
+        $this->notifications[] = "saisir votre  pseudo";
+        $isOk = false;
     }
 
-    private function isEmail(string $formType){
-        $isOk = true;
-        if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-            $this->notifications[] = "votre email n'est pas valide";
+    return $isOk;
+}
+private function isUnik(string $formType){
+    $isOk = true;
+    if (empty($_POST['pseudo'])){
+        $this->notifications[] = "saisir votre  pseudo";
+        $isOk = false;
+        
+    }else {
+        $options = array();
+        $options['pseudo'] = [$_POST['pseudo']];
+        if ($formType != 'createUsers'){
+            $options['id'] = [$_POST['id'], '!='];
+        }
+        $pseudo = MainModel::loadModel("Users")->listAll($options);
+        if (!empty($pseudo)){
+            $this->notifications[] = "pseudo déjà utilisé";
             $isOk = false;
         }
-        if ($_POST['email2']!== $_POST['email']){
-            $this->notifications[] = "Veuillez saisir le même email ";
-            $isOk = false;
-        }else {
-            $options = array();
-            $options['email'] = [$_POST['email']];
-            if ($formType != 'createUsers'){
-                $options['id'] = [$_POST['id'], '!='];
-            }
-            $email = MainModel::loadModel("Users")->listAll($options);
-            if (!empty($email)){
-                $this->notifications[] = "Email déjà utilisé";
-                $isOk = false;
-            }
+    }
+    return $isOk;
+}
+
+private function isEmail(string $formType){
+    $isOk = true;
+    if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+        $this->notifications[] = "votre email n'est pas valide";
+        $isOk = false;
+    }
+    if ($_POST['email2']!== $_POST['email']){
+        $this->notifications[] = "Veuillez saisir le même email ";
+        $isOk = false;
+    }else {
+        $options = array();
+        $options['email'] = [$_POST['email']];
+        if ($formType != 'createUsers'){
+            $options['id'] = [$_POST['id'], '!='];
         }
-        return $isOk;
+        $email = MainModel::loadModel("Users")->listAll($options);
+        if (!empty($email)){
+            $this->notifications[] = "Email déjà utilisé";
+            $isOk = false;
+        }
+    }
+    return $isOk;
     }
 
     private function isPassword(){
@@ -101,9 +123,10 @@ class InscriptionController extends MainController
         
         $isOk[] = $this->isEmail($formType);
         $isOk[] = $this->isAlpha();
+        $isOk[] = $this->isUnik($formType);
         $isOk[] = $this->isPassword();
         
-        return $isOk[0] && $isOk[1] && $isOk[2];
+        return $isOk[0] && $isOk[1] && $isOk[2] && $isOk[3];
     } 
 
 

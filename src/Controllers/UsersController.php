@@ -11,7 +11,6 @@ class UsersController extends MainController
         $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
 
         $users = MainModel::loadModel("Users")->getAll();
-
         $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',
@@ -25,12 +24,13 @@ class UsersController extends MainController
     public function createUsers()
     {  
         $data= array();
-        if (isset($_POST)){
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = htmlspecialchars($_POST['password']);
-            $data['role']       = htmlspecialchars($_POST['role']);
+        $post = filter_input_array(INPUT_POST);
+        if (isset($post)){
+            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS );
+            $data['email']      = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
+            $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
         }
         if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
             $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -105,6 +105,7 @@ class UsersController extends MainController
             ]
         );
     }
+/*  ------------------ form verifications -----------------------  */
 
     private function isAlpha(){
         $isOk = true;
@@ -116,6 +117,26 @@ class UsersController extends MainController
         return $isOk;
     }
 
+    private function isUnik(string $formType){
+        $isOk = true;
+        if (empty($_POST['pseudo'])){
+            $this->notifications[] = "saisir votre  pseudo";
+            $isOk = false;
+            
+        }else {
+            $options = array();
+            $options['pseudo'] = [$_POST['pseudo']];
+            if ($formType != 'createUsers'){
+                $options['id'] = [$_POST['id'], '!='];
+            }
+            $pseudo = MainModel::loadModel("Users")->listAll($options);
+            if (!empty($pseudo)){
+                $this->notifications[] = "pseudo déjà utilisé";
+                $isOk = false;
+            }
+        }
+        return $isOk;
+    }
     private function isEmail(string $formType){
         $isOk = true;
         if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
@@ -164,10 +185,10 @@ class UsersController extends MainController
         
         $isOk[] = $this->isEmail($formType);
         $isOk[] = $this->isAlpha();
+        $isOk[] = $this->isUnik($formType);
         $isOk[] = $this->isPassword();
         
-        return $isOk[0] && $isOk[1] && $isOk[2];
-        //return eval(explode(' && ', $isOk));
+        return $isOk[0] && $isOk[1] && $isOk[2] && $isOk[3];
     } 
 
 

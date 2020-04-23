@@ -104,7 +104,6 @@ abstract class MainModel
                     }
                     $req .= ($key == key($params) ? " WHERE " : " AND");
                     $req .= ' '.$key.' '. $operator;
-                    // debug(gettype($value[0]));
                     switch($key) {
                         case 'id':
                         case 'posts_id':
@@ -189,16 +188,4 @@ abstract class MainModel
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }
-
-    private $data;
-
-    public function __construct($data)
-    {
-         $this->data = $data;   
-    }
-
-    private function getField($field){
-        return $this->data[$field];
-    }
-
 }

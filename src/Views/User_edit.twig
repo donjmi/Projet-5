@@ -46,12 +46,12 @@
       <div class="input-group-prepend">
          <span class="input-group-text">pseudo</span>
       </div>
+      {% if action == 'update' %}
+      <input type="text" name="pseudo" value="{{ user.pseudo|default(user.pseudo) }}" class="form-control" />
+      {% else %} 
       <input type="text" name="pseudo" value="{{ user.pseudo }}" class="form-control" />
+      {% endif %}
    </div>
-   {# <p><input type="text"        name="pseudo"     value="{{ user.pseudo }}"   id="defaultContactFormName" class="form-control mb-4" placeholder="pseudo"></p> #}
-   {# <p><input type="password"    name="password"   value="{{ user.password }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password" ></p>
-   <p><input type="password"    name="password2"  value="{{ user.password2 }}" id="defaultContactFormName" class="form-control mb-4" placeholder="password de confirmation" ></p> #}
-   
    <div class="input-group mb-3">
       <div class="input-group-prepend">
          <span class="input-group-text">mot de passe</span>
@@ -71,7 +71,9 @@
    
    <p><input type="text"        name="role"       value="{{ user.role }}"     id="defaultContactFormName" class="form-control mb-4" placeholder="role" /></p>
    <p><input type="submit"      name="formuser"   value="envoyez" /></p>
-
+   {% if action == 'update' %}
+   <p><a class="btn btn-primary" href="users/listUsers/" role="button">Retour</a></p>
+   {% endif %}
 </form>
 
 {% endblock content %}

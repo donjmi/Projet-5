@@ -68,7 +68,7 @@ private function isUnik(string $formType){
         }
         $pseudo = MainModel::loadModel("Users")->listAll($options);
         if (!empty($pseudo)){
-            $this->notifications[] = "pseudo déjà utilisé";
+            $this->notifications[] = "Ce pseudo est déjà utilisé";
             $isOk = false;
         }
     }
@@ -78,7 +78,7 @@ private function isUnik(string $formType){
 private function isEmail(string $formType){
     $isOk = true;
     if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-        $this->notifications[] = "votre email n'est pas valide";
+        $this->notifications[] = "Votre email n'est pas au bon format";
         $isOk = false;
     }
     if ($_POST['email2']!== $_POST['email']){

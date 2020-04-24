@@ -48,7 +48,7 @@ class InscriptionController extends MainController
 private function isAlpha(){
     $isOk = true;
     if (empty($_POST['pseudo'])){
-        $this->notifications[] = "saisir votre  pseudo";
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
     }
 
@@ -57,7 +57,7 @@ private function isAlpha(){
 private function isUnik(string $formType){
     $isOk = true;
     if (empty($_POST['pseudo'])){
-        $this->notifications[] = "saisir votre  pseudo";
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
         
     }else {

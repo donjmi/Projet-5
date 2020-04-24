@@ -48,7 +48,7 @@ class InscriptionController extends MainController
 private function isAlpha(){
     $isOk = true;
     if (empty($_POST['pseudo'])){
-        $this->notifications[] = "saisir votre  pseudo";
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
     }
 
@@ -57,7 +57,7 @@ private function isAlpha(){
 private function isUnik(string $formType){
     $isOk = true;
     if (empty($_POST['pseudo'])){
-        $this->notifications[] = "saisir votre  pseudo";
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
         
     }else {
@@ -68,7 +68,7 @@ private function isUnik(string $formType){
         }
         $pseudo = MainModel::loadModel("Users")->listAll($options);
         if (!empty($pseudo)){
-            $this->notifications[] = "pseudo déjà utilisé";
+            $this->notifications[] = "Ce pseudo est déjà utilisé";
             $isOk = false;
         }
     }
@@ -78,11 +78,11 @@ private function isUnik(string $formType){
 private function isEmail(string $formType){
     $isOk = true;
     if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-        $this->notifications[] = "votre email n'est pas valide";
+        $this->notifications[] = "Votre email n'est pas au bon format";
         $isOk = false;
     }
     if ($_POST['email2']!== $_POST['email']){
-        $this->notifications[] = "Veuillez saisir le même email ";
+        $this->notifications[] = "Veuillez saisir un email identique ";
         $isOk = false;
     }else {
         $options = array();
@@ -92,7 +92,7 @@ private function isEmail(string $formType){
         }
         $email = MainModel::loadModel("Users")->listAll($options);
         if (!empty($email)){
-            $this->notifications[] = "Email déjà utilisé";
+            $this->notifications[] = "Cet Email déjà utilisé";
             $isOk = false;
         }
     }
@@ -102,11 +102,11 @@ private function isEmail(string $formType){
     private function isPassword(){
         $isOk = true;
         if (empty($_POST['password'])){
-            $this->notifications[] = "saisir votre  password";
+            $this->notifications[] = "Veuillez saisir votre password";
             $isOk = false;
         }
         if ($_POST['password2']!== $_POST['password']){
-            $this->notifications[] = "Veuillez saisir le même password";
+            $this->notifications[] = "Veuillez saisir un password identique";
             $isOk = false;
         }
 

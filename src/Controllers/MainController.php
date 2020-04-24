@@ -37,16 +37,7 @@ abstract class MainController
             case 'admin_users':
                 $redirect = '/users/listUsers';
             break;
-            case 'admin_users_create':
-                $redirect = '/users/create';
-            break;
-            case 'admin_users_update':
-                $redirect = '/users/update';
-            break;
-            case 'admin_users_delete':
-                $redirect = '/users/delete';
-            break;
-            case 'inscriptionx':
+            case 'inscription':
                 $redirect = '/users/listUsers';
             break;
             default:

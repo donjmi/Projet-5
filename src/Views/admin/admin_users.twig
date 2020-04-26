@@ -27,8 +27,8 @@
 						<button type="button" class="btn btn-warning">modifier</button>
 				</td>
 				<td>
-					<a href="users/delete/{{user.id}}"> 
-						<button  type="button" class="btn btn-danger" ><div class="top" ><span id="tool" data-toggle="tooltip" data-placement="bottom" title="Supp. définitive">supprimer</span><i></i></div></button>
+					<a href="users/delete/{{user.id}}" onclick="return window.confirm('Êtes-vous certain de vouloir supprimer cette utilisateur ?!')"> 
+						<button  type="button" class="btn btn-danger" >supprimer</button></a>
 				</td> 
     </tr>
    {% endfor%}

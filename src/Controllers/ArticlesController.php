@@ -58,10 +58,10 @@ class ArticlesController extends MainController
     public function createComment()
     {
         $data = array();
-        $data['posts_id'] = htmlspecialchars($_POST['posts_id']);
-        $data['user_id'] = htmlspecialchars($_POST['user_id']);
-        $data['comment'] = htmlspecialchars($_POST['comment']);
-        $data['date_comment'] = date("Y-m-d H:i:s");
+        $data['posts_id']       = filter_input(INPUT_POST, 'posts_id', FILTER_SANITIZE_NUMBER_INT);
+        $data['user_id']        = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
+        $data['comment']        = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
+        $data['date_comment']   = date("Y-m-d H:i:s");
         $comment = new CommentsController();
         $comment->edit_com($data);
         

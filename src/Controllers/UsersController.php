@@ -15,7 +15,7 @@ class UsersController extends MainController
             'users'     => $users,            
             'action'    => 'createUsers',
             'errors'    => $this->notifications,
-            'configs' => $configs,
+            'configs'   => $configs,
         ));  
       
     }
@@ -24,15 +24,15 @@ class UsersController extends MainController
     public function createUsers()
     {  
         $data= array();
-        // $post = filter_input_array(INPUT_POST);
-        if (isset($_POST)){
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['password']   = htmlspecialchars($_POST['password']);
-            $data['role']       = htmlspecialchars($_POST['role']);
+        $post = filter_input_array(INPUT_POST);
+        if (isset($post)){
+            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['email']      = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+            $data['password']   = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
+            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
         }
-        if (isset($_POST['formuser']) && $this->validateUsers('createUsers')){
+        if (isset($post['formuser']) && $this->validateUsers('createUsers')){
             $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Users")->createQuery('create',$data);
             $this->redirect('admin_users');
@@ -45,22 +45,23 @@ class UsersController extends MainController
             'user'      => $data,
             'action'    => 'createUsers',
             'errors'    => $this->notifications,
-            'configs'   => $configs,
+            'configs'   => $configs
         ));
         
     }
 
     public function update($id){
-        if (array_key_exists('id', $_POST) && ! empty($_POST['id'])){
+        $post = filter_input_array(INPUT_POST);
+        if (array_key_exists('id', $post) && ! empty($post['id'])){
          
             $data= array();
-            $data['id']         = htmlspecialchars($_POST['id']);
-            $data['pseudo']     = htmlspecialchars($_POST['pseudo']);
-            $data['email']      = htmlspecialchars($_POST['email']);
-            $data['email2']      = htmlspecialchars($_POST['email2']);
-            $data['password']   = htmlspecialchars($_POST['password']);
-            $data['password2']   = htmlspecialchars($_POST['password2']);
-            $data['role']       = htmlspecialchars($_POST['role']);
+            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['email']      = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+            $data['email2']     = filter_input(INPUT_POST, 'email2', FILTER_VALIDATE_EMAIL);
+            $data['password']   = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
+            $data['password2']  = filter_input(INPUT_POST, 'Password2', FILTER_SANITIZE_STRING);
+            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
 
             if (! $this->validateUsers('update')) {
                 $this->render('User_edit', Array(
@@ -106,9 +107,11 @@ class UsersController extends MainController
         );
     }
 /*  ------------------ form verifications -----------------------  */
+
 private function isAlpha(){
     $isOk = true;
-    if (empty($_POST['pseudo'])){
+    $post = filter_input_array(INPUT_POST);
+    if (empty($post['pseudo'])){
         $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
     }
@@ -117,15 +120,16 @@ private function isAlpha(){
 }
 private function isUnik(string $formType){
     $isOk = true;
-    if (empty($_POST['pseudo'])){
+    $post = filter_input_array(INPUT_POST);
+    if (empty($post['pseudo'])){
         $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
         
     }else {
         $options = array();
-        $options['pseudo'] = [$_POST['pseudo']];
+        $options['pseudo'] = [$post['pseudo']];
         if ($formType != 'createUsers'){
-            $options['id'] = [$_POST['id'], '!='];
+            $options['id'] = [$post['id'], '!='];
         }
         $pseudo = MainModel::loadModel("Users")->listAll($options);
         if (!empty($pseudo)){
@@ -138,18 +142,19 @@ private function isUnik(string $formType){
 
 private function isEmail(string $formType){
     $isOk = true;
-    if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+    $post = filter_input_array(INPUT_POST);
+    if (empty($post['email']) || !filter_var($post['email'],FILTER_VALIDATE_EMAIL)){
         $this->notifications[] = "Votre email n'est pas au bon format";
         $isOk = false;
     }
-    if ($_POST['email2']!== $_POST['email']){
+    if ($post['email2']!== $post['email']){
         $this->notifications[] = "Veuillez saisir un email identique ";
         $isOk = false;
     }else {
         $options = array();
-        $options['email'] = [$_POST['email']];
+        $options['email'] = [$post['email']];
         if ($formType != 'createUsers'){
-            $options['id'] = [$_POST['id'], '!='];
+            $options['id'] = [$post['id'], '!='];
         }
         $email = MainModel::loadModel("Users")->listAll($options);
         if (!empty($email)){
@@ -162,11 +167,12 @@ private function isEmail(string $formType){
 
     private function isPassword(){
         $isOk = true;
-        if (empty($_POST['password'])){
+        $post = filter_input_array(INPUT_POST);
+        if (empty($post['password'])){
             $this->notifications[] = "Veuillez saisir votre password";
             $isOk = false;
         }
-        if ($_POST['password2']!== $_POST['password']){
+        if ($post['password2']!== $post['password']){
             $this->notifications[] = "Veuillez saisir un password identique";
             $isOk = false;
         }
@@ -189,7 +195,4 @@ private function isEmail(string $formType){
         
         return $isOk[0] && $isOk[1] && $isOk[2] && $isOk[3];
     }  
-
-
-
 }

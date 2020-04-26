@@ -16,22 +16,22 @@ class AdminController extends MainController
         if (array_key_exists('id', $post) && ! empty($post['id'])){
             
             $data= array();
-            $data['title'] = $post['title'];
-            $data['slug'] = $post['slug'];
-            $data['content'] = $post['content'];
+            $data['title'] = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['slug'] = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['content'] = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
-            $data['url_images'] = $post['url_images'];
+            $data['url_images'] = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
             
             $x = MainModel::loadModel("Admin")->createQuery('update',$data);
 
         } elseif (array_key_exists('title', $post)){
             
             $data= array();
-            $data['title'] = $post['title'];
-            $data['slug'] = $post['slug'];
-            $data['content'] = $post['content'];
+            $data['title'] = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['slug'] = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['content'] = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation'] = htmlspecialchars(date("Y-m-d H:i:s"));
-            $data['url_images'] = $post['url_images'];
+            $data['url_images'] = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
 
             $x = MainModel::loadModel("Admin")->createQuery('create',$data);
 

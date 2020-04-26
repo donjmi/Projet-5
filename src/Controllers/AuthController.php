@@ -45,10 +45,10 @@ class AuthController extends MainController
     private function isRegistered(){
 
         $isOk = true;
-
+        
         $data = array();
-        $data['email']         = htmlspecialchars($_POST['email']);
-        $data['password']   = $_POST["password"];
+        $data['email']         = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $data['password']      = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
            
         $bddPass = MainModel::loadModel("Auth")->getPass($data['email']);
             

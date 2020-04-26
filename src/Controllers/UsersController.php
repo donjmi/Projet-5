@@ -38,14 +38,14 @@ class UsersController extends MainController
             $this->redirect('admin_users');
         }
         $configs = $this->configSite();
-        $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
+        $configs['site']['label'] = '';
 
             
-        $this->render('User_edit', Array(
-            'user'   => $data,
+        $this->render('inscription', Array(
+            'user'      => $data,
             'action'    => 'createUsers',
-            'errors' => $this->notifications,
-            'configs' => $configs,
+            'errors'    => $this->notifications,
+            'configs'   => $configs,
         ));
         
     }
@@ -67,7 +67,7 @@ class UsersController extends MainController
                     'user'      => $data,
                     'action'    => 'update',
                     'errors'    => $this->notifications,
-                    'configs' => $this->configSite(),
+                    'configs'   => $this->configSite(),
                 ));
             }
             $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -82,7 +82,7 @@ class UsersController extends MainController
                 'user'   => $user,
                 'action'    => 'update',
                 'errors' => $this->notifications,
-                'configs' => $this->configSite(),
+                'configs' => $this->configSite()
             ));
         }
     }
@@ -106,59 +106,68 @@ class UsersController extends MainController
         );
     }
 /*  ------------------ form verifications -----------------------  */
-
-    private function okUserPseudo(string $formType){
-        $isOk = true;
-        if (empty($_POST['pseudo'])){
-            $this->notifications[] = "saisir votre  pseudo";
-            $isOk = false;
-            
-        }else {
-            $options = array();
-            $options['pseudo'] = [$_POST['pseudo']];
-            if ($formType != 'createUsers'){
-                $options['id'] = [$_POST['id'], '!='];
-            }
-            $pseudo = MainModel::loadModel("Users")->listAll($options);
-            if (!empty($pseudo)){
-                $this->notifications[] = "pseudo déjà utilisé";
-                $isOk = false;
-            }
-        }
-        return $isOk;
-    }
-    private function okUserEmail(string $formType){
-        $isOk = true;
-        if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-            $this->notifications[] = "votre email n'est pas valide";
-            $isOk = false;
-        }
-        if ($_POST['email2']!== $_POST['email']){
-            $this->notifications[] = "Veuillez saisir le même email ";
-            $isOk = false;
-        }else {
-            $options = array();
-            $options['email'] = [$_POST['email']];
-            if ($formType != 'createUsers'){
-                $options['id'] = [$_POST['id'], '!='];
-            }
-            $email = MainModel::loadModel("Users")->listAll($options);
-            if (!empty($email)){
-                $this->notifications[] = "Email déjà utilisé";
-                $isOk = false;
-            }
-        }
-        return $isOk;
+private function isAlpha(){
+    $isOk = true;
+    if (empty($_POST['pseudo'])){
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
+        $isOk = false;
     }
 
-    private function okUserPass(){
+    return $isOk;
+}
+private function isUnik(string $formType){
+    $isOk = true;
+    if (empty($_POST['pseudo'])){
+        $this->notifications[] = "Votre pseudo n'est pas renseigné";
+        $isOk = false;
+        
+    }else {
+        $options = array();
+        $options['pseudo'] = [$_POST['pseudo']];
+        if ($formType != 'createUsers'){
+            $options['id'] = [$_POST['id'], '!='];
+        }
+        $pseudo = MainModel::loadModel("Users")->listAll($options);
+        if (!empty($pseudo)){
+            $this->notifications[] = "Ce pseudo est déjà utilisé";
+            $isOk = false;
+        }
+    }
+    return $isOk;
+}
+
+private function isEmail(string $formType){
+    $isOk = true;
+    if (empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+        $this->notifications[] = "Votre email n'est pas au bon format";
+        $isOk = false;
+    }
+    if ($_POST['email2']!== $_POST['email']){
+        $this->notifications[] = "Veuillez saisir un email identique ";
+        $isOk = false;
+    }else {
+        $options = array();
+        $options['email'] = [$_POST['email']];
+        if ($formType != 'createUsers'){
+            $options['id'] = [$_POST['id'], '!='];
+        }
+        $email = MainModel::loadModel("Users")->listAll($options);
+        if (!empty($email)){
+            $this->notifications[] = "Cet Email déjà utilisé";
+            $isOk = false;
+        }
+    }
+    return $isOk;
+    }
+
+    private function isPassword(){
         $isOk = true;
         if (empty($_POST['password'])){
-            $this->notifications[] = "saisir votre  password";
+            $this->notifications[] = "Veuillez saisir votre password";
             $isOk = false;
         }
         if ($_POST['password2']!== $_POST['password']){
-            $this->notifications[] = "Veuillez saisir le même password";
+            $this->notifications[] = "Veuillez saisir un password identique";
             $isOk = false;
         }
 
@@ -173,12 +182,13 @@ class UsersController extends MainController
      */
     private function validateUsers(string $formType){
         
-        $isOk[] = $this->okUserEmail($formType);
-        $isOk[] = $this->okUserPseudo($formType);
-        $isOk[] = $this->okUserPass();
+        $isOk[] = $this->isEmail($formType);
+        $isOk[] = $this->isAlpha();
+        $isOk[] = $this->isUnik($formType);
+        $isOk[] = $this->isPassword();
         
-        return $isOk[0] && $isOk[1] && $isOk[2];
-    } 
+        return $isOk[0] && $isOk[1] && $isOk[2] && $isOk[3];
+    }  
 
 
 

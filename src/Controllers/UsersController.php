@@ -108,16 +108,6 @@ class UsersController extends MainController
     }
 /*  ------------------ form verifications -----------------------  */
 
-private function isAlpha(){
-    $isOk = true;
-    $post = filter_input_array(INPUT_POST);
-    if (empty($post['pseudo'])){
-        $this->notifications[] = "Votre pseudo n'est pas renseigné";
-        $isOk = false;
-    }
-
-    return $isOk;
-}
 private function isUnik(string $formType){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
@@ -189,7 +179,6 @@ private function isEmail(string $formType){
     private function validateUsers(string $formType){
         
         $isOk[] = $this->isEmail($formType);
-        $isOk[] = $this->isAlpha();
         $isOk[] = $this->isUnik($formType);
         $isOk[] = $this->isPassword();
         

@@ -27,7 +27,8 @@ class CommentsModel extends MainModel{
                             Users.pseudo
                     FROM Comments, users
                     WHERE Comments.posts_id = '" . $id . "'
-                    AND Comments.user_id = Users.id";
+                    AND Comments.user_id = Users.id 
+                    ORDER BY Comments.id DESC";
             // debug($req);
             $query = $this->connexion->prepare($req);
             $query->execute();

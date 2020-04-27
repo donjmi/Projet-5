@@ -154,37 +154,29 @@ abstract class MainModel
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }
-   
-    /**
-     * createQuery : function to create or update entry
-     *
-     * @param  mixed $command
-     * @param  mixed $data
-     * @return void
-     */
-    public function createQuery(string $command, array $data)
+
+    public function create(array $data)
     {
         $keys = implode(', ', array_keys($data));
         $values = implode('", "', $data);
+        $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';      
+        $query = $this->connexion->prepare($req);
+        return $query->execute();
+    }
 
-        switch ($command) {
-            case 'create':
-                $req = 'INSERT INTO ' . $this->table . ' (' . $keys . ') VALUES ("' . $values . '")';
-                break;
-
-            case 'update':
-                $set = null;
-                foreach ($data as $dataKey => $dataValue) {
-                    if ($dataKey == 'id') {
+    public function update(array $data)
+    {
+        $keys = implode(', ', array_keys($data));
+        $values = implode('", "', $data);
+        $set = null;
+            foreach ($data as $dataKey => $dataValue) {
+                if ($dataKey == 'id'){
                         continue;
-                    }
-                    $set .= $dataKey . ' = "' . $dataValue . '", ';
+                }
+                $set .= $dataKey . ' = "' . $dataValue . '", ';
                 }
                 $set = substr_replace($set, '', -2);
-                $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = ' . $data['id'];
-                break;
-        }
-        // debug($req);
+                $req = 'UPDATE ' . $this->table . ' SET ' . $set . ' WHERE id = '. $data['id'];
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }

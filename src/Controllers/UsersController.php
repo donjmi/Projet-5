@@ -136,23 +136,18 @@ private function isPseudo(string $formType){
 private function isEmail(string $formType){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
-     if ($post['email2']!== $post['email']){
-        $this->notifications[] = "Veuillez saisir un email identique ";
+    if ($post['email2']!== $post['email']){
+        $this->notifications[] = "Votre Email n'est pas renseigné";
         $isOk = false;
     }else {
-        $options = array();
-        $options['email'] = [$post['email']];
-        if ($formType != 'createUsers'){
-            $options['id'] = [$post['id'], '!='];
-        }
-        $email = MainModel::loadModel("Users")->listAll($options);
-        if (!empty($email)){
-            $this->notifications[] = "Cet Email déjà utilisé";
+        $verifEmail = MainModel::loadModel("Users")->controlEmail($post['email']);
+        if (empty($post['id']) && !empty($verifEmail)){
+            $this->notifications[] = "Ce Email est déjà utilisé";
             $isOk = false;
         }
     }
     return $isOk;
-    }
+}
 
     private function isPassword(){
         $isOk = true;

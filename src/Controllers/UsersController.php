@@ -116,11 +116,11 @@ private function isEmail(string $formType){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
     if ($post['email2']!== $post['email']){
-        $this->notifications[] = "Votre Email n'est pas renseigné";
+        $this->notifications[] = "Votre Email de confirmation est différent";
         $isOk = false;
     }else {
-        $verifEmail = MainModel::loadModel("Users")->controlEmail($post['email']);
-        if (empty($post['id']) && !empty($verifEmail)){
+        $verifEmail = MainModel::loadModel("Users")->controlEmail($post['email'], $post['id']);
+            if (!empty($verifEmail)){
             $this->notifications[] = "Ce Email est déjà utilisé";
             $isOk = false;
         }
@@ -128,15 +128,15 @@ private function isEmail(string $formType){
     return $isOk;
 }
 
-    private function isPassword(){
-        $isOk = true;
-        $post = filter_input_array(INPUT_POST);
-        if (empty($post['password']) || $post['password2']!== $post['password']){
-            $this->notifications[] = "Mot de passe vide et/ou différent de la confirmation";
-            $isOk = false;
-        }
-        return $isOk;
+private function isPassword(){
+    $isOk = true;
+    $post = filter_input_array(INPUT_POST);
+    if (empty($post['password']) || $post['password2']!== $post['password']){
+        $this->notifications[] = "Mot de passe vide et/ou différent de la confirmation";
+        $isOk = false;
     }
+    return $isOk;
+}
     
     /**
      * validateUsers

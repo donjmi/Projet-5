@@ -67,7 +67,7 @@ class ArticlesController extends MainController
         
         
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
-        $comments = MainModel::loadModel("Comments")->getAll('posts_id', $_POST['posts_id']);
+        $comments = MainModel::loadModel("Comments")->getAll('posts_id', $data['posts_id']);
         $this->render('article', [
             'article' => $article,
             'comments' => $comments

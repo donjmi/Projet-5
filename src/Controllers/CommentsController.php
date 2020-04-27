@@ -30,7 +30,7 @@ class CommentsController extends MainController
      */
     public function edit_com($data)
     {
-        $comment = MainModel::loadModel("Comments")->createQuery('create',$data);
+        $comment = MainModel::loadModel("Comments")->create($data);
 
     }
 }

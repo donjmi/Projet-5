@@ -34,7 +34,7 @@ class UsersController extends MainController
             $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
         }
         if (isset($post['formuser']) && $this->validateUsers('createUsers')){
-            $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Users")->create($data);
             $this->redirect('admin_users');
         }
@@ -64,7 +64,7 @@ class UsersController extends MainController
             if (! $this->validateUsers('update')) {
                 $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));
             }
-            $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $data['password']   = password_hash($data['password'], PASSWORD_DEFAULT);
             unset($data['email2']);
             unset($data['password2']);
             $user = MainModel::loadModel("Users")->update($data);

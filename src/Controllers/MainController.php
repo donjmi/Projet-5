@@ -29,7 +29,8 @@ abstract class MainController
     public function render(string $file, array $data = [])
     {
         extract($data);
-        echo $this->twig->render($file . '.twig', $data); 
+        echo $this->twig->render($file . '.twig', $data);
+        exit();
     }
 
     public function redirect($url){

@@ -33,7 +33,7 @@ class UsersController extends MainController
             $data['password']   = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
             $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
         }
-        if (isset($post['formuser']) && $this->validateUsers('createUsers')){
+        if (isset($post['formuser']) && $this->validateUsers()){
             $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
             $user = MainModel::loadModel("Users")->create($data);
             $this->redirect('admin_users');
@@ -57,11 +57,11 @@ class UsersController extends MainController
             $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['email']      = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
             $data['email2']     = filter_input(INPUT_POST, 'email2', FILTER_VALIDATE_EMAIL);
-            $data['password']   = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
-            $data['password2']  = filter_input(INPUT_POST, 'Password2', FILTER_SANITIZE_STRING);
+            $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+            $data['password2']  = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
             $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
 
-            if (! $this->validateUsers('update')) {
+            if (! $this->validateUsers()) {
                 $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));
             }
             $data['password']   = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -96,7 +96,7 @@ class UsersController extends MainController
     }
 /*  ------------------ form verifications -----------------------  */
 
-private function isPseudo(string $formType){
+private function isPseudo(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
     if (empty($post['pseudo'])){
@@ -112,19 +112,20 @@ private function isPseudo(string $formType){
     return $isOk;
 }
 
-private function isEmail(string $formType){
+private function isEmail(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
-    if ($post['email2']!== $post['email']){
+    if ($post['email2'] != $post['email']){
         $this->notifications[] = "Votre Email de confirmation est différent";
         $isOk = false;
     }else {
         $verifEmail = MainModel::loadModel("Users")->controlEmail($post['email'], $post['id']);
-            if (!empty($verifEmail)){
+        if (!empty($verifEmail)){
             $this->notifications[] = "Ce Email est déjà utilisé";
             $isOk = false;
         }
     }
+
     return $isOk;
 }
 
@@ -141,14 +142,13 @@ private function isPassword(){
     /**
      * validateUsers
      *
-     * @param  mixed $formType
      * @return void
      */
-    private function validateUsers(string $formType){
-        
-        $isOk[] = $this->isEmail($formType);
+    private function validateUsers(){
+        $isOk = array();
+        $isOk[] = $this->isEmail();
         // $isOk[] = $this->isAlpha();
-        $isOk[] = $this->isPseudo($formType);
+        $isOk[] = $this->isPseudo();
         $isOk[] = $this->isPassword();
         
         return $isOk[0] && $isOk[1] && $isOk[2];// && $isOk[3];

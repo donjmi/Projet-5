@@ -50,7 +50,7 @@ class Router
      */
     public function parseUrl()
     {
-        $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
+        $url = explode('/', filter_input(INPUT_GET,'page', FILTER_SANITIZE_URL));
         
             if ($url[0] != "") 
             {

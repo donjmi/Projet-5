@@ -18,20 +18,18 @@ class ArticlesController extends MainController
      * @return void
      */
     public function read($id){
-        if (! empty($_POST)) {
+        $post = filter_input_array(INPUT_POST);
+        if (! empty($post)) {
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOne($id);
             $comment = MainModel::loadModel("comments")->listComment($id);
             // $comment = MainModel::loadModel("comments")->getAll('posts_id', $id);
             
-            
             // $comment = MainModel::loadModel("comments")->listAll([
             //     'posts_id' => [$id, ' = '], 
             //     // 'comment' => 'très'
             //     ]);
-
-
             $this->render('article', [
                 'article' => $article,
                 'comments' => $comment

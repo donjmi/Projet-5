@@ -35,20 +35,18 @@ class UsersController extends MainController
         }
         if (isset($post['formuser']) && $this->validateUsers('createUsers')){
             $data['password']   = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $user = MainModel::loadModel("Users")->createQuery('create',$data);
+            $user = MainModel::loadModel("Users")->create($data);
             $this->redirect('admin_users');
         }
         $configs = $this->configSite();
         $configs['site']['label'] = '';
 
-            
         $this->render('inscription', Array(
             'user'      => $data,
             'action'    => 'createUsers',
             'errors'    => $this->notifications,
             'configs'   => $configs
-        ));
-        
+        ));  
     }
 
     public function update($id){
@@ -69,7 +67,7 @@ class UsersController extends MainController
             $data['password']   = password_hash($_POST['password'], PASSWORD_DEFAULT);
             unset($data['email2']);
             unset($data['password2']);
-            $user = MainModel::loadModel("Users")->createQuery('update',$data);
+            $user = MainModel::loadModel("Users")->update($data);
             // debug($user);
             $this->redirect('admin_users');
         } else {
@@ -98,25 +96,6 @@ class UsersController extends MainController
     }
 /*  ------------------ form verifications -----------------------  */
 
-// public function isExistUser(){
-//     $post = filter_input_array(INPUT_POST);
-//     $verifUser = new UsersModel();
-//     $isOk = true;
-//     if (empty($post['id']) && $verifUser->controlUser($post['pseudo'], $post['email'])) {
-//         $this->notifications[] = "Ce pseudo et/ou email est déjà utilisé";
-//         $isOk = false;
-//     }
-// }
-// private function isAlpha(){
-//     $isOk = true;
-//     $post = filter_input_array(INPUT_POST);
-//     if (empty($post['pseudo'])){
-//         $this->notifications[] = "Votre pseudo n'est pas renseigné";
-//         $isOk = false;
-//     }
-
-//     return $isOk;
-// }
 private function isPseudo(string $formType){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);

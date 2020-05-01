@@ -1,7 +1,6 @@
 <?php
 namespace Blog\Controllers;
 
-use Blog\Models\ArticlesModel;
 use Blog\Controllers\CommentsController;
 use Blog\Models\MainModel;
 
@@ -12,26 +11,65 @@ use Blog\Models\MainModel;
 class ArticlesController extends MainController
 {    
     /**
+     * edit
+     *
+     * @return void
+     */
+    public function edit()
+    {
+        $post = filter_input_array(INPUT_POST);
+        if (array_key_exists('id', $post) && ! empty($post['id'])){
+            
+            $data= array();
+            $data['id']          = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['title']          = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['slug']           = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
+            $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
+            // debug($data);
+            MainModel::loadModel("Admin")->update($data);
+
+        } elseif (array_key_exists('title', $post)){
+            
+            $data= array();
+            $data['title']          = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['slug']           = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
+            $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
+
+            MainModel::loadModel("Admin")->create($data);
+
+        }
+
+        $articles = MainModel::loadModel("Admin")->getAll();
+        $this->render('admin/Admin_post', Array(
+            'articles'  => $articles
+        )); 
+    }
+    
+    
+    
+    /**
      * read the article or create the comment article
      *
      * @param  mixed $id
      * @return void
      */
     public function read($id){
-        if (! empty($_POST)) {
+        $post = filter_input_array(INPUT_POST);
+        if (! empty($post)) {
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOne($id);
             $comment = MainModel::loadModel("comments")->listComment($id);
             // $comment = MainModel::loadModel("comments")->getAll('posts_id', $id);
             
-            
             // $comment = MainModel::loadModel("comments")->listAll([
             //     'posts_id' => [$id, ' = '], 
             //     // 'comment' => 'très'
             //     ]);
-
-
             $this->render('article', [
                 'article' => $article,
                 'comments' => $comment
@@ -67,7 +105,7 @@ class ArticlesController extends MainController
         
         
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
-        $comments = MainModel::loadModel("Comments")->getAll('posts_id', $_POST['posts_id']);
+        $comments = MainModel::loadModel("Comments")->getAll('posts_id', $data['posts_id']);
         $this->render('article', [
             'article' => $article,
             'comments' => $comments

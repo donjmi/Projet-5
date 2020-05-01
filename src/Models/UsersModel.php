@@ -25,8 +25,8 @@ class UsersModel extends MainModel{
             return $query->fetch();
     }
 
-    public function controlEmail($email){
-        $req = "SELECT * FROM $this->table WHERE email = '" . $email . "' 
+    public function controlEmail($email, $id){
+        $req = "SELECT * FROM $this->table WHERE email = '" . $email . "' AND id != '" . $id . "'
                     LIMIT 1 ";
             $query = $this->connexion->prepare($req);
             $query->execute();

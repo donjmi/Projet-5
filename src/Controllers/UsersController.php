@@ -35,7 +35,7 @@ class UsersController extends MainController
         }
         if (isset($post['formuser']) && $this->validateUsers()){
             $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
-            $user = MainModel::loadModel("Users")->create($data);
+            MainModel::loadModel("Users")->create($data);
             $this->redirect('admin_users');
         }
         $configs = $this->configSite();

@@ -63,9 +63,7 @@ class ArticlesController extends MainController
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOne($id);
-            $comment = MainModel::loadModel("comments")->listComment($id);
-            // $comment = MainModel::loadModel("comments")->getAll('posts_id', $id);
-            
+            $comment = MainModel::loadModel("comments")->listComment($id);            
             // $comment = MainModel::loadModel("comments")->listAll([
             //     'posts_id' => [$id, ' = '], 
             //     // 'comment' => 'très'
@@ -105,7 +103,7 @@ class ArticlesController extends MainController
         
         
         $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
-        $comments = MainModel::loadModel("Comments")->getAll('posts_id', $data['posts_id']);
+        $comments = MainModel::loadModel("Comments")->listComment($data['posts_id']);
         $this->render('article', [
             'article' => $article,
             'comments' => $comments

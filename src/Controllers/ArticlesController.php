@@ -9,9 +9,22 @@ use Blog\Models\MainModel;
  * Manages the Article item
  */
 class ArticlesController extends MainController
-{    
+{        
     /**
-     * edit
+     * listArticles
+     *
+     * @return void
+     */
+    public function listArticles()
+    {
+        $articles = MainModel::loadModel("Articles")->getArticles();
+        $this->render('articles', Array(
+            'articles' => $articles
+        ));  
+    } 
+    
+    /**
+     * edit with create or update
      *
      * @return void
      */
@@ -49,8 +62,6 @@ class ArticlesController extends MainController
         )); 
     }
     
-    
-    
     /**
      * read the article or create the comment article
      *
@@ -62,7 +73,7 @@ class ArticlesController extends MainController
         if (! empty($post)) {
             $this->createComment();
         } else {
-            $article = MainModel::loadModel("articles")->getOne($id);
+            $article = MainModel::loadModel("articles")->getOneArticle($id);
             $comment = MainModel::loadModel("comments")->listComment($id);            
             // $comment = MainModel::loadModel("comments")->listAll([
             //     'posts_id' => [$id, ' = '], 

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>{{ article.title }} </h1>
-<p>Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
+<p>Créé par {{article.pseudo}} - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
 
 <figure><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></figure>
 <p class="jmi"> {{ article.content|nl2br  }}</p>

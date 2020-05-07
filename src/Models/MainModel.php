@@ -43,26 +43,6 @@ abstract class MainModel
     }
     
     /**
-     * Lists all Datas from the id or another key with Limit
-     *
-     * @param  mixed $key
-     * @param  mixed $value
-     * @return void
-     */
-    public function getLimit(string $key=null, string $value=null)
-    {
-            $req = "SELECT  * FROM " . $this->table;
-            
-            if (isset($key) && isset($value)){
-                $req .= " WHERE $key = $value";
-            }
-
-            $req .= " ORDER BY id desc LIMIT 5";
-            $query = $this->connexion->prepare($req);
-            $query->execute();
-            return $query->fetchAll();
-    }
-    /**
      * Lists all Datas from the id or another key
      *
      * @param  mixed $key

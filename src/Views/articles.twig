@@ -16,7 +16,7 @@
                     <p class="card-text">{{ article.slug}}
                         <a href="articles/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
                     </p>
-                    <p class="card-text"><small class="text-muted">Créé par Administateur - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
+                    <p class="card-text"><small class="text-muted">Créé par {{article.pseudo}} - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
                 </div>
             </div>
         </div>

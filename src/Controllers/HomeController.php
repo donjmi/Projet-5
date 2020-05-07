@@ -14,7 +14,7 @@ class HomeController extends MainController
      */
     public function defaultMethod()
     {
-        $articles = MainModel::loadModel("Articles")->getLimit();
+        $articles = MainModel::loadModel("home")->getLimit();
         $this->render('home', Array(
             'articles' => $articles,
             'rssItems' => $this->fluxrss()->channel->item
@@ -23,13 +23,7 @@ class HomeController extends MainController
     /**
      * Renders the view Home + flux rss
      */
-    public function listArticles()
-    {
-        $articles = MainModel::loadModel("Articles")->getAll();
-        $this->render('articles', Array(
-            'articles' => $articles
-        ));  
-    }
+
     
     /**
      * fluxrss

@@ -43,7 +43,7 @@ class UsersController extends MainController
 
         $this->render('inscription', Array(
             'user'      => $data,
-            'action'    => 'createUsers',
+            // 'action'    => 'createUsers',
             'errors'    => $this->notifications,
             'configs'   => $configs
         ));  

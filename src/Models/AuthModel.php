@@ -18,9 +18,10 @@ class AuthModel extends MainModel{
 
     public function getPass($email)
     {
-        $req = "SELECT password FROM " . $this->table . " WHERE email='" . $email . "'";
+        $req = "SELECT * FROM " . $this->table . " WHERE email='" . $email . "'";
         $query = $this->connexion->prepare($req);
         $query->execute();
         return $query->fetch();
     }
+
 }

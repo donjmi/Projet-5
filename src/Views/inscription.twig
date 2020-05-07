@@ -12,6 +12,15 @@
 			{% endfor %}
 		</div>
 	{% endif %}
+	{% if bienvenue %}
+		<div class="alert alert-sucess">
+			{% for msg in bienvenue %}
+				<ul>
+					<li>{{ msg }}</li>
+				</ul>
+			{% endfor %}
+		</div>
+	{% endif %}
 	<div class="container register">
 		<div class="row">
 			<div class="col-md-12">
@@ -30,7 +39,7 @@
 							<div class="col-md-12">
 								<form method="post">
 									<div class="form-group">
-										<input type="email" name="email" class="form-control" placeholder="Your Email *" value="{{ user.email }}"/>
+										<input type="email" name="email" class="form-control" placeholder="Your Email *" value="{{ user.email }}" required/>
 									</div>
 									<div class="form-group">
 										<input type="email2" name="email2" class="form-control" placeholder="Confimed Email  *" value="{{ user.email2 }}"/>
@@ -60,12 +69,12 @@
 						<h3 class="register-heading">Se connecter</h3>
 						<div class="row register-form">
 							<div class="col-md-12">
-								<form method="post">
+								<form method="post" action="auth/login/">
 									<div class="form-group">
-										<input type="text" name="LGform2_user" class="form-control" placeholder="Your Email *" value="" required=""/>
+										<input type="email" name="email" class="form-control" placeholder="Your Email *" value="" required=""/>
 									</div>
 									<div class="form-group">
-										<input type="password" name="LGform2_pwd" class="form-control" placeholder="Your Password *" value="" required=""/>
+										<input type="password" name="password" class="form-control" placeholder="Your Password *" value="" required=""/>
 									</div>
 									<div class="form-group">
 										<input type="submit" name="LGform2" class="btnContactSubmit" value="Login"/>

@@ -49,7 +49,6 @@ class ArticlesModel extends MainModel{
 
     public function getOneArticle($id)
     {
-        // $req = "SELECT * FROM " . $this->table . " WHERE id='" . $id . "'";
         $req = "SELECT articles.id,
                             articles.title,
                             articles.slug,

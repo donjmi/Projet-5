@@ -41,7 +41,7 @@ class ArticlesController extends MainController
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
             // debug($data);
-            MainModel::loadModel("Admin")->update($data);
+            MainModel::loadModel("Articles")->update($data);
 
         } elseif (array_key_exists('title', $post)){
             
@@ -51,12 +51,12 @@ class ArticlesController extends MainController
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
-
-            MainModel::loadModel("Admin")->create($data);
+            debug($data);
+            MainModel::loadModel("Articles")->create($data);
 
         }
 
-        $articles = MainModel::loadModel("Admin")->getAll();
+        $articles = MainModel::loadModel("Articles")->getAll();
         $this->render('admin/Admin_post', Array(
             'articles'  => $articles
         )); 

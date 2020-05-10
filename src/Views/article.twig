@@ -6,21 +6,40 @@
 
 <figure><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></figure>
 <p class="jmi"> {{ article.content|nl2br  }}</p>
+<hr>
 {% endblock %}
 
 {% block form %}
-<h2>{{ article.title }} - {{ article.id }}</h2>
+
+
+<h2>{{ article.title }}</h2>
 <h3>Vos commentaires ci-dessous :</h3>
   <form method="post" action="articles/read/{{ article.id }}" class="text-center border border-light p-5 comment">
   <p><input type="hidden"  name="id"        value=""></p>
   <p><input type="hidden"  name="posts_id"  value="{{ article.id }}"  id="defaultContactFormName" class="form-control mb-4"></p>
   <p><input type="text"    name="user_id"   value=""  id="defaultContactFormName"                 class="form-control mb-4" placeholder="mettre 0 pour l'instant"></p>
-  <p><input type="text"    name="comment"   value "" id="defaultContactFormName"                  class="form-control mb-4"  placeholder="ici !! votre commentaire " required
-  style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 84px;"></p>
+  {# <p><input type="text"    name="comment"   value "" id="defaultContactFormName"                  class="form-control ftext"  placeholder="ici !! votre commentaire " required data-validation-required-message="Veuillez entrer votre commentaire."></p> #}
+  <p><textarea rows="2" class="form-control ftext" id="comment" placeholder="Votre message" name="comment" required data-validation-required-message="Veuillez entrer votre commentaire."></textarea></p>
   <p><input type="submit"                   value="envoyez"></p>
-</form>
-
-
+</form> 
+{# 
+<form class="mt-5" enctype="multipart/form-data" method="post" action="../public/?id={{ post.id }}&p={{ p }}&access=blog!comment">
+	<div class="control-group">
+		<div class="form-group floating-label-form-group controls has-success">
+			<label class="font-weight-bold" for="comment">Vos commentaires :</label>
+			<textarea rows="2" class="form-control ftext" id="comment" placeholder="Votre message" name="comment" required data-validation-required-message="Veuillez entrer votre commentaire."></textarea>
+			<small class="form-text text-muted">Connexion nécessaire</small>
+		</div>
+	</div>
+	{% if session.user.username is defined %}
+		<div class="form-group text-center">
+			<button type="submit" class="btn btn-outline-dark">Soumettre
+				<i class="fas fa-paper-plane"></i>
+			</button>
+		</div>
+	{% endif %}
+</form> #}
+<hr>
 {% include 'comment.twig' with {'items': comments} %}
 {% block comment %}
 {% endblock comment %}

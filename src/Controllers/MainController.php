@@ -9,7 +9,7 @@ abstract class MainController
 {
     protected $twig = null;
     protected $notifications = null;
-    protected $session = null; // session user
+    protected $session; // session user
     protected $currentPage = null;
     /**
      * MainController constructor
@@ -22,7 +22,7 @@ abstract class MainController
         ]);
         $this->notifications = array();
         
-        $this->session = filter_var_array($_SESSION);
+        $this->session = new SessionController();
 
     }
 
@@ -45,6 +45,9 @@ abstract class MainController
             break;
             case 'inscription':
                 $redirect = '/users/listUsers';
+            break;
+            case 'User_membre':
+                $redirect = '/auth/login';
             break;
             default:
                 $redirect = '';

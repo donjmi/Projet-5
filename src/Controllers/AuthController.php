@@ -4,42 +4,12 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class AuthController extends MainController
-{    
-    
-    public function login()
-    {  
-        $data= array();
-    
-        $post = filter_input_array(INPUT_POST);
-        if ($this->currentPage == "home"){// @TODO pages publiques
-            session_start();
-        } else if (! empty(session_id())) {// @TODO utilisateur connecté
-            session_start();
-        } else if (isset($post)){
-            $data['email']      = $post['email'];
-            $data['password']   = password_hash($post["password"],PASSWORD_BCRYPT);
-            $user = $this->isRegistered();
-            if (empty($user)){
-                // debug('yes ok');
-                session_start();
-                $_SESSION['login'] = $user['pseudo'];
-                $this->redirect('admin_users');
-            }
-        }
-        
-        $configs = $this->configSite();
-        $configs['site']['label'] = 'Se connecter';
-        $okConnect = "Vous êtes connecté, Bienvenue !!!";
-
-        $this->render('inscription', Array(
-            'user'      => $data,
-            'action'    => 'login',
-            'errors'    => $this->notifications,
-            // 'configs'   => $configs,
-            'bienvenue' => $okConnect
-        ));
-    }
-
+{      
+    /**
+     * configSite : title pages
+     *
+     * @return void
+     */
     private function configSite()
     {
         return array(
@@ -48,46 +18,37 @@ class AuthController extends MainController
             ]
         );
     }
-    
- /*  ------------------login form verifications -----------------------  */
 
-    private function isRegistered(){
+    public function login()
+    {
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        $isOk = null;
-        $post = filter_input_array(INPUT_POST);
-        $data['email']         = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $data['password']      = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $bddPass = MainModel::loadModel("Auth")->getPass($data['email']);
- 
-        if(!password_verify($post['password'], $bddPass['password'])){
-            $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
-            $isOk = $bddPass;
+            //on vérifie que email et password ne soient pas vide
+        if (!empty($email) and !empty($password)) {
+            //Vérifie que l’utilisateur existe avec le email
+            $user = MainModel::loadModel("Auth")->verifyEmail($email);
+            //Ensuite on récupère ses données
+            if ($user !== false) {
+                $user = MainModel::loadModel("Auth")->verifyEmail($email);
+                //Et on vérifie le password
+                if (password_verify($password, $user['password']) === true) {
+                    
+                    $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
+                    // debug($this->session);
+                    $configs['site']['label'] = 'Modifier votre profil';
+                    return $this->render('User_member', array(
+                        'session' => filter_var_array($_SESSION),
+                        'user'    => $user,
+                        'configs'   => $configs
+                    ));
+                }
+            }
         }
-        return $isOk;
+        $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
+        return $this->render('inscription', array(
+                'errors'    => $this->notifications,
+                // 'configs'   => $configs
+        ));
     }
-    
-    /**
-     * validateLogin
-     *
-     * @param  mixed $formType
-     * @return void
-     */
-    private function validateLogin(){
-        
-        $isOk[] = $this->isRegistered();
-        return $isOk[0];
-    } 
-/**  -------------------- session ----------      */
-// public function createSession($user)
-// {
-//     $this->session['user'] = [
-//         'id' => $user['id'],
-//         'prenom' => $user['pseudo'],
-//         'mail' => $user['mail'],
-//         'role' => $user['role']
-//     ];
-
-//     $_SESSION['user'] = $this->session['user'];
-// }
-
 }

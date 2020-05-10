@@ -1,0 +1,74 @@
+{% if not mode %}
+	{% extends 'Template/layout-admin.twig' %}
+{% endif %}
+
+{% block form %}
+	<p class="h4 mb-4 border-bottom border-success col-12">{{ configs.site.label }} ({{ session.user.role }})</p>
+
+	
+	{% if errors %}
+		<div class="alert alert-danger">
+			<p>Le formulaire n'est pas rempli correctement :</p>
+			{% for msg in errors %}
+				<ul>
+					<li>{{ msg }}</li>
+				</ul>
+			{% endfor %}
+		</div>
+	{% endif %}
+	<form method="post" action="users/{{ action }}/" class="text-center border border-light p-5">
+		<h4><p class="border-bottom border-success col-12">Votre compte : {{ user.pseudo }}<p></h4>
+		<p><input type="hidden" name="id" value="{{ user.id }}"/></p><div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Email</span>
+			</div>
+			<input type="email" name="email" value="{{ user.email }}" class="form-control"/>
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Confirmez Email</span>
+			</div>
+			{% if action == 'update' %}
+				<input type="email" name="email2" value="{{ user.email2|default(user.email) }}" class="form-control"/>
+			{% else %}
+				<input type="email" name="email2" value="{{ user.email2 }}" class="form-control"/>
+			{% endif %}
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">pseudo</span>
+			</div>
+			{% if action == 'update' %}
+				<input type="text" name="pseudo" value="{{ user.pseudo|default(user.pseudo) }}" class="form-control"/>
+			{% else %}
+				<input type="text" name="pseudo" value="{{ user.pseudo }}" class="form-control"/>
+			{% endif %}
+		</div>
+		<h4><p class="border-bottom border-success col-12"> Modifier votre password<p></h4>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">mot de passe</span>
+			</div>
+			<input type="password" name="password" value="{{ user.password }}" class="form-control"/>
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">confirmez mot de passe</span>
+			</div>
+			{% if action == 'update' %}
+				<input type="password" name="password2" value="{{ user.password2|default(user.password) }}" class="form-control"/>
+			{% else %}
+				<input type="password" name="password2" value="{{ user.password2 }}" class="form-control"/>
+			{% endif %}
+		</div>
+
+		<p><input type="text" name="role" value="{{ user.role }}" id="defaultContactFormName" class="form-control mb-4" placeholder="role"/></p>
+		<p><input type="submit" name="formuser" value="envoyez"/></p>
+		{% if action == 'update' %}
+			<p>
+				<a class="btn btn-primary" href="users/listUsers/" role="button">Retour</a>
+			</p>
+		{% endif %}
+	</form>
+	
+{% endblock %}

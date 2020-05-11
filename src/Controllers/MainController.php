@@ -21,9 +21,8 @@ abstract class MainController
           'cache' => false,  //__DIR__ .'/tmp'
         ]);
         $this->notifications = array();
-        
+      
         $this->session = new SessionController();
-
     }
 
     /**

@@ -41,7 +41,7 @@ class ArticlesController extends MainController
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
             // debug($data);
-            MainModel::loadModel("Admin")->update($data);
+            MainModel::loadModel("Articles")->update($data);
 
         } elseif (array_key_exists('title', $post)){
             
@@ -51,12 +51,12 @@ class ArticlesController extends MainController
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
-
-            MainModel::loadModel("Admin")->create($data);
+            debug($data);
+            MainModel::loadModel("Articles")->create($data);
 
         }
 
-        $articles = MainModel::loadModel("Admin")->getAll();
+        $articles = MainModel::loadModel("Articles")->getAll();
         $this->render('admin/Admin_post', Array(
             'articles'  => $articles
         )); 
@@ -81,7 +81,8 @@ class ArticlesController extends MainController
             //     ]);
             $this->render('article', [
                 'article' => $article,
-                'comments' => $comment
+                'comments' => $comment,
+                'session' => filter_var_array($_SESSION)
                 ]);
         }
     }
@@ -103,21 +104,22 @@ class ArticlesController extends MainController
      * use Comment object  with function edit_com in CommentsController
      */
     public function createComment()
-    {
-        $data = array();
-        $data['posts_id']       = filter_input(INPUT_POST, 'posts_id', FILTER_SANITIZE_NUMBER_INT);
-        $data['user_id']        = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
-        $data['comment']        = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
-        $data['date_comment']   = date("Y-m-d H:i:s");
-        $comment = new CommentsController();
-        $comment->edit_com($data);
+    {     
+        $posts_id        = filter_input(INPUT_POST, 'posts_id', FILTER_SANITIZE_NUMBER_INT);
+        $userId          = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
+        $comment         = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
+        $date_comment    = date("Y-m-d H:i:s");
+        $validate        = filter_input(INPUT_POST, 'validate', FILTER_SANITIZE_NUMBER_INT);
+        $comments = new CommentsController();
+        $comments->edit_com($comment, $posts_id, $userId);
         
-        
-        $article = MainModel::loadModel("articles")->getOne($data['posts_id']);
-        $comments = MainModel::loadModel("Comments")->listComment($data['posts_id']);
+        $article = MainModel::loadModel("articles")->getOne($posts_id);
+        $comments = MainModel::loadModel("Comments")->listComment($posts_id);
+
         $this->render('article', [
             'article' => $article,
-            'comments' => $comments
+            'comments'=> $comments,
+            'session' => filter_var_array($_SESSION)
         ]);
     }
     

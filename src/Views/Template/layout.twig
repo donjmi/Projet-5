@@ -22,7 +22,7 @@
 
 	<body>
 		<!-- Navigation -->
-		{{ include('Template/navbar.twig') }}
+		{% include 'Template/navbar.twig' with {'session': session} %}
 
 		{% block img_accueil %}{% endblock %}
 		{% block presentation %}{% endblock %}
@@ -35,6 +35,11 @@
 					<div class="col-4"> {% block rss %}{% endblock %}
 					</div>
 				</div>
+			</div>
+		</section>
+		<section class="py-5">
+			<div class="container">
+				{% block content2 %}{% endblock %}
 			</div>
 		</section>
 		<section>

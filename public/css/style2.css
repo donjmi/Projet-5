@@ -6,12 +6,16 @@
  body {
   padding-top: 56px;
   /* background-color:#eaedf1; */
-  background-image:radial-gradient(white, black);
+  background-image:radial-gradient(white, white);
   text-align: center;
 
   /* background-color: #ffffff; */
 }
-
+#pseudo{
+  color: beige;
+  font-weight:bold;
+  font-size: 15px;
+}
 .title-post{
   text-shadow: 2px 2px 7px #000000;
 }
@@ -80,7 +84,14 @@ padding-left: 0px;
 p{
 text-align: justify;
 }
-
+h1, h2, h3 {
+  font-family: 'Share Tech Mono', sans-serif;
+  font-weight: bold;
+}
+h4, h5, h6 {
+  font-family: 'Share Tech Mono', sans-serif;
+  font-weight: bold;
+}
 h1.title-post{
   text-align: center;
 }

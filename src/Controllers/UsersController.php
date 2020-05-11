@@ -8,15 +8,11 @@ class UsersController extends MainController
 {    
     public function listUsers()
     {
-        $configs = $this->configSite();
-        $configs['site']['label'] = 'Ajouter un nouvel utilisateur';
-
         $users = MainModel::loadModel("Users")->getAll();
         $this->render('admin/admin_users', Array(
             'users'     => $users,            
             'action'    => 'createUsers',
             'errors'    => $this->notifications,
-            'configs'   => $configs,
         ));  
       
     }
@@ -59,7 +55,7 @@ class UsersController extends MainController
             $data['email2']     = filter_input(INPUT_POST, 'email2', FILTER_VALIDATE_EMAIL);
             $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
             $data['password2']  = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
-            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT);
+            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
 
             if (! $this->validateUsers()) {
                 $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));

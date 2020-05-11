@@ -18,7 +18,12 @@ class AuthController extends MainController
             ]
         );
     }
-
+    
+    /**
+     * login
+     *
+     * @return void
+     */
     public function login()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -30,17 +35,15 @@ class AuthController extends MainController
             $user = MainModel::loadModel("Auth")->verifyEmail($email);
             //Ensuite on récupère ses données
             if ($user !== false) {
-                $user = MainModel::loadModel("Auth")->verifyEmail($email);
                 //Et on vérifie le password
                 if (password_verify($password, $user['password']) === true) {
                     
                     $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
-                    // debug($this->session);
                     $configs['site']['label'] = 'Modifier votre profil';
                     return $this->render('User_member', array(
                         'session' => filter_var_array($_SESSION),
                         'user'    => $user,
-                        'configs'   => $configs
+                        'configs' => $configs,
                     ));
                 }
             }
@@ -50,5 +53,15 @@ class AuthController extends MainController
                 'errors'    => $this->notifications,
                 // 'configs'   => $configs
         ));
+    }
+    
+    /**
+     * logout
+     *
+     * @return void
+     */
+    public function logout(){
+        SessionController::destroySession();
+        $this->redirect('home');
     }
 }

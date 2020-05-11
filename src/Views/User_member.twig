@@ -1,6 +1,4 @@
-{% if not mode %}
-	{% extends 'Template/layout-admin.twig' %}
-{% endif %}
+{% extends 'Template/layout-admin.twig' %}
 
 {% block form %}
 	<p class="h4 mb-4 border-bottom border-success col-12">{{ configs.site.label }} ({{ session.user.role }})</p>

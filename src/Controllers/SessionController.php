@@ -34,11 +34,11 @@ class SessionController
      * @param string $username
      * @param string $email
      */
-    public function createSession(int $Uid, string $pseudo, string $email, string $role)
+    public function createSession(int $userId, string $pseudo, string $email, string $role)
     {
         $_SESSION['user'] = [
-            'id' => $Uid,
-            'username' => $pseudo,
+            'id' => $userId,
+            'pseudo' => $pseudo,
             'email' => $email,
             'role' => $role,
         ];
@@ -47,7 +47,7 @@ class SessionController
     /**
      * @return void
      */
-    public function destroySession()
+    public static function destroySession()
     {
         $_SESSION['user'] = [];
         session_destroy();

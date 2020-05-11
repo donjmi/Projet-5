@@ -22,7 +22,7 @@
 
 	<body>
 		<!-- Navigation -->
-		{{ include('Template/navbar.twig') }}
+		{% include 'Template/navbar.twig' with {'session': session} %}
 
 		{% block img_accueil %}{% endblock %}
 		{% block presentation %}{% endblock %}

@@ -21,7 +21,7 @@
 
 	<body>
 		<!-- Navigation -->
-		{{ include('Template/navbar.twig') }}
+		{% include 'Template/navbar.twig' with {'session': session} %}
 
 		<section class="py-5">
 			<div class="container content">

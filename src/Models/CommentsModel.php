@@ -19,13 +19,13 @@ class CommentsModel extends MainModel{
 
     public function listComment($id)
     {       
-            $req = "SELECT Comments.id,
+            $req = "SELECT  Comments.id,
+                            Comments.posts_id,
                             Comments.user_id,
                             Comments.comment,
-                            Comments.posts_id,
                             Comments.date_comment,
                             Users.pseudo
-                    FROM Comments, users
+                    FROM $this->table, users
                     WHERE Comments.posts_id = '" . $id . "'
                     AND Comments.user_id = Users.id 
                     ORDER BY Comments.id DESC";
@@ -34,4 +34,12 @@ class CommentsModel extends MainModel{
             $query->execute();
             return $query->fetchAll();
     }
+
+    public function addComment(string $comment, int $posts_id, int $userId)
+    {
+        $req = ("INSERT INTO comments (comment, date_comment, validate, posts_id, user_id) VALUES (?, NOW(), '0', ?, ?)");
+        $query = $this->connexion->prepare($req);
+        $query->execute(array($comment, $posts_id, $userId));
+    }
+
 }

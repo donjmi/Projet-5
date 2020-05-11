@@ -28,9 +28,11 @@ class CommentsController extends MainController
      * @param  mixed $data
      * @return void
      */
-    public function edit_com($data)
+    // public function edit_com()
+    public function edit_com($comment, $posts_id, $userId)
     {
-        $comment = MainModel::loadModel("Comments")->create($data);
+        // $comment = MainModel::loadModel("Comments")->create($data);
+        $comments = MainModel::loadModel("Comments")->addComment($comment, $posts_id, $userId);
 
     }
 }

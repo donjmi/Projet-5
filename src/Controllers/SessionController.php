@@ -30,7 +30,7 @@ class SessionController
     }
 
     /**
-     * @param int $idUser
+     * @param int    $idUser
      * @param string $username
      * @param string $email
      */
@@ -94,4 +94,13 @@ class SessionController
         }
         return false;
     }
+
+    // public function checkAdminAccess()
+    // {
+    //     if ($this->globals->getSession()->islogged() === false) {
+    //         $this->globals->getSession()->createAlert('You must be logged in to access the administration', 'black');
+
+    //         $this->redirect('user');
+    //     }
+    // }
 }

@@ -74,11 +74,7 @@ class ArticlesController extends MainController
             $this->createComment();
         } else {
             $article = MainModel::loadModel("articles")->getOneArticle($id);
-            $comment = MainModel::loadModel("comments")->listComment($id);            
-            // $comment = MainModel::loadModel("comments")->listAll([
-            //     'posts_id' => [$id, ' = '], 
-            //     // 'comment' => 'très'
-            //     ]);
+            $comment = MainModel::loadModel("comments")->listComment($id);
             $this->render('article', [
                 'article' => $article,
                 'comments' => $comment,
@@ -86,7 +82,7 @@ class ArticlesController extends MainController
                 ]);
         }
     }
-        
+ 
     /**
      * update
      *
@@ -101,17 +97,15 @@ class ArticlesController extends MainController
       
     /**
      * createComment
-     * use Comment object  with function edit_com in CommentsController
+     * use Comment object  with function createComment in CommentsController
      */
     public function createComment()
     {     
         $posts_id        = filter_input(INPUT_POST, 'posts_id', FILTER_SANITIZE_NUMBER_INT);
-        $userId          = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
-        $comment         = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
-        $date_comment    = date("Y-m-d H:i:s");
-        $validate        = filter_input(INPUT_POST, 'validate', FILTER_SANITIZE_NUMBER_INT);
+        $userId          =  $this->session->getUserVar('id');
+        $comment         = trim(filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS));
         $comments = new CommentsController();
-        $comments->edit_com($comment, $posts_id, $userId);
+        $comments->createComment($comment, $posts_id, $userId);
         
         $article = MainModel::loadModel("articles")->getOne($posts_id);
         $comments = MainModel::loadModel("Comments")->listComment($posts_id);

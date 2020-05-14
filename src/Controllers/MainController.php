@@ -55,4 +55,14 @@ abstract class MainController
         header("Location: http://localhost/projet-5$redirect");
         exit();
     }
+
+    /**
+     * @param $message
+     */
+    public function alert($message)
+    {
+        $alert = "<script>alert('$message');</script>";
+        echo filter_var($alert);
+    }
+
 }

@@ -5,34 +5,22 @@ use Blog\Models\MainModel;
 
 class CommentsController extends MainController
 {    
+        
     /**
-     * read
+     * createComment
      *
-     * @param  mixed $id
+     * @param  mixed $comment
+     * @param  mixed $posts_id
+     * @param  mixed $userId
      * @return void
      */
-    public function read($id)
+    public function createComment($comment, $posts_id, $userId)
     {
-        $comment = MainModel::loadModel("comments")->listAll([
-        'posts_id' => [$id, '='], 
-        // 'comment' => 'très'
-        ]);
-        $this->render('comment', [
-            'comments' => $comment
-            ]);
-    }
-    
-    /**
-     * edit_com
-     * this function is use in ArticleController
-     * @param  mixed $data
-     * @return void
-     */
-    // public function edit_com()
-    public function edit_com($comment, $posts_id, $userId)
-    {
-        // $comment = MainModel::loadModel("Comments")->create($data);
         $comments = MainModel::loadModel("Comments")->addComment($comment, $posts_id, $userId);
 
+    }
+
+    public function inputComment(){
+        
     }
 }

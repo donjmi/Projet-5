@@ -37,9 +37,26 @@ class CommentsModel extends MainModel{
 
     public function addComment(string $comment, int $posts_id, int $userId)
     {
-        $req = ("INSERT INTO comments (comment, date_comment, validate, posts_id, user_id) VALUES (?, NOW(), '0', ?, ?)");
+        $req = ("INSERT INTO $this->table (comment, date_comment, validate, posts_id, user_id) VALUES (?, NOW(), '0', ?, ?)");
         $query = $this->connexion->prepare($req);
         $query->execute(array($comment, $posts_id, $userId));
     }
+
+    public function noValidate()
+    {
+        $req = ("SELECT * From $this->table WHERE validate = 0 ORDER BY id DESC");
+        $query = $this->connexion->prepare($req);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function okComment()
+    {
+        $req = ("SELECT * From $this->table WHERE validate = 1 ORDER BY id DESC");
+        $query = $this->connexion->prepare($req);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+
 
 }

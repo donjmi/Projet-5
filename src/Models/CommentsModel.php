@@ -25,6 +25,7 @@ class CommentsModel extends MainModel
                             Comments.user_id,
                             Comments.comment,
                             Comments.date_comment,
+                            Comments.validate,
                             Users.pseudo
                     FROM $this->table, users
                     WHERE Comments.posts_id = '" . $id . "'
@@ -100,7 +101,7 @@ class CommentsModel extends MainModel
                 $query->execute(array($id));
         }
 
-        public function countArticles()
+        public function countComments()
         {
                 $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 0 ");
                 $query->execute();

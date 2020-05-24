@@ -1,4 +1,4 @@
-{% extends 'Template/layout-admin.twig' %}
+{% extends 'Template/layout.twig' %}
 
 {% block form %}
 	<p class="h4 mb-4 border-bottom border-success col-12">{{ configs.site.label }} ({{ session.user.role }})</p>
@@ -60,7 +60,7 @@
 			{% endif %}
 		</div>
 
-		<p><input type="text" name="role" value="{{ user.role }}" id="defaultContactFormName" class="form-control mb-4" placeholder="role"/></p>
+		<p><input disable type="text" name="role" value="{{ user.role }}" id="defaultContactFormName" class="form-control mb-4" placeholder="role"/></p>
 		<p><input type="submit" name="formuser" value="envoyez"/></p>
 		{% if action == 'update' %}
 			<p>

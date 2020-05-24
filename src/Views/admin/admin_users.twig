@@ -1,13 +1,13 @@
-{% extends 'Template/layout-admin.twig' %}
+{% extends 'Template/layout.twig' %}
 
-{% block content %}
+{% block content2 %}
 <h1> Liste des utilisateurs </h1>
 <a href="users/createUsers">
 			<button type="button" class="btn btn-success">ajouter</button></a>
 
 <br />
-<table class="table">
-    <thead class="thead-light">
+<table class="table table-striped table-bordered mytable dislay">
+    <thead>
     <tr>
         <th>id</th>
         <th>pseudo</th>
@@ -18,6 +18,7 @@
 				<th>supprimer</th>
     </tr>
     <thead>
+    <tbody>
 {% for user in users %}
     <tr>
        <td>{{ user.id }}</td>
@@ -34,11 +35,7 @@
 			<button  type="button" class="btn btn-danger" >supprimer</button></a>
 		</td> 
     </tr>
-   {% endfor%}
-</table>
-
-{# <p class="h4 mb-4">Ajouter un nouvel utilisateur</p><a href="users/createUsers" class="badge badge-primary">Ajout</a> #}
-
-{# {% include 'User_edit.twig'  with {'errors': errors, 'action': action, 'configs': configs, 'mode': 'bloc' } %} #}
-    
-{% endblock content %}
+   {% endfor %}
+   </tbody>
+</table>  
+{% endblock content2 %}

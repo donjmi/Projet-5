@@ -67,4 +67,30 @@ class ArticlesModel extends MainModel{
         $query->execute();
         return $query->fetch();
     }
+
+        
+        /**
+         * posted article
+         *
+         * @param  mixed $id
+         * @return void
+         */
+        public function posted($id)
+        {
+                $query = $this->connexion->prepare("UPDATE $this->table SET posted = 1  WHERE id = ? ");
+                $query->execute(array($id));
+        }
+        
+        /**
+         * countNoArticles articles not posted
+         *
+         * @return void
+         */
+        public function countNoArticles()
+        {
+                $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE posted = 0 ");
+                $query->execute();
+                $total = $query->rowCount();
+                return $total;
+        }
 }

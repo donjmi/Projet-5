@@ -37,9 +37,11 @@ class ArticlesController extends MainController
             $data['id']          = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['title']          = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['slug']           = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
-            $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
+            // $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
+            $data['update_article'] = htmlspecialchars(date("Y-m-d H:i:s"));
+            $data['posted']         = filter_input(INPUT_POST, 'posted', FILTER_SANITIZE_SPECIAL_CHARS);
             // debug($data);
             MainModel::loadModel("Articles")->update($data);
 
@@ -51,7 +53,7 @@ class ArticlesController extends MainController
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
-            debug($data);
+            // debug($data);
             MainModel::loadModel("Articles")->create($data);
 
         }
@@ -136,18 +138,13 @@ class ArticlesController extends MainController
         ]);
     }
     
-    /**
-     * delete
-     *
-     * @param  mixed $id
-     * @return void
-     */
     public function delete($id){
-        $one = MainModel::loadModel("Articles")->getOne($id);
-        $article = MainModel::loadModel("Articles")->delete($id);
-        $this->render('article_delete', Array(
-            'article'   => $article,
-            'one'       => $one
-        )); 
+        $comment = MainModel::loadModel("Articles")->delete($id);
+        $this->redirect('admin_index');
     }
+      
+    public function postedArticles($id){
+        $comment = MainModel::loadModel("Articles")->posted($id);
+        $this->redirect('admin_index');
+    }   
 }

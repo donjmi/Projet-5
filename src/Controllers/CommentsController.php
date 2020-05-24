@@ -35,11 +35,4 @@ class CommentsController extends MainController
         $comment = MainModel::loadModel("Comments")->publish($id);
         $this->redirect('admin_index');
     }
-
-    public function nbComment(){
-        $comment = MainModel::loadModel("Comments")->countArticles();
-        return $this->render('admin_index', array(
-            'nbComments' => $comment
-        ));
-    }
 }

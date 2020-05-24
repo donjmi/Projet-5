@@ -75,6 +75,7 @@ class ArticlesController extends MainController
         } else {
             $article = MainModel::loadModel("articles")->getOneArticle($id);
             $comment = MainModel::loadModel("comments")->listComment($id);
+            // $comment = MainModel::loadModel("comments")->notOkComment($id);
             $this->render('article', [
                 'article' => $article,
                 'comments' => $comment,
@@ -82,7 +83,25 @@ class ArticlesController extends MainController
                 ]);
         }
     }
- 
+
+    // public function toRead($id){        
+    //     $posts_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    //     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
+
+    //     if (!empty($posts_id) and !empty($comment)) {
+    //         $userId = $this->session->getUserVar('id');
+    //         debug($userId);
+    //         $this->createComment();
+    //         $wcomments = $commentManager->getWaitingComments($posts_id, $idy);
+    //         if ($wcomments !== false) {
+
+    //             return $this->render('post.twig', array('post' => $post, 'comment' => $comments, 'wcomment' => $wcomments, 'p' => $page));
+    //         }
+    //         return $this->render('post.twig', array('post' => $post, 'comment' => $comments, 'p' => $page));
+    //     }
+    //     return $this->render('home.twig');
+    // }
+        
     /**
      * update
      *

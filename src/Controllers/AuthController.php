@@ -37,7 +37,7 @@ class AuthController extends MainController
             if ($user !== false) {
                 //Et on vérifie le password
                 if (password_verify($password, $user['password']) === true) {
-                    
+                    $this->alert('Bienvenue, vous êtes bien connecté !!');
                     $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
                     $configs['site']['label'] = 'Modifier votre profil';
                     return $this->render('User_member', array(

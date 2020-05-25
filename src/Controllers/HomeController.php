@@ -17,7 +17,8 @@ class HomeController extends MainController
         $articles = MainModel::loadModel("home")->getLimit();
         $this->render('home', Array(
             'articles' => $articles,
-            'rssItems' => $this->fluxrss()->channel->item
+            'rssItems' => $this->fluxrss()->channel->item,
+            'session' => filter_var_array($_SESSION)
         ));  
     }
     /**

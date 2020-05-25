@@ -42,6 +42,9 @@ abstract class MainController
             case 'admin_users':
                 $redirect = '/users/listUsers';
             break;
+            case 'admin_index':
+                $redirect = '/admin/edit';
+            break;
             case 'inscription':
                 $redirect = '/users/listUsers';
             break;

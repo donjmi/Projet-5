@@ -1,11 +1,86 @@
-{% extends 'Template/layout-article.twig' %}
+{% extends 'Template/layout.twig' %}
 
-{% block content %}
-<h1> {{ titleAdm }}</h1>
-<br/><br/>
+{% block content2 %}
+<h2> {{ titleAdm }}</h2>
+{# <br/><br/>
 <a href="users/listUsers/"><button type="button" class="btn btn-primary btn-lg">Gestion des utilisateurs</button></a>
-<a href="Articles/edit"><button type="button" class="btn btn-primary btn-lg">Gestion des articles</button></a>
+<a href="Articles/edit"><button type="button" class="btn btn-primary btn-lg">Gestion des articles</button></a> #}
+<br/>
+<br/>
+<div class="row">
+	<div class="col-12 col-md-4 col-lg-4">
+		<div class="jumbotron">
+			<h2>Utilisateurs</h2>
+			<p class="lead">
+            <hr>
+            <a href="users/listUsers/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">cliquez pour modifier<h6><span class="badge badge-light">{{ nbComments  }}</span></h6></a>
+			</p>
+		</div>
+	</div>
+	<div class="col-12 col-md-4 col-lg-4">
+		<div class="jumbotron">
+			<h2>Articles</h2>
+			<p class="lead"><hr>
+            <a href="articles/edit/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Non publié(s)<h6><span class="badge badge-light">{{ nbArticles  }}</span></h6></a>
+			</p>
+		</div>
+	</div>
+	<div class="col-12 col-md-4 col-lg-4">
+		<div class="jumbotron">
+			<h2>Commentaires</h2>
+			<p class="lead"><hr>
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reste à valider<h6><span class="badge badge-light">{{ nbComments  }}</span></h6></a>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered mytable dislay">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Article</th>
+        <th scope="col">Commentaire</th>
+        <th scope="col">date</th>
+        <th scope="col">validation</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for comment in comments %}
+      <tr>
+        <th scope="row">{{ comment.id }}</th>
+        <td>{{ comment.title }}</td>
+        <td>{{ comment.pseudo }} - {{ comment.comment }}</td>
+        <td>{{ comment.date_comment|date("d/m/Y") }}</td>
+        <td>{{ comment.validate }}</td>
+        <td style="border-left-width: 10px; border-left-color:transparent;">
+          <div class="row">
+                <div class="btn-group">
+                <a href="#" id="{{ comment.id }}"></a>
+                <a href="comments/validateComment/{{comment.id}}" onclick="return window.confirm('Validation du commentaire !')" id="{{ comment.id }}" class="btn btn-success btn-sm">valider</button></a>
+                <a href="comments/delete/{{comment.id}}" onclick="return window.confirm('Attention suppression definitive du commentaire !')" class="btn btn-danger btn-sm">Supprimer</button></a>
+                {# <a href="comments/update/{{comment.id}}" class="btn btn-primary btn-sm">Editer</button></a> #}
+                </div>
+          </div>
+        </td>
+      </tr>
+{% endfor %}
+<tfoot>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Article</th>
+        <th scope="col">Commentaire</th>
+        <th scope="col">date</th>
+        <th scope="col">validée</th>
+        <th scope="col">action</th>
+      </tr>
+</tfoot>
+    </tbody>
+  </table>
+</div>
 
 
-{% endblock content %}
+{% endblock content2 %}
 

@@ -4,22 +4,34 @@
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.min.js"></script>
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js"></script>
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-					
+            {# <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> #}
+            <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+            {# <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.10.21/r-2.2.5/datatables.min.js"></script> #}
           <!-- JavaScript -->
 						<script>
 							$(function () {
 								$('[data-toggle="tooltip"]').tooltip()
 								})
 						</script>
+            <script>
+             $(document).ready(function() {
+              $('.mytable').DataTable( {
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+                } );
+              } );
+            </script>
 
 <!-- Footer -->
 <div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <p class="text-center lead">@copyright - J.Lavidange  - 
-        <a href="admin/edit/"> Allez sur Admin</a>
-      </p>
-    </div>
+	<div class="row">
+		<div class="col">
+			<p class="text-center lead">@copyright - J.Lavidange  -
+				<a href="admin/edit/">
+					Allez sur Admin</a>
+			</p>
+		</div>
 
   </div>
   <div class="row" id="footer-jmi">

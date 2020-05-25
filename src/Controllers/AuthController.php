@@ -50,8 +50,27 @@ class AuthController extends MainController
         }
         $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
         return $this->render('inscription', array(
-                'errors'    => $this->notifications,
+                'errors'    => $this->notifications
                 // 'configs'   => $configs
+        ));
+    }
+    
+    /**
+     * login
+     *
+     * @return void
+     */
+    public function member()
+    {
+        // $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
+        $user_session = filter_var_array($_SESSION['user']);
+        $user = MainModel::loadModel("Users")->getOne($user_session['id']);
+        //debug($user_session);
+        $configs['site']['label'] = 'Modifier votre profil';
+        return $this->render('User_member', array(
+            'session' => filter_var_array($_SESSION),
+            'user'    => $user,
+            'configs' => $configs,
         ));
     }
     

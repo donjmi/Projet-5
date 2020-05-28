@@ -24,18 +24,21 @@
 					<a class="nav-link" href="public/images/CV.pdf" target="_blank">Mon CV</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="users/listUsers/">users</a>
+					<a class="nav-link" href="users/listUsers/">.</a>
 				</li>
 				{% if session.user is defined %}
 				<li class="nav-item">
 					<a class="nav-link" href="Auth/member/">Mon profil</a>
 				</li>
-					<li class="nav-item">
-						<a class="nav-link" id="pseudo">{{ session.user.pseudo }}</a>
-					</li>
-					<div class="rounded-top my-2 my-lg-0">
-						<a href="Auth/logout" type="button" class="btn btn-danger">Deconnexion</a>
-					</div>
+				<li class="nav-item">
+					<a class="nav-link" id="pseudo">{{ session.user.pseudo }}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="admin/edit/">Administration</a>
+				</li>
+				<div class="rounded-top my-2 my-lg-0">
+					<a href="Auth/logout" type="button" class="btn btn-danger">Deconnexion</a>
+				</div>
 				{% else %}
 					<div class=" rounded-top my-2 my-lg-0">
 						<a href="users/createUsers" type="button" class="btn btn-outline-success">Se connecter</a>

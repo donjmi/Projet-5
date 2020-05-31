@@ -1,47 +1,43 @@
-{% extends 'Template/layout.twig' %}
+<div class="container" id="contact">
+	<div class="row has-success">
+		<div class="col-lg-8 col-md-10 mx-auto mt-5" style="top: 50px" ;>
+			<h3 class="mb-3 border-bottom text-center col-12">Me contacter</h3>
 
-{% block content %}
-<form class="border border-light p-5">
-
-    <p class="h4 mb-4 text-center">Sign in</p>
-
-    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-
-    <div class="d-flex justify-content-between">
-        <div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-            </div>
-        </div>
-        <div>
-            <a href="">Forgot password?</a>
-        </div>
-    </div>
-
-    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-
-    <div class="text-center">
-        <p>Not a member?
-            <a href="">Register</a>
-        </p>
-
-        <p>or sign in with:</p>
-        <a type="button" class="light-blue-text mx-2">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-            <i class="fab fa-github"></i>
-        </a>
-    </div>
-</form>
-
-{% endblock content %}
+			<form name="sentMessage" id="contactForm" method="post" action="Contact/send">
+				<div class="control-group">
+					<div class="form-group  floating-label-form-group controls">
+						{# <label for="surname">Votre Nom</label> #}
+						<input type="text" class="form-control ftext" id="surname" placeholder="Nom" name="surname" required data-validation-required-message="Veuillez entrer votre nom.">
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="form-group  floating-label-form-group controls">
+						{# <label for="name">Votre Prénom</label> #}
+						<input type="text" class="form-control ftext" id="name" placeholder="Prénom" name="name" required data-validation-required-message="Veuillez entrer votre prénom.">
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="form-group floating-label-form-group controls">
+						{# <label for="mail">mail</label> #}
+						<input type="email" class="form-control ftext" id="email" placeholder="Adresse mail" name="mail" required data-validation-required-message="Veuillez entrer votre adresse mail.">
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="form-group floating-label-form-group controls">
+						{# <label for="content">Votre Message</label> #}
+						<textarea rows="4" class="form-control ftext" id="content" placeholder="Message" name="content" required data-validation-required-message="Veuillez entrer votre message."></textarea>
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-outline-dark" name="send">Envoyer
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

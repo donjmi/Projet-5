@@ -19,7 +19,8 @@ class ArticlesController extends MainController
     {
         $articles = MainModel::loadModel("Articles")->getArticles();
         $this->render('articles', Array(
-            'articles' => $articles
+            'articles' => $articles,
+            'session' => filter_var_array($_SESSION)
         ));  
     } 
     

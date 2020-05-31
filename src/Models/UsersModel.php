@@ -40,5 +40,13 @@ class UsersModel extends MainModel{
             $query->execute();
             return $query->fetch();
     }
+    
+    public function countNoUsers()
+    {
+            $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 0 ");
+            $query->execute();
+            $total = $query->rowCount();
+            return $total;
+    }
 
 }

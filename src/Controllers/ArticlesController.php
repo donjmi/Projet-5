@@ -78,7 +78,6 @@ class ArticlesController extends MainController
         } else {
             $article = MainModel::loadModel("articles")->getOneArticle($id);
             $comment = MainModel::loadModel("comments")->listComment($id);
-            // $comment = MainModel::loadModel("comments")->notOkComment($id);
             $this->render('article', [
                 'article' => $article,
                 'comments' => $comment,
@@ -114,7 +113,8 @@ class ArticlesController extends MainController
     public function update($id){
         
         $article = MainModel::loadModel("Articles")->getOne($id);
-        $this->render('Article_edit', ['article' => $article]); 
+        $this->render('Article_edit', ['article' => $article]);
+         
     }
       
     /**

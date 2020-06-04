@@ -3,9 +3,13 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col">
-			<p class="text-center lead">@copyright - J.Lavidange  -  
+			<p class="text-center lead">@copyright - J.Lavidange  - 
+      {% if session.user is defined %} 
+      <img class="card_img" src="public/images/admin.png" alt="" style="line-height:20px; height:20px;"/>
+      {% else %}
 				<a href="users/createUsers"><img class="card_img" src="public/images/admin.png" alt="" style="line-height:20px; height:20px;"/> se connecter</a>
-			</p>
+			{% endif %}
+      </p>
 		</div>
 
   </div>

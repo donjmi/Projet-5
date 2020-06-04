@@ -12,9 +12,6 @@
 {% block form %}
 
 <h2>{{ article.title }}</h2>
-<p>{{  session }}</p>
-<p>{{  session.user }}</p>
-<p>vous êtes connecté en tant que : {{  session.user.pseudo }}</p>
 <h3>Vos commentaires ci-dessous :</h3>
   <form method="post" action="articles/read/{{ article.id }}" class="text-center border border-light p-5 comment">
   <p><input type="hidden"  name="id"        value=""></p>

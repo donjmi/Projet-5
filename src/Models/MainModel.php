@@ -14,7 +14,6 @@ abstract class MainModel
        /**
      * Allows to load a model
      * @param string $model
-     * @return void
      */
     public static function loadModel(string $model)
     {

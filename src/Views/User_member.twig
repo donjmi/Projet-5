@@ -1,7 +1,8 @@
 {% extends 'Template/layout.twig' %}
 
 {% block form %}
-	<p class="h4 mb-4 border-bottom border-success col-12">{{ configs.site.label }} ({{ session.user.role }})</p>
+	<p class="h4 mb-4 border-bottom border-success col-12">{{ configs.site.label }} :</p>
+	<p class="h5 mb-4 ">Rôle : {{ session.user.role|upper }}</p>
 
 	
 	{% if errors %}
@@ -59,8 +60,9 @@
 				<input type="password" name="password2" value="{{ user.password2 }}" class="form-control"/>
 			{% endif %}
 		</div>
-
+		{% if user.role == 'admin' %}
 		<p><input disable type="text" name="role" value="{{ user.role }}" id="defaultContactFormName" class="form-control mb-4" placeholder="role"/></p>
+		{% endif %}
 		<p><input type="submit" name="formuser" value="envoyez"/></p>
 		{% if action == 'update' %}
 			<p>

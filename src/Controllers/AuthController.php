@@ -7,7 +7,6 @@ class AuthController extends MainController
 {      
     /**
      * configSite : title pages
-     *
      * @return void
      */
     private function configSite()
@@ -19,11 +18,7 @@ class AuthController extends MainController
         );
     }
     
-    /**
-     * login
-     *
-     * @return void
-     */
+
     public function login()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -36,7 +31,8 @@ class AuthController extends MainController
             //Ensuite on récupère ses données
             if ($user !== false) {
                 //Et on vérifie le password
-                if (password_verify($password, $user['password']) === true) {
+               
+                if (password_verify($password, $user['password'])) {
                     $this->alert('Bienvenue, vous êtes bien connecté !!');
                     $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
                     $configs['site']['label'] = 'Modifier votre profil';
@@ -45,11 +41,14 @@ class AuthController extends MainController
                         'user'    => $user,
                         'configs' => $configs,
                     ));
+                } else {
+                    $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
                 }
+            } else {
+                $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
             }
         }
-        $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
-        return $this->render('inscription', array(
+        return $this->render('login', array(
                 'errors'    => $this->notifications
                 // 'configs'   => $configs
         ));
@@ -57,15 +56,13 @@ class AuthController extends MainController
     
     /**
      * login
-     *
-     * @return void
+     *@param string $model
+     *@return void
      */
     public function member()
     {
-        // $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
         $user_session = filter_var_array($_SESSION['user']);
         $user = MainModel::loadModel("Users")->getOne($user_session['id']);
-        //debug($user_session);
         $configs['site']['label'] = 'Modifier votre profil';
         return $this->render('User_member', array(
             'session' => filter_var_array($_SESSION),
@@ -82,5 +79,24 @@ class AuthController extends MainController
     public function logout(){
         SessionController::destroySession();
         $this->redirect('home');
+    }
+
+    public function confirmUser($id){
+
+        $user  = MainModel::loadModel("Auth")->verifytoken($id);
+        $url = explode('/', filter_input(INPUT_GET,'page', FILTER_SANITIZE_URL));
+
+        if ($user['id'] == $url[2] && $user['token'] == $url[3]) {
+            $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
+            MainModel::loadModel("Auth")->confirmAuth($id);
+            $this->alert("Votre compte est activité !");
+            return $this->render('User_member', array(
+                'session' => filter_var_array($_SESSION),
+                'user'    => $user
+            ));
+        }else {
+            $this->render('login', Array(
+                'session' => filter_var_array($_SESSION)));
+            }
     }
 }

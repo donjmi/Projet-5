@@ -48,5 +48,11 @@ class UsersModel extends MainModel{
             $total = $query->rowCount();
             return $total;
     }
+    
+    public function getUserMail($email){
+        $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE email = '$email'");
+        $query->execute();
+        return $query->fetch();
+    }
 
 }

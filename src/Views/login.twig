@@ -1,0 +1,43 @@
+{% extends 'Template/layout.twig' %}
+{% block content %}
+	<p class="h4 mb-4">{{ configs.site.label }}</p>
+
+	{% if errors %}
+		<div class="alert alert-danger">
+			<p>Le formulaire n'est pas rempli correctement :</p>
+			{% for msg in errors %}
+				<ul>
+					<li>{{ msg }}</li>
+				</ul>
+		</div>
+	{% endfor %}
+		
+	{% endif %}
+<div class="container" id="contact">
+	<div class="row has-success">
+		<div class="col-lg-8 col-md-10 mx-auto mt-5" style="top: 50px" ;>
+			<h3 class="mb-3 border-bottom text-center col-12">Se connecter</h3>
+
+			<form name="sentMessage" id="contactForm" method="post" action="auth/login/">
+				<div class="control-group">
+					<div class="form-group  floating-label-form-group controls">
+						<input type="email" class="form-control ftext" id="email" placeholder="email" name="email" required data-validation-required-message="Veuillez entrer votre email.">
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="form-group  floating-label-form-group controls">
+						<input type="password" class="form-control ftext" id="password" placeholder="password" name="password" required data-validation-required-message="Veuillez entrer votre password.">
+						<p class="help-block text-danger"></p>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-outline-dark" name="LGform2">Envoyer
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

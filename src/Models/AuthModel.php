@@ -24,4 +24,19 @@ class AuthModel extends MainModel{
         return $query->fetch();
     }
 
+    public function verifytoken($id)
+    {
+        $req = "SELECT * FROM " . $this->table . " WHERE id = $id ";
+        $query = $this->connexion->prepare($req);
+        $query->execute();
+        return $query->fetch();
+    }
+
+    
+    public function confirmAuth($id)
+    {
+            $query = $this->connexion->prepare("UPDATE $this->table SET validate = 1, token = '' WHERE id = ? ");
+            $query->execute(array($id));
+    }
+
 }

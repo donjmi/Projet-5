@@ -7,7 +7,7 @@ class AdminController extends MainController
 {    
     public function edit()
     {  
-       
+        if ($this->session->getUserVar('role') === 'admin') {
             $titleAdm = "Accueil de l'administration du site";
             $comments = MainModel::loadModel("comments")->notOkComment();
             $nbComments = MainModel::loadModel("comments")->countComments();
@@ -23,9 +23,14 @@ class AdminController extends MainController
                 'nbArticles'=> $nbArticles,
                 'articles'  => $articles,
                 'users'     => $users,
-                'nbUsers'   => $nbUsers
+                'nbUsers'   => $nbUsers,
+                'session' => filter_var_array($_SESSION)
 
-            )); 
+            ));
+        }
+        $this->alert("Connectez vous en tant administrateur !");
+        $this->render('login', Array(
+            'session' => filter_var_array($_SESSION)));   
     }
     
 }

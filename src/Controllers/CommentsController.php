@@ -20,12 +20,6 @@ class CommentsController extends MainController
 
     }
 
-    // public function update($id){
-        
-    //     $comments = MainModel::loadModel("Comments")->getOne($id);
-    //     $this->render('Comment_edit', ['comment' => $comments]); 
-    // }
-
     public function delete($id){
         $comment = MainModel::loadModel("Comments")->delete($id);
         $this->redirect('admin_index');

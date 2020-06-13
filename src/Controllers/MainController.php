@@ -71,7 +71,6 @@ abstract class MainController
     public function alert($message)
     {
         $alert = "<script>alert('$message');</script>";
-        // echo filter_var($alert);
         print_r(filter_var($alert));
     }
 }

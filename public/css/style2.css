@@ -104,7 +104,7 @@ ul.list-group {
   padding: 30px;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, .2);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
 }
 
 .circle {
@@ -201,10 +201,3 @@ ul.list-group {
   padding: 3%;
   border-radius: 2.5rem;
 }
-
-/* .nav-tabs .nav-link {
-  border: 1px solid transparent;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  color: white;
-} */

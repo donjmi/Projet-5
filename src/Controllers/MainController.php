@@ -31,7 +31,7 @@ abstract class MainController
     public function render(string $file, array $data = [])
     {
         $this->currentPage = $file;
-        echo $this->twig->render($file . '.twig', $data);
+        print_r($this->twig->render($file . '.twig', $data));
         exit();
     }
     
@@ -71,7 +71,6 @@ abstract class MainController
     public function alert($message)
     {
         $alert = "<script>alert('$message');</script>";
-        echo filter_var($alert);
+        print_r(filter_var($alert));
     }
-
 }

@@ -1,22 +1,16 @@
-/*!
- * Start Bootstrap - Full Width Pics (https://startbootstrap.com/template-overviews/full-width-pics)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-width-pics/blob/master/LICENSE)
- */
- body {
+body {
   padding-top: 56px;
-  /* background-color:#eaedf1; */
-  background-image:radial-gradient(white, white);
+  background-image: radial-gradient(white, white);
   text-align: center;
-
-  /* background-color: #ffffff; */
 }
-#pseudo{
+
+#pseudo {
   color: beige;
-  font-weight:bold;
+  font-weight: bold;
   font-size: 15px;
 }
-.title-post{
+
+.title-post {
   text-shadow: 2px 2px 7px #000000;
 }
 
@@ -27,19 +21,11 @@
   background-size: cover;
   -o-background-size: cover;
 }
-.container-fluid{
-
-padding-right: 0px;
-padding-left: 0px;
-}
 
 #headerwrap {
   background: url(../images/series-US.jpg) no-repeat center top;
-  /* background: url(../img/header-bg.jpg) no-repeat center top; */
   margin-top: 50px;
-  padding-top: 0px;
-  /* background-attachment: relative; */
-  background-attachment: fixed; 
+  background-attachment: fixed;
   background-position: center center;
   min-height: 500px;
   width: 100%;
@@ -47,52 +33,41 @@ padding-left: 0px;
   -moz-background-size: 100%;
   -o-background-size: 100%;
   background-size: 100%;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
-#headerwrap h2 {
-  color: white;
-  font-weight:bold;
-  font-size: 70px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  
-}
-.presentation{
+.presentation {
   background: url(https://images.unsplash.com/photo-1512070853659-f08f0efae470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=600&q=60) no-repeat center center;
   background-size: cover;
 }
 
-.hero-unit{
+.hero-unit {
   color: white;
 }
 
-@media (max-width: 768px ) {
+@media (max-width: 768px) {
   #headerwrap h1 {
     font-size: 50px;
   }
-
   #headerwrap h2 {
     font-size: 30px;
   }
 }
 
-p{
-text-align: justify;
+p {
+  text-align: justify;
 }
+
 h1, h2, h3 {
   font-family: 'Share Tech Mono', sans-serif;
   font-weight: bold;
 }
+
 h4, h5, h6 {
   font-family: 'Share Tech Mono', sans-serif;
   font-weight: bold;
 }
-h1.title-post{
+
+h1.title-post {
   text-align: center;
 }
 
@@ -100,38 +75,41 @@ h1.title-post{
   width: 200px;
   height: 200px;
 }
+
 #img_blog_admin {
   width: 50px;
   height: 50px;
 }
-.admin-bloc1{
+
+.admin-bloc1 {
   padding-left: 10px;
 }
-.admin-bloc2{
+
+.admin-bloc2 {
   margin-right: auto;
   margin-left: auto;
 }
 
-.flux{
+.flux {
   color: blueviolet;
 }
-ul.list-group{
+
+ul.list-group {
   margin-bottom: 35px;
   font-size: smaller;
   text-align: left;
 }
 
-.jmi{
+.jmi {
   padding: 30px;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 10px 50px rgba(0,0,0,.2);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
 }
 
-.circle{
+.circle {
   width: 200px;
   height: 200px;
-  /* background: url(https://fr.web.img5.acsta.net/c_216_288/pictures/19/10/29/09/05/3954913.jpg); */
   background-size: 100% 100%;
   border-radius: 50%;
   float: left;
@@ -139,125 +117,83 @@ ul.list-group{
   margin: 20px;
 }
 
-.kek{
-  text-shadow:0 1px 0 #ccc, 
-  0 2px 0 #c9c9c9,
-  0 3px 0 #bbb,
-  0 4px 0 #b9b9b9,
-  0 5px 0 #aaa,
-  0 6px 1px rgba(0,0,0,.1),
-  0 0 5px rgba(0,0,0,.1),
-  0 1px 3px rgba(0,0,0,.3),
-  0 3px 5px rgba(0,0,0,.2),
-  0 5px 10px rgba(0,0,0,.25),
-  0 10px 10px rgba(0,0,0,.2),
-  0 20px 20px rgba(0,0,0,.15);color:#fff;
-  background-color:#2E8ECE;
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-#block{
-padding-top: 56px;
+#block {
+  padding-top: 56px;
 }
 
 /* footer */
-#footer-jmi{
-  font-family:georgia, serif;
-  margin-bottom:10px;
-  font-size : 15px;
-  color : white;
+
+#footer-jmi {
+  font-family: georgia, serif;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: white;
 }
 
-.lead{
+.lead {
   font-weight: bold;
 }
 
-tbody{
-text-align:left; font-size: 14px; color: #000000;
-}
-
-.test{
-  background-color :white;
-  /* background: url(https://images.unsplash.com/photo-1572188863110-46d457c9234d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60); */
-}
-.content{
-  background-color :white;
+.test {
+  background-color: white;
   /* background: url(https://images.unsplash.com/photo-1572188863110-46d457c9234d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60); */
 }
 
-.marvin{
+.content {
+  background-color: white;
+}
+
+.marvin {
   padding-top: 30px;
   background-color: rgba(245, 230, 230, 0.71);
 }
-.comment{
-  margin-bottom: -30px
+
+.comment {
+  margin-bottom: -30px;
 }
 
-/*
-*
-*form style
-*/
-.btnContactSubmit
-{
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
-    color: #fff;
-    background-color: #0062cc;
-    border: none;
-    cursor: pointer;
-    margin-right: 6%;
-    background-color: white;
-    color: blue;
-    margin-top: 4%;
+.text-align {
+  margin-top: -3%;
+  margin-bottom: -9%;
+  padding: 10%;
+  margin-left: 30%;
 }
-.register .nav-tabs .nav-link:hover{
-    border: none;
-}
-.text-align{
-    margin-top: -3%;
-    margin-bottom: -9%;
 
-    padding: 10%;
-    margin-left: 30%;
+.form-new {
+  margin-right: 22%;
+  margin-left: 20%;
 }
-.form-new{
-    margin-right: 22%;
-    margin-left: 20%;
+
+.register-heading {
+  margin-left: 21%;
+  margin-bottom: 10%;
+  color: #e9ecef;
 }
-.register-heading{
-    margin-left: 21%;
-    margin-bottom: 10%;
-    color: #e9ecef;
+
+.register-heading h1 {
+  margin-left: 21%;
+  margin-bottom: 10%;
+  color: #e9ecef;
 }
-.register-heading h1{
-    margin-left: 21%;
-    margin-bottom: 10%;
-    color: #e9ecef;
+
+.btnLoginSubmit {
+  border: none;
+  padding: 2%;
+  width: 25%;
+  cursor: pointer;
+  background: #29abe2;
+  color: #fff;
 }
-.btnLoginSubmit{
-    border: none;
-    padding: 2%;
-    width: 25%;
-    cursor: pointer;
-    background: #29abe2;
-    color: #fff;
+
+.btnForgetPwd {
+  cursor: pointer;
+  margin-right: 5%;
+  color: #f8f9fa;
 }
-.btnForgetPwd{
-    cursor: pointer;
-    margin-right: 5%;
-    color: #f8f9fa;
-}
-.register{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-    margin-top: 3%;
-    padding: 3%;
-    border-radius: 2.5rem;
-}
-.nav-tabs .nav-link{
-    border: 1px solid transparent;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-    color: white;
+
+.register {
+  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  margin-top: 3%;
+  padding: 3%;
+  border-radius: 2.5rem;
 }

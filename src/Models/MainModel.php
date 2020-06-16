@@ -61,51 +61,7 @@ abstract class MainModel
             $query = $this->connexion->prepare($req);
             $query->execute();
             return $query->fetchAll();
-    }
-    
-    /**
-     * Lists all Datas from the id or multiple key
-     *
-     * @param  mixed $params
-     * @return void
-     */
-    public function listAll(array $params=null)
-    {
-            $req = 'SELECT * FROM ' . $this->table;
-            
-            if (isset($params)){
-                foreach($params as $key => $value)
-                {
-                    if (isset($value[1]) && !empty($value[1])){
-                        $operator = $value[1];
-                    } else {
-                        $operator = '=';
-                    }
-                    $req .= ($key == key($params) ? " WHERE " : " AND");
-                    $req .= ' '.$key.' '. $operator;
-                    switch($key) {
-                        case 'id':
-                        case 'posts_id':
-                        case 'users_id':
-                        case 'role':
-                            $req .= ' '.$value[0];
-                        break;
-                        case 'email':
-                        case 'pseudo':
-                        case 'password':
-                            $req .= ' "'.$value[0].'"';
-                        break;
-                        default:
-                    }
-                }
-            }
-            $req .= " ORDER BY id desc";
-            // debug($req);
-            $query = $this->connexion->prepare($req);
-            $query->execute();
-            return $query->fetchAll();
-    }
-  
+    } 
     
     /**
      * Reads Data from its id or another key

@@ -29,7 +29,6 @@ class HomeController extends MainController
     /**
      * fluxrss
      *
-     * @return void
      */
     public function fluxrss()
     {

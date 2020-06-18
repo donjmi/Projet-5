@@ -86,8 +86,8 @@ class SessionController
     public function checkAdmin()
     {
         if ($this->isLogged()) {
-            if ($this->getUserVar('role') === '1') {
-
+            if ($this->getUserVar('role') === 'admin') {
+                
                 return true;
             }
             $this->destroySession();

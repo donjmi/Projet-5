@@ -39,6 +39,7 @@ class AuthController extends MainController
                     return $this->render('User_member', array(
                         'session' => filter_var_array($_SESSION),
                         'user'    => $user,
+                        'action'    => 'update',
                         'configs' => $configs,
                     ));
                 } else {
@@ -66,6 +67,7 @@ class AuthController extends MainController
         $configs['site']['label'] = 'Modifier votre profil';
         return $this->render('User_member', array(
             'session' => filter_var_array($_SESSION),
+            'action'  => 'update',
             'user'    => $user,
             'configs' => $configs,
         ));

@@ -16,17 +16,21 @@ class CommentsController extends MainController
      */
     public function createComment($comment, $posts_id, $userId)
     {
-        $comments = MainModel::loadModel("Comments")->addComment($comment, $posts_id, $userId);
+        MainModel::loadModel("Comments")->addComment($comment, $posts_id, $userId);
 
     }
 
     public function delete($id){
-        $comment = MainModel::loadModel("Comments")->delete($id);
+        if ($this->session->checkAdmin()) {
+        MainModel::loadModel("Comments")->delete($id);
         $this->redirect('admin_index');
+        }
     }
 
     public function validateComment($id){
-        $comment = MainModel::loadModel("Comments")->publish($id);
+        if ($this->session->checkAdmin()) {
+        MainModel::loadModel("Comments")->publish($id);
         $this->redirect('admin_index');
+        }
     }
 }

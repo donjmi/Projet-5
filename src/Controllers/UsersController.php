@@ -34,34 +34,44 @@ class UsersController extends MainController
     }
 
     public function update($id){
-        $post = filter_input_array(INPUT_POST);
-        if (array_key_exists('id', $post) && ! empty($post['id'])){
-            $data= array();
-            $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-            $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['email']      = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-            $data['email2']     = filter_input(INPUT_POST, 'email2', FILTER_VALIDATE_EMAIL);
-            $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-            $data['password2']  = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
-            $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+        if ($this->session->checkAdmin()) {
 
-            if (! $this->validateUsers()) {
-                $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));
+            $post = filter_input_array(INPUT_POST);
+            if (array_key_exists('id', $post) && ! empty($post['id'])){
+                $data= array();
+                $data['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+                $data['pseudo']     = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
+                $data['email']      = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+                $data['email2']     = filter_input(INPUT_POST, 'email2', FILTER_VALIDATE_EMAIL);
+                $data['password']   = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+                $data['password2']  = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+                $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+
+                if (! $this->validateUsers()) {
+                    $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));
+                }
+                    $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
+                    unset($data['email2']);
+                    unset($data['password2']);
+                    $user = MainModel::loadModel("Users")->update($data);
+                    $this->redirect('admin_index');
+                
+                
+            } else {
+                $user = MainModel::loadModel("Users")->getOne($id);
+                $this->render('User_edit', Array('user'=> $user,'action'=> 'update','errors' => $this->notifications,'configs'=> $this->configSite()));
             }
-            $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
-            unset($data['email2']);
-            unset($data['password2']);
-            $user = MainModel::loadModel("Users")->update($data);
-            $this->redirect('admin_index');
         } else {
-            $user = MainModel::loadModel("Users")->getOne($id);
-            $this->render('User_edit', Array('user'=> $user,'action'=> 'update','errors' => $this->notifications,'configs'=> $this->configSite()));
+            $this->redirect('home');
         }
     }
 
     public function delete($id){
-        $user = MainModel::loadModel("Users")->delete($id);
-        $this->redirect('admin_index');
+        if ($this->session->checkAdmin()) {
+            $user = MainModel::loadModel("Users")->delete($id);
+            $this->redirect('admin_index');
+        }
+       
     }
 
     private function configSite()
@@ -77,7 +87,7 @@ class UsersController extends MainController
 private function isPseudo(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
-    if (empty($post['pseudo'])){
+    if (empty($post['pseudo']) || !preg_match('/^[a-zA-Z0-9_]+$/', $post['pseudo'])){
         $this->notifications[] = "Votre pseudo n'est pas renseigné";
         $isOk = false;
     }else {

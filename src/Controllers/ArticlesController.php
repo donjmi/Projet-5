@@ -9,7 +9,8 @@ use Blog\Models\MainModel;
  * Manages the Article item
  */
 class ArticlesController extends MainController
-{        
+{
+       
     /**
      * listArticles
      *
@@ -35,15 +36,13 @@ class ArticlesController extends MainController
         if (array_key_exists('id', $post) && ! empty($post['id'])){
             
             $data= array();
-            $data['id']          = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $data['id']             = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['title']          = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['slug']           = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
-            // $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
             $data['update_article'] = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['posted']         = filter_input(INPUT_POST, 'posted', FILTER_SANITIZE_SPECIAL_CHARS);
-            // debug($data);
             MainModel::loadModel("Articles")->update($data);
 
         } elseif (array_key_exists('title', $post)){
@@ -54,15 +53,11 @@ class ArticlesController extends MainController
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
-            // debug($data);
             MainModel::loadModel("Articles")->create($data);
 
         }
-
-        $articles = MainModel::loadModel("Articles")->getAll();
-        $this->render('admin/Admin_post', Array(
-            'articles'  => $articles
-        )); 
+        
+        $this->redirect('admin_index');
     }
     
     /**
@@ -85,24 +80,6 @@ class ArticlesController extends MainController
                 ]);
         }
     }
-
-    // public function toRead($id){        
-    //     $posts_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-    //     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
-
-    //     if (!empty($posts_id) and !empty($comment)) {
-    //         $userId = $this->session->getUserVar('id');
-    //         debug($userId);
-    //         $this->createComment();
-    //         $wcomments = $commentManager->getWaitingComments($posts_id, $idy);
-    //         if ($wcomments !== false) {
-
-    //             return $this->render('post.twig', array('post' => $post, 'comment' => $comments, 'wcomment' => $wcomments, 'p' => $page));
-    //         }
-    //         return $this->render('post.twig', array('post' => $post, 'comment' => $comments, 'p' => $page));
-    //     }
-    //     return $this->render('home.twig');
-    // }
         
     /**
      * update
@@ -113,7 +90,7 @@ class ArticlesController extends MainController
     public function update($id){
         
         $article = MainModel::loadModel("Articles")->getOne($id);
-        $this->render('Article_edit', ['article' => $article]);
+        $this->render('Article_edit', ['article' => $article, 'session'   => filter_var_array($_SESSION)]);
          
     }
       
@@ -140,12 +117,12 @@ class ArticlesController extends MainController
     }
     
     public function delete($id){
-        $comment = MainModel::loadModel("Articles")->delete($id);
+       MainModel::loadModel("Articles")->delete($id);
         $this->redirect('admin_index');
     }
       
     public function postedArticles($id){
-        $comment = MainModel::loadModel("Articles")->posted($id);
+        MainModel::loadModel("Articles")->posted($id);
         $this->redirect('admin_index');
     }   
 }

@@ -68,7 +68,7 @@ class UsersController extends MainController
 
     public function delete($id){
         if ($this->session->checkAdmin()) {
-            $user = MainModel::loadModel("Users")->delete($id);
+            MainModel::loadModel("Users")->delete($id);
             $this->redirect('admin_index');
         }
        
@@ -177,6 +177,6 @@ private function isPassword(){
             ->setBody($content)
         ;
 
-        $result = $mailer->send($message);
+        $mailer->send($message);
     }
 }

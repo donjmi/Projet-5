@@ -1,7 +1,6 @@
 <?php
 
 namespace Blog\Controllers;
-
 /**
  * Class SessionController
  * @package Blog\Controller
@@ -91,6 +90,7 @@ class SessionController
                 return true;
             }
             $this->destroySession();
+            // $this->redirect('login');
         }
         return false;
     }

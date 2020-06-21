@@ -101,8 +101,6 @@ abstract class MainModel
 
     public function update(array $data)
     {
-        $keys = implode(', ', array_keys($data));
-        $values = implode('", "', $data);
         $set = null;
             foreach ($data as $dataKey => $dataValue) {
                 if ($dataKey == 'id'){

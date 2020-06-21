@@ -58,11 +58,11 @@ p {
   text-align: justify;
 }
 
-h1, 
-h2, 
+h1,
+h2,
 h3,
-h4, 
-h5, 
+h4,
+h5,
 h6 {
   font-family: 'Share Tech Mono', sans-serif;
   font-weight: bold;
@@ -189,11 +189,4 @@ ul.list-group {
   cursor: pointer;
   margin-right: 5%;
   color: #f8f9fa;
-}
-
-.register {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  margin-top: 3%;
-  padding: 3%;
-  border-radius: 2.5rem;
 }

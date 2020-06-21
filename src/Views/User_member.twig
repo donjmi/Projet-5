@@ -64,9 +64,9 @@
 		<p><input disable type="text" name="role" value="{{ user.role }}" id="defaultContactFormName" class="form-control mb-4" placeholder="role"/></p>
 		{% endif %}
 		<p><input type="submit" name="formuser" value="envoyez"/></p>
-		{% if action == 'update' %}
+		{% if user.role == 'admin' %}
 			<p>
-				<a class="btn btn-primary" href="users/listUsers/" role="button">Retour</a>
+				<a class="btn btn-primary" href="admin/edit/" role="button">Retour</a>
 			</p>
 		{% endif %}
 	</form>

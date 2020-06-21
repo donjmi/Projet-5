@@ -31,7 +31,7 @@ abstract class MainController
     public function render(string $file, array $data = [])
     {
         $this->currentPage = $file;
-        print_r($this->twig->render($file . '.twig', $data));
+        echo $this->twig->render($file . '.twig', $data);
         exit();
     }
     

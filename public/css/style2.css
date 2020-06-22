@@ -5,13 +5,13 @@ body {
 }
 
 #pseudo {
-  color: beige;
+  color: bisque;
   font-weight: bold;
   font-size: 15px;
 }
 
 .title-post {
-  text-shadow: 2px 2px 7px #000000;
+  text-shadow: 2px 2px 7px #000;
 }
 
 .bg-image-full {
@@ -48,6 +48,7 @@ body {
   #headerwrap h1 {
     font-size: 50px;
   }
+
   #headerwrap h2 {
     font-size: 30px;
   }
@@ -57,12 +58,12 @@ p {
   text-align: justify;
 }
 
-h1, h2, h3 {
-  font-family: 'Share Tech Mono', sans-serif;
-  font-weight: bold;
-}
-
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Share Tech Mono', sans-serif;
   font-weight: bold;
 }
@@ -136,7 +137,6 @@ ul.list-group {
 
 .test {
   background-color: white;
-  /* background: url(https://images.unsplash.com/photo-1572188863110-46d457c9234d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60); */
 }
 
 .content {
@@ -189,11 +189,4 @@ ul.list-group {
   cursor: pointer;
   margin-right: 5%;
   color: #f8f9fa;
-}
-
-.register {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  margin-top: 3%;
-  padding: 3%;
-  border-radius: 2.5rem;
 }

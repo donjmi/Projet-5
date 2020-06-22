@@ -4,21 +4,7 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class AuthController extends MainController
-{      
-    /**
-     * configSite : title pages
-     * @return void
-     */
-    private function configSite()
-    {
-        return array(
-            'site' => [
-                'label' => "gestion de l'utilisateur",
-            ]
-        );
-    }
-    
-
+{  
     public function login()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -35,12 +21,8 @@ class AuthController extends MainController
                 if (password_verify($password, $user['password'])) {
                     $this->alert('Bienvenue, vous êtes bien connecté !!');
                     $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
-                    $configs['site']['label'] = 'Modifier votre profil';
-                    return $this->render('User_member', array(
-                        'session' => filter_var_array($_SESSION),
-                        'user'    => $user,
-                        'configs' => $configs,
-                    ));
+                    
+                    $this->redirect('home');
                 } else {
                     $this->notifications[] = "l'email et/ou mot de passe n'est pas correct";
                 }
@@ -49,7 +31,8 @@ class AuthController extends MainController
             }
         }
         return $this->render('login', array(
-                'errors'    => $this->notifications
+                'errors'    => $this->notifications,
+                'session' => filter_var_array($_SESSION),
                 // 'configs'   => $configs
         ));
     }
@@ -66,6 +49,7 @@ class AuthController extends MainController
         $configs['site']['label'] = 'Modifier votre profil';
         return $this->render('User_member', array(
             'session' => filter_var_array($_SESSION),
+            'action'  => 'update',
             'user'    => $user,
             'configs' => $configs,
         ));

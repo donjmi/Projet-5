@@ -58,8 +58,8 @@
         <th>id</th>
         <th>image</th>
         <th>titre</th>
-        <th>slug</th>
-        <th>content</th>
+        {# <th>slug</th> #}
+        {# <th>content</th> #}
         <th>date creation</th>
         <th>Publier</th>
         <th>Date maj</th>
@@ -72,8 +72,8 @@
       <td>{{ article.id }}</td>
       <td><img id="img_blog_admin" src="{{ article.url_images }}" alt="..." ></td>
       <td>{{ article.title }}</td>
-      <td>{{ article.slug|slice(0, 55) }} ...</td>
-      <td>{{ article.content|slice(0, 55) }} ...</td>
+      {# <td>{{ article.slug|slice(0, 55) }} ...</td> #}
+      {# <td>{{ article.content|slice(0, 55) }} ...</td> #}
       <td>{{ article.date_creation|date("d/m/y G:i:s") }}</td>
       <td>{{ article.posted }}</td>
       <td>{{ article.update_article }}</td>
@@ -116,7 +116,7 @@
         <th>id</th>
         <th>pseudo</th>
         <th>email</th>
-        <th>mot de passe</th>
+        {# <th>mot de passe</th> #}
         <th>rôle</th>
         <th>Editer</th>
 				<th>supprimer</th>
@@ -128,7 +128,7 @@
        <td>{{ user.id }}</td>
        <td>{{ user.pseudo }}</td>
        <td>{{ user.email }}</td>
-       <td>{{ ' ... '~user.password|slice(0,20)~' ...'}}</td>
+       {# <td>{{ ' ... '~user.password|slice(0,20)~' ...'}}</td> #}
        <td>{{ user.role }}</td>
        <td>
 			<a href="users/update/{{user.id}}">

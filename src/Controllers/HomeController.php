@@ -21,11 +21,7 @@ class HomeController extends MainController
             'session' => filter_var_array($_SESSION)
         ));  
     }
-    /**
-     * Renders the view Home + flux rss
-     */
-
-    
+        
     /**
      * fluxrss
      *

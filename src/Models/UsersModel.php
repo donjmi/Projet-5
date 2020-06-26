@@ -15,7 +15,14 @@ class UsersModel extends MainModel{
         // Nous ouvrons la connexion à la base de données
         $this->getConnection();
     }
-
+    
+    /**
+     * controlUser
+     *
+     * @param  mixed $pseudo
+     * @param  mixed $email
+     * @return void
+     */
     public function controlUser($pseudo, $email){
         $req = "SELECT * FROM $this->table WHERE pseudo = '" . $pseudo . "'
                     AND email = '" . $email . "'  
@@ -24,7 +31,14 @@ class UsersModel extends MainModel{
             $query->execute();
             return $query->fetch();
     }
-
+    
+    /**
+     * controlEmail
+     *
+     * @param  mixed $email
+     * @param  mixed $id
+     * @return void
+     */
     public function controlEmail($email, $id){
         $req = "SELECT * FROM $this->table WHERE email = '" . $email . "' AND id != '" . $id . "'
                     LIMIT 1 ";
@@ -32,7 +46,13 @@ class UsersModel extends MainModel{
             $query->execute();
             return $query->fetch();
     }
-
+    
+    /**
+     * controlPseudo
+     *
+     * @param  mixed $pseudo
+     * @return void
+     */
     public function controlPseudo($pseudo){
         $req = "SELECT * FROM $this->table WHERE pseudo = '" . $pseudo . "' 
                     LIMIT 1 ";
@@ -40,7 +60,12 @@ class UsersModel extends MainModel{
             $query->execute();
             return $query->fetch();
     }
-    
+        
+    /**
+     * countNoUsers
+     *
+     * @return void
+     */
     public function countNoUsers()
     {
             $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 0 ");
@@ -48,7 +73,13 @@ class UsersModel extends MainModel{
             $total = $query->rowCount();
             return $total;
     }
-    
+        
+    /**
+     * getUserMail
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function getUserMail($email){
         $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE email = '$email'");
         $query->execute();

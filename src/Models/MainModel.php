@@ -11,7 +11,7 @@ abstract class MainModel
     protected $table;
     public $model;
   
-       /**
+    /**
      * Allows to load a model
      * @param string $model
      */
@@ -89,7 +89,13 @@ abstract class MainModel
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $data
+     * @return void
+     */
     public function create(array $data)
     {
         $keys = implode(', ', array_keys($data));
@@ -98,7 +104,13 @@ abstract class MainModel
         $query = $this->connexion->prepare($req);
         return $query->execute();
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $data
+     * @return void
+     */
     public function update(array $data)
     {
         $set = null;

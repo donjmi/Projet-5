@@ -90,17 +90,8 @@ class SessionController
                 return true;
             }
             $this->destroySession();
-            // $this->redirect('login');
         }
         return false;
     }
 
-    // public function checkAdminAccess()
-    // {
-    //     if ($this->globals->getSession()->islogged() === false) {
-    //         $this->globals->getSession()->createAlert('You must be logged in to access the administration', 'black');
-
-    //         $this->redirect('user');
-    //     }
-    // }
 }

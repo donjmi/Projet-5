@@ -17,7 +17,13 @@ class CommentsModel extends MainModel
                 // get cnx
                 $this->getConnection();
         }
-
+        
+        /**
+         * listComment
+         *
+         * @param  mixed $id
+         * @return void
+         */
         public function listComment($id)
         {
                 $req = "SELECT  Comments.id,
@@ -36,14 +42,27 @@ class CommentsModel extends MainModel
                 $query->execute();
                 return $query->fetchAll();
         }
-
+        
+        /**
+         * addComment
+         *
+         * @param  mixed $comment
+         * @param  mixed $posts_id
+         * @param  mixed $userId
+         * @return void
+         */
         public function addComment(string $comment, int $posts_id, int $userId)
         {
                 $req = ("INSERT INTO $this->table (comment, date_comment, validate, posts_id, user_id) VALUES (?, NOW(), '0', ?, ?)");
                 $query = $this->connexion->prepare($req);
                 $query->execute(array($comment, $posts_id, $userId));
         }
-
+        
+        /**
+         * noValidate
+         *
+         * @return void
+         */
         public function noValidate()
         {
                 $req = ("SELECT * From $this->table WHERE validate = 0 ORDER BY id DESC");
@@ -51,6 +70,12 @@ class CommentsModel extends MainModel
                 $query->execute();
                 return $query->fetchAll();
         }
+              
+        /**
+         * notOkComment
+         *
+         * @return void
+         */
         public function notOkComment()
         {
                 $req = "SELECT  Comments.id,
@@ -69,7 +94,13 @@ class CommentsModel extends MainModel
                 $query->execute();
                 return $query->fetchAll();
         }
-
+        
+        /**
+         * okComment
+         *
+         * @param  mixed $id
+         * @return void
+         */
         public function okComment($id)
         {
                 $req = "SELECT  Comments.id,
@@ -100,7 +131,12 @@ class CommentsModel extends MainModel
                 $query = $this->connexion->prepare("UPDATE $this->table SET validate = 1 WHERE id = ? ");
                 $query->execute(array($id));
         }
-
+        
+        /**
+         * countComments
+         *
+         * @return void
+         */
         public function countComments()
         {
                 $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 0 ");

@@ -115,12 +115,24 @@ class ArticlesController extends MainController
             'session' => filter_var_array($_SESSION)
         ]);
     }
-    
+        
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id){
        MainModel::loadModel("Articles")->delete($id);
         $this->redirect('admin_index');
     }
-      
+          
+    /**
+     * postedArticles
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function postedArticles($id){
         MainModel::loadModel("Articles")->posted($id);
         $this->redirect('admin_index');

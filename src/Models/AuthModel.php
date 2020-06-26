@@ -15,7 +15,13 @@ class AuthModel extends MainModel{
         // Nous ouvrons la connexion à la base de données
         $this->getConnection();
     }
-
+    
+    /**
+     * verifyEmail
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function verifyEmail($email)
     {
         $req = "SELECT * FROM " . $this->table . " WHERE email='" . $email . "'";
@@ -23,7 +29,13 @@ class AuthModel extends MainModel{
         $query->execute();
         return $query->fetch();
     }
-
+    
+    /**
+     * verifytoken
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function verifytoken($id)
     {
         $req = "SELECT * FROM " . $this->table . " WHERE id = $id ";
@@ -32,7 +44,13 @@ class AuthModel extends MainModel{
         return $query->fetch();
     }
 
-    
+        
+    /**
+     * confirmAuth
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function confirmAuth($id)
     {
             $query = $this->connexion->prepare("UPDATE $this->table SET validate = 1, token = '' WHERE id = ? ");

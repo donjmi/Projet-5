@@ -19,14 +19,26 @@ class CommentsController extends MainController
         MainModel::loadModel("Comments")->addComment($comment, $posts_id, $userId);
 
     }
-
+    
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id){
         if ($this->session->checkAdmin()) {
         MainModel::loadModel("Comments")->delete($id);
         $this->redirect('admin_index');
         }
     }
-
+    
+    /**
+     * validateComment
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function validateComment($id){
         if ($this->session->checkAdmin()) {
         MainModel::loadModel("Comments")->publish($id);

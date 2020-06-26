@@ -4,7 +4,12 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class AuthController extends MainController
-{  
+{      
+    /**
+     * login
+     *
+     * @return void
+     */
     public function login()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -64,7 +69,13 @@ class AuthController extends MainController
         SessionController::destroySession();
         $this->redirect('home');
     }
-
+    
+    /**
+     * confirmUser via token
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function confirmUser($id){
 
         $user  = MainModel::loadModel("Auth")->verifytoken($id);
@@ -74,10 +85,10 @@ class AuthController extends MainController
             $this->session->createSession($user['id'], $user['pseudo'], $user['email'], $user['role']);
             MainModel::loadModel("Auth")->confirmAuth($id);
             $this->alert("Votre compte est activité !");
-            return $this->render('User_member', array(
-                'session' => filter_var_array($_SESSION),
-                'user'    => $user
-            ));
+
+            $home = new HomeController;
+            $home->defaultMethod();
+            
         }else {
             $this->render('login', Array(
                 'session' => filter_var_array($_SESSION)));

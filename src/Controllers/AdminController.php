@@ -4,11 +4,14 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class AdminController extends MainController
-{    
+{        
+    /**
+     * edit administration page
+     *
+     */
     public function edit()
     {  
         if ($this->session->getUserVar('role') === 'admin') {
-            // if ($this->session->checkAdmin()) {
             $titleAdm   = "Accueil de l'administration du site";
             $comments   = MainModel::loadModel("comments")->notOkComment();
             $nbComments = MainModel::loadModel("comments")->countComments();

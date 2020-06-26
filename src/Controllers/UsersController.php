@@ -4,7 +4,12 @@ namespace Blog\Controllers;
 use Blog\Models\MainModel;
 
 class UsersController extends MainController
-{  
+{      
+    /**
+     * createUsers
+     *
+     * @return void
+     */
     public function createUsers()
     {  
         $data= array();
@@ -32,7 +37,13 @@ class UsersController extends MainController
         }
             $this->render('inscription', Array('user' => $data, 'errors' => $this->notifications,'session' => filter_var_array($_SESSION)));  
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function update($id){
         if ($this->session->checkAdmin()) {
 
@@ -65,7 +76,13 @@ class UsersController extends MainController
             $this->redirect('home');
         }
     }
-
+    
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id){
         if ($this->session->checkAdmin()) {
             MainModel::loadModel("Users")->delete($id);
@@ -73,7 +90,12 @@ class UsersController extends MainController
         }
        
     }
-
+    
+    /**
+     * configSite
+     *
+     * @return void
+     */
     private function configSite()
     {
         return array(
@@ -100,6 +122,11 @@ private function isPseudo(){
     return $isOk;
 }
 
+/**
+ * isEmail
+ *
+ * @return void
+ */
 private function isEmail(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
@@ -117,6 +144,11 @@ private function isEmail(){
     return $isOk;
 }
 
+/**
+ * isPassword
+ *
+ * @return void
+ */
 private function isPassword(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
@@ -147,7 +179,12 @@ private function isPassword(){
         return substr(str_shuffle(str_repeat($alphabet, $length)),0, $length);
     }
 
-
+    
+    /**
+     * send_token
+     *
+     * @return void
+     */
     private function send_token(){
         $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);

@@ -24,7 +24,12 @@ class ArticlesModel extends MainModel{
         return simplexml_load_file('http://www.critictoo.com/feed/');
         // return simplexml_load_file('https://www.cineserie.com/feed/');
         }
-
+        
+        /**
+         * getArticles
+         *
+         * @return void
+         */
         public function getArticles()
     {       
             $req = "SELECT articles.id,
@@ -46,7 +51,13 @@ class ArticlesModel extends MainModel{
             $query->execute();
             return $query->fetchAll();
     }
-
+    
+    /**
+     * getOneArticle
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function getOneArticle($id)
     {
         $req = "SELECT articles.id,

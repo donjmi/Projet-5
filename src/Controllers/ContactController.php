@@ -1,6 +1,7 @@
 <?php
 namespace Blog\Controllers;
 
+
 /**
  * class ContactController
  * Manages the contact
@@ -11,17 +12,12 @@ class ContactController extends MainController
     {
         $post = filter_input_array(INPUT_POST);
         if ($post){
-            // @TODO send mail
-            // $surname = filter_input(INPUT_POST, 'surname', FILTER_SANITIZE_STRING);
-            // $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-            // $mail = filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL);
-            // $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_STRING);
-            
+
             $this->send_mail();
-            // @TODO redirection with notification to user
             $this->alert("Votre message a bien été envoyé !");
-            // $this->redirect('home');
-            return $this->render('home');
+
+            $home = new HomeController;
+            $home->defaultMethod();
         }
 
     }
@@ -51,28 +47,6 @@ class ContactController extends MainController
         ->setBody($content)
         ;
 
-        $result = $mailer->send($message);
-    }
-
-    /**
-     * @param $data
-     * @return array
-     */
-    public function verifyUser($data)
-    {
-        $error = [];
-        $userManager = new UserManager();
-        if (!empty($data['email']) and $userManager->checkUser($data['email']) === true) {
-            $error['email'] = "Cet email est déjà utilisé !";
-        }
-        if (!empty($data['username']) and $userManager->checkUsername($data['username']) === true) {
-            $error['username'] = "Ce Nom est déjà utilisé !";
-        }
-        if (!empty($data['password2']) and $data['password'] !== $data['password2']) {
-            $error['password'] = "Vos passwords sont différents !";
-        }
-        return $error;
-    }
-
-  
+        $mailer->send($message);
+    } 
 }

@@ -9,7 +9,7 @@ abstract class MainController
     protected $twig = null;
     protected $notifications = null;
     protected $session; // session user
-    protected $currentPage = null;
+
     /**
      * MainController constructor
      */
@@ -21,6 +21,7 @@ abstract class MainController
         ]);
         $this->notifications = array();
         $this->session = new SessionController();
+        require_once '../config/config.php';
     }
 
     /**
@@ -30,8 +31,7 @@ abstract class MainController
      */
     public function render(string $file, array $data = [])
     {
-        $this->currentPage = $file;
-        echo $this->twig->render($file . '.twig', $data);
+        echo filter_var($this->twig->render($file . '.twig', $data));
         exit();
     }
     
@@ -60,7 +60,7 @@ abstract class MainController
             default:
                 $redirect = '';
         }
-        $this->currentPage = $url;
+
         header("Location: http://localhost/projet-5$redirect");
         exit();
     }

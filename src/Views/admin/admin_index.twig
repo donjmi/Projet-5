@@ -4,51 +4,100 @@
 <h2> {{ titleAdm }}</h2>
 <div id="tabs">
   <h3>Commentaires - (à valider {{ nbComments  }}) </h3>
-  <div><div class="table-responsive">
-    <table class="table table-striped table-bordered dislay" id="mytable">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Article</th>
-          <th scope="col">Commentaire</th>
-          <th scope="col">date</th>
-          <th scope="col">validation</th>
-          <th scope="col">action</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for comment in comments %}
-        <tr>
-          <th scope="row">{{ comment.id }}</th>
-          <td>{{ comment.title }}</td>
-          <td>{{ comment.pseudo }} - {{ comment.comment }}</td>
-          <td>{{ comment.date_comment|date("d/m/Y") }}</td>
-          <td>{{ comment.validate }}</td>
-          <td style="border-left-width: 10px; border-left-color:transparent;">
-            <div class="row">
-              <div class="btn-group">
-              <a href="#" id="{{ comment.id }}"></a>
-              <a href="comments/validateComment/{{comment.id}}" onclick="return window.confirm('Validation du commentaire !')" id="{{ comment.id }}" class="btn btn-success btn-sm">valider</button></a>
-              <a href="comments/delete/{{comment.id}}" onclick="return window.confirm('Attention suppression definitive du commentaire !')" class="btn btn-danger btn-sm">Supprimer</button></a>
+  <div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered dislay" id="mytable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Article</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">date</th>
+            <th scope="col">validation</th>
+            <th scope="col">action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+          <tr>
+            <th scope="row">{{ comment.id }}</th>
+            <td>{{ comment.title }}</td>
+            <td>{{ comment.pseudo }} - {{ comment.comment }}</td>
+            <td>{{ comment.date_comment|date("d/m/Y") }}</td>
+            <td>{{ comment.validate }}</td>
+            <td style="border-left-width: 10px; border-left-color:transparent;">
+              <div class="row">
+                <div class="btn-group">
+                <a href="#" id="{{ comment.id }}"></a>
+                <a href="comments/validateComment/{{comment.id}}" onclick="return window.confirm('Validation du commentaire !')" id="{{ comment.id }}" class="btn btn-success btn-sm">valider</button></a>
+                <a href="comments/delete/{{comment.id}}" onclick="return window.confirm('Attention suppression definitive du commentaire !')" class="btn btn-danger btn-sm">Supprimer</button></a>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-      <tfoot>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Article</th>
-          <th scope="col">Commentaire</th>
-          <th scope="col">date</th>
-          <th scope="col">validée</th>
-          <th scope="col">action</th>
-        </tr>
-      </tfoot>
-    </table>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Article</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">date</th>
+            <th scope="col">validée</th>
+            <th scope="col">action</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>  <h3>Commentaires - (déjà validés {{ nbOkComments  }}) </h3>
+  <div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered dislay" id="mytable4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Article</th>
+            <th scope="col">utilisateur</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">date</th>
+            <th scope="col">validation</th>
+            <th scope="col">action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for comment in okComments %}
+          <tr>
+            <th scope="row">{{ comment.id }}</th>
+            <td>{{ comment.title }}</td>
+            <td>{{ comment.pseudo }}</td>
+            <td>{{ comment.comment }}</td>
+            <td>{{ comment.date_comment|date("d/m/Y") }}</td>
+            <td>{{ comment.validate }}</td>
+            <td style="border-left-width: 10px; border-left-color:transparent;">
+              <div class="row">
+                <div class="btn-group">
+                <a href="#" id="{{ comment.id }}"></a>
+                <a href="comments/delete/{{comment.id}}" onclick="return window.confirm('Attention suppression definitive du commentaire !')" class="btn btn-danger btn-sm">Supprimer</button></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Article</th>
+            <th scope="col">utilisateur</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">date</th>
+            <th scope="col">validée</th>
+            <th scope="col">action</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
-</div>
   <h3>Articles ({{ nbArticles  }} non publié(s))</h3>
   <div>
     <table class="table table-striped table-bordered dislay" id="mytable2">
@@ -152,6 +201,8 @@
 <!-- JavaScript -->
   <script>
     $(document).ready(function() {
+      //"scrollX": true,
+      //"paging": true,
       $('#mytable').DataTable( {
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
         } );
@@ -159,6 +210,9 @@
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
         } );
       $('#mytable3').DataTable( {
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+        } );
+      $('#mytable4').DataTable( {
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
         } );
       

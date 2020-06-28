@@ -89,7 +89,6 @@ class CommentsModel extends MainModel
                     WHERE Comments.posts_id = articles.id
                     AND validate = 0 
                     ORDER BY Comments.date_comment ASC";
-                //     debug($req);
                 $query = $this->connexion->prepare($req);
                 $query->execute();
                 return $query->fetchAll();
@@ -109,11 +108,12 @@ class CommentsModel extends MainModel
                             Comments.comment,
                             Comments.date_comment,
                             Comments.validate,
+                            articles.title,
                             Users.pseudo
-                    FROM $this->table, users
-                    WHERE Comments.posts_id = '" . $id . "'
+                    FROM $this->table, articles, users
+                    WHERE Comments.posts_id = articles.id
                     AND Comments.user_id = Users.id 
-                    AND validate = 1 
+                    AND Comments.validate = 1  
                     ORDER BY Comments.id DESC";
                 $query = $this->connexion->prepare($req);
                 $query->execute();
@@ -140,6 +140,19 @@ class CommentsModel extends MainModel
         public function countComments()
         {
                 $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 0 ");
+                $query->execute();
+                $total = $query->rowCount();
+                return $total;
+        }  
+
+        /**
+         * countOkComments
+         *
+         * @return void
+         */
+        public function countOkComments()
+        {
+                $query = $this->connexion->prepare("SELECT * FROM $this->table WHERE validate = 1 ");
                 $query->execute();
                 $total = $query->rowCount();
                 return $total;

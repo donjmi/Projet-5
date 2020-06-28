@@ -46,9 +46,8 @@ body {
 
 @media screen and (max-width: 1024px) {
   #headerwrap {
-    min-height: 0px; 
+    min-height: unset;
   }
-
 }
 
 p {

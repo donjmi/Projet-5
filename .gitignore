@@ -1,7 +1,6 @@
 # DB (uncomment when you start using the template)
 config/config.php
 # config/db.sql
-src/Controllers/function.php
 # Images
 #public/img/
 

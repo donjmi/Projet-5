@@ -44,13 +44,9 @@ body {
   color: white;
 }
 
-@media (max-width: 768px) {
-  #headerwrap h1 {
-    font-size: 50px;
-  }
-
-  #headerwrap h2 {
-    font-size: 30px;
+@media screen and (max-width: 1024px) {
+  #headerwrap {
+    min-height: 0px; 
   }
 }
 
@@ -72,14 +68,9 @@ h1.title-post {
   text-align: center;
 }
 
-#img_blog {
-  width: 200px;
-  height: 200px;
-}
-
-#img_blog_admin {
-  width: 50px;
-  height: 50px;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .admin-bloc1 {
@@ -189,4 +180,14 @@ ul.list-group {
   cursor: pointer;
   margin-right: 5%;
   color: #f8f9fa;
+}
+
+.col-4 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+div.dataTables_wrapper {
+  width: 768px;
+  margin: 0 auto;
 }

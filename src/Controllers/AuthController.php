@@ -37,8 +37,7 @@ class AuthController extends MainController
         }
         return $this->render('login', array(
                 'errors'    => $this->notifications,
-                'session' => filter_var_array($_SESSION),
-                // 'configs'   => $configs
+                'session' => filter_var_array($_SESSION)
         ));
     }
     

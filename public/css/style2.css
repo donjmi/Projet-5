@@ -48,6 +48,7 @@ body {
   #headerwrap {
     min-height: 0px; 
   }
+
 }
 
 p {
@@ -183,8 +184,8 @@ ul.list-group {
 }
 
 .col-4 {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: unset;
+  padding-right: unset;
 }
 
 div.dataTables_wrapper {

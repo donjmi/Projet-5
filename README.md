@@ -3,30 +3,24 @@
 
 BLOG MVC - Project n° 5 Openclassrooms
 
-Installation du projet
+Bonjour ! Ce site Web est un blog avec une architecture MVC (Model View Controller). Le site dispose d'une zone d'administration où vous pouvez gérer un article, un commentaire, un membre ....
 
-Installation of composer => https://getcomposer.org/download/
-Once composer is installed, launch terminal command : "composer dump-autoload -o" in order to load all classes.
+Ce site a été programmé en code PHP et pour le style Bootstrap et javacript L'architecture utilise une programmation orientée objet. Vous verrez le shema associé dans le dossier "UML". Ce dossier résume les objectifs et l'architecture du site.
 
-STEP 2
+Pour utiliser ce projet ...
 
-Import the blog.sql file located in the /database/ folder to your database.
+Installer composer (logiciel de gestionnaire de dépendances)
+Installer les bibliothèques (Twig, SwiftMailer)
+Clonez ce projet dans votre référentiel ou dossier
+Importer une base de données SQL à partir du dossier SQL
+Modifier les informations de connexion (dossier config)
+Changez si necessaire dans la page navbar.twig l'URL de base à utiliser
 
-STEP 3
+connexion admin:
+login : <ad@min.fr>
+pass : admin
 
-Modify the file located in the /config/ config.php
-Edit this file and fill the empty fields with your database connection information.
+La norme utilisée:
+PSR4
 
-STEP 4
-
-Edit the HomeController.php file located in /src/Controller.
-Read the comments and indicate your email address in order to receive emails sent via the Blog.
-
-YOU ARE ALL SET !
-
-Connect to the blog as an Admin for the first time :
-
-email : ad@min.com
-password : .....
-
-ENJOY !
+ENJOY !! 

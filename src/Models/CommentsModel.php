@@ -100,7 +100,7 @@ class CommentsModel extends MainModel
          * @param  mixed $id
          * @return void
          */
-        public function okComment($id)
+        public function okComment()
         {
                 $req = "SELECT  Comments.id,
                             Comments.posts_id,

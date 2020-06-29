@@ -59,7 +59,7 @@ class UsersController extends MainController
                 $data['role']       = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
 
                 if (! $this->validateUsers()) {
-                    $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'configs'=> $this->configSite()));
+                    $this->render('User_edit', Array('user'=>$data,'action'=>'update','errors'=>$this->notifications,'session'   => filter_var_array($_SESSION),'configs'=> $this->configSite()));
                 }
                     $data['password']   = password_hash($data['password'], PASSWORD_BCRYPT);
                     unset($data['email2']);
@@ -70,7 +70,7 @@ class UsersController extends MainController
                 
             } else {
                 $user = MainModel::loadModel("Users")->getOne($id);
-                $this->render('User_edit', Array('user'=> $user,'action'=> 'update','errors' => $this->notifications,'configs'=> $this->configSite()));
+                $this->render('User_edit', Array('user'=> $user,'action'=> 'update','errors' => $this->notifications,'session'   => filter_var_array($_SESSION),'configs'=> $this->configSite()));
             }
         } else {
             $this->redirect('home');

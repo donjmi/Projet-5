@@ -31,26 +31,26 @@ USE blog ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Structure de la table articles
 --
 
 CREATE TABLE articles (
-  `id` tinyint(3) UNSIGNED NOT NULL,
-  `title` varchar(250) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `content` longtext NOT NULL,
-  `date_creation` datetime DEFAULT NULL,
-  `url_images` text DEFAULT NULL,
-  `update_article` date NOT NULL,
-  `user_id` smallint(11) NOT NULL,
-  `posted` tinyint(1) NOT NULL
+  id tinyint(3) UNSIGNED NOT NULL,
+  title varchar(250) NOT NULL,
+  slug varchar(255) NOT NULL,
+  content longtext NOT NULL,
+  date_creation datetime DEFAULT NULL,
+  url_images text DEFAULT NULL,
+  update_article date NOT NULL,
+  user_id smallint(11) NOT NULL,
+  posted tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `articles`
+-- Déchargement des données de la table articles
 --
 
-INSERT INTO articles (`id`, `title`, `slug`, `content`, `date_creation`, `url_images`, `update_article`, `user_id`, `posted`) VALUES
+INSERT INTO articles (id, title, slug, content, date_creation, url_images, update_article, user_id, posted) VALUES
 (4, 'Arrow : Stargirl', 'Une nouvelle héroïne DC Comics rejoint l’Arrowverse.', 'Le nouveau cross-over de l’Arrowverse va-t-il accueillir une toute nouvelle recrue dans l&#38;#38;#38;#39;univers connecté DC Comics ? Nos confrères du site Business Insider révèlent en effet que l’héroïne Stargirl fera une apparition dans l’épisode spécial intitulé Crisis on Infinite Earths ; si l’héroïne ne devrait apparaître qu’au détour d’une simple scène, cette courte introduction préfigure toutefois de quelques mois le lancement de sa propre série, tout d&#38;#38;#38;#39;abord sur la plate-forme DC Universe puis sur la chaîne CW aux Etats-Unis.  Incarnée par Brec Bassinger (Bella et les Bulldogs), Stargirl est un super-héroïne aux pouvoirs cosmiques, dont l’alter-ego est une jeune lycéenne vivant dans l’ombre de son beau-père (Luke Wilson), lui-même ancien side-kick de Starman (Joel McHale), le célèbre héros de la Société de justice d&#38;#38;#38;#39;Amérique. Et bien que ses aventures soient parties intégrantes de l’Arrowverse, il semblerait toutefois que l’action du show se déroulera dans un tout autre univers que celui des séries Supergirl, Flash, Batwoman etc.  Les trois premières parties de Crisis on Infinite Earths seront diffusées aux Etats-Unis les 8, 9 et 10 décembre prochains suivies un mois plus tard - le 14 janvier 2020 - d’un double-épisode final.  L&#38;#38;#38;#39;ultime saison d&#38;#38;#38;#39;Arrow est diffusée chez nous en exclusivité sur Netflix :', '2020-05-24 20:45:18', 'http://fr.web.img3.acsta.net/r_640_360/newsv7/19/11/22/09/51/5705967.jpg', '2020-06-22', 1, 1),
 (5, 'The Baker  the Beauty ', 'Un trailer pour la nouvelle comédie romantique d’ABC qui débarque en avril', 'Amour, célébrités et pâtisserie. Voilà ce qui est au programme de The Baker and The Beauty, la nouvelle comédie romantique de la chaine américaine ABC et adaptation de la série israélienne éponyme. Cette dernière se dévoile à l’aide d’une bande-annonce avant son arrivée sur le petit écran, annoncée pour le 13 avril 2020.  Plus précisément, The Baker and The Beauty s’intéresse à Daniel Garcia (Victor Rasuk), un boulanger de classe moyenne et fils d’immigrés cubains qui fait tout pour aider ses parents et ses frères et sœurs. Lorsqu’une soirée à Miami en compagnie de sa petite-amie tourne à la rupture, Daniel fait la connaissance de Noa Hamilton (Nathalie Kelley), star internationale.  Alors que les deux développent une relation, la vie de Daniel se retrouve sous le feu des projecteurs, avec tous les avantages et inconvénients que cela implique.', '2020-05-24 18:08:06', 'https://www.nouveautes-tele.com/wp-content/uploads/2020/01/baker-beauty.jpg', '2020-06-21', 1, 1),
 (6, 'Hunters', 'Des groupes de chasseurs de nazis, dans l\'Amérique des années 1970, sont en quête de justice et assoiffés de vengeance', 'Des groupes de chasseurs de nazis, dans l&#39;Amérique des années 1970, sont en quête de justice et assoiffés de vengeance.Ils vont traquer et tuer des centaines de nazis qui, avec l&#39;aide du gouvernement américain, ont échappé aux forces de l&#39;ordre et ont réussi à se fondre dans la société.Personnages principaux :    Al Pacino (VF : José Luccioni) : Meyer Offerman    Logan Lerman (VF : Nathanel Alimi) : Jonah Heidelbaum    Kate Mulvany (VF : Cathy Diraison) : Soeur Harriet / Rebecca Crowtser    Tiffany Boone : Roxy Jones   Carol Kane : Mindy Markowitz    Saul Rubinek (VF : Paul Borne) : Murray Markowitz    Josh Radnor (VF : Xavier Béja) : Lonny Flash  Louis Ozawa Changchien : Joe Torrance   Jerrika Hinton (VF : Virginie Emane) : Millie Morris   Greg Austin : Travis Leich   Dylan Baker (VF : Pierre Tessier) : Biff Simpson    Lena Olin : Le Colonel / Eva Braun', '2019-06-29 22:05:01', 'http://fr.web.img4.acsta.net/c_216_288/pictures/20/01/06/09/11/1833037.jpg', '2020-06-27', 1, 1),
@@ -63,23 +63,23 @@ INSERT INTO articles (`id`, `title`, `slug`, `content`, `date_creation`, `url_im
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comments`
+-- Structure de la table comments
 --
 
 CREATE TABLE comments (
-  `id` int(11) NOT NULL,
-  `posts_id` tinyint(3) UNSIGNED NOT NULL,
-  `user_id` tinyint(4) NOT NULL,
-  `comment` text NOT NULL,
-  `date_comment` datetime NOT NULL,
-  `validate` tinyint(1) NOT NULL DEFAULT 0
+  id int(11) NOT NULL,
+  posts_id tinyint(3) UNSIGNED NOT NULL,
+  user_id tinyint(4) NOT NULL,
+  comment text NOT NULL,
+  date_comment datetime NOT NULL,
+  validate tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `comments`
+-- Déchargement des données de la table comments
 --
 
-INSERT INTO comments (`id`, `posts_id`, `user_id`, `comment`, `date_comment`, `validate`) VALUES
+INSERT INTO comments (id, posts_id, user_id, comment, date_comment, validate) VALUES
 (1, 10, 1, 'voici un commentaire', '2020-03-31 00:17:51', 1),
 (12, 4, 2, 'c\'est bien', '2020-04-03 12:44:49', 1),
 (14, 10, 2, 'pascal', '2020-04-06 16:02:14', 1),
@@ -90,24 +90,24 @@ INSERT INTO comments (`id`, `posts_id`, `user_id`, `comment`, `date_comment`, `v
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table users
 --
 
 CREATE TABLE users (
-  `id` tinyint(4) NOT NULL,
-  `pseudo` varchar(80) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(55) NOT NULL DEFAULT 'modo',
-  `token` varchar(255) NOT NULL,
-  `validate` int(11) NOT NULL
+  id tinyint(4) NOT NULL,
+  pseudo varchar(80) NOT NULL,
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  role varchar(55) NOT NULL DEFAULT 'modo',
+  token varchar(255) NOT NULL,
+  validate int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `users`
+-- Déchargement des données de la table users
 --
 
-INSERT INTO users (`id`, `pseudo`, `email`, `password`, `role`, `token`, `validate`) VALUES
+INSERT INTO users (id, pseudo, email, password, role, token, validate) VALUES
 (1, 'Administrator', 'ad@min.fr', '$2y$10$cy6Pb/E.rL8d4n4KDNJFAu9/.WKwKGysVAKrApvhjdARMwHp98x1C', 'admin', '', 1),
 (2, 'teddy', 'ted@teddy.fr', '$2y$10$A4dvJ3C5woHP3ZwS1DmuMOLL6gYVwGES2b228u9Tdye8tDMXkuFui', 'admin', '', 1),
 (3, 'changeTo', '2jordan@nike.fr', '$2y$10$CzmBq0QAgcG8PPPTARAuRO1F2PF/PJDZP8jGxkyqT/aPpvwXv4xrK', 'member', '', 1),
@@ -124,60 +124,60 @@ INSERT INTO users (`id`, `pseudo`, `email`, `password`, `role`, `token`, `valida
 --
 
 --
--- Index pour la table `articles`
+-- Index pour la table articles
 --
-ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
+ALTER TABLE articles
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY id (id);
 
 --
--- Index pour la table `comments`
+-- Index pour la table comments
 --
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
-  ADD KEY `posts_id` (`posts_id`),
-  ADD KEY `fk_comments_users` (`user_id`);
+ALTER TABLE comments
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY id (id),
+  ADD KEY posts_id (posts_id),
+  ADD KEY fk_comments_users (user_id);
 
 --
--- Index pour la table `users`
+-- Index pour la table users
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`email`);
+ALTER TABLE users
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY id (id,email);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `articles`
+-- AUTO_INCREMENT pour la table articles
 --
-ALTER TABLE `articles`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+ALTER TABLE articles
+  MODIFY id tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT pour la table `comments`
+-- AUTO_INCREMENT pour la table comments
 --
-ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+ALTER TABLE comments
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT pour la table users
 --
-ALTER TABLE `users`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+ALTER TABLE users
+  MODIFY id tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `comments`
+-- Contraintes pour la table comments
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comment_Article` FOREIGN KEY (`posts_id`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE comments
+  ADD CONSTRAINT fk_comment_Article FOREIGN KEY (posts_id) REFERENCES articles (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT fk_comments_users FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

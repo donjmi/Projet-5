@@ -9,16 +9,12 @@ Ce site a été programmé en code PHP et pour le style Bootstrap et javacript L
 
 Pour utiliser ce projet ...
 
-Installer composer (logiciel de gestionnaire de dépendances)
-Installer les bibliothèques (Twig, SwiftMailer)
-Clonez ce projet dans votre référentiel ou dossier
-Importer une base de données SQL à partir du dossier SQL
-Modifier les informations de connexion (dossier config)
-Changez si necessaire dans la page navbar.twig l'URL de base à utiliser
-
-connexion admin:
-login : <ad@min.fr>
-pass : admin
+-Installer composer (logiciel de gestionnaire de dépendances)
+-Installer les bibliothèques (Twig, SwiftMailer)
+-Clonez ce projet dans votre référentiel ou dossier
+-Importer une base de données SQL à partir du dossier SQL
+-Modifier les informations de connexion (dossier config)
+-Changez si necessaire dans la page navbar.twig l'URL de base à utiliser
 
 La norme utilisée:
 PSR4

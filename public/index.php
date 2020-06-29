@@ -12,6 +12,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $router = new Router();
 
-Debugger::enable();
+// Debugger::enable();
 $router->run();
 

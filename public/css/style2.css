@@ -67,10 +67,15 @@ h6 {
 h1.title-post {
   text-align: center;
 }
+ 
+#img_blog {
+  width: 200px;
+  height: 200px;
+}
 
-img {
-  max-width: 100%;
-  height: auto;
+#img_blog_admin {
+  width: 50px;
+  height: 50px;
 }
 
 .admin-bloc1 {

@@ -1,11 +1,11 @@
 {% extends 'Template/layout.twig' %}
 
 {% block content %}
-<h1>{{ article.title }} </h1>
-<p>Créé par {{article.pseudo}} - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</p>
+<h1>{{ article.title|raw }} </h1>
+<p>Créé par {{article.pseudo}} - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}  - maj le {{ article.update_article|date("d/m/Y")}}</p>
 
 <figure><img class="circle" src="{{ article.url_images }}" class="card-img-top" alt="..." ></figure>
-<p class="jmi"> {{ article.content|nl2br  }}</p>
+<p class="jmi"> {{ article.content|raw|nl2br }}</p>
 <hr>
 {% endblock %}
 

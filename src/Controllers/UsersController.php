@@ -130,6 +130,7 @@ private function isPseudo(){
 private function isEmail(){
     $isOk = true;
     $post = filter_input_array(INPUT_POST);
+    $post['id']         = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
     if ($post['email2'] != $post['email']){
         $this->notifications[] = "Votre Email de confirmation est différent";
         $isOk = false;

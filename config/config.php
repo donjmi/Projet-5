@@ -10,6 +10,6 @@ define('DB_OPTIONS', array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO
 
 const EMAIL_HOST = 'smtp.gmail.com';
 const EMAIL_PORT = 587;
-const EMAIL_USERNAME = 'donjmipub@gmail.com';
-const EMAIL_PASSWORD = 'donjmi@1pass';
+const EMAIL_USERNAME = 'email';
+const EMAIL_PASSWORD = 'password';
 const EMAIL_ENCRYPTION = 'tls';

@@ -53,6 +53,7 @@ class ArticlesController extends MainController
             $data['content']        = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);;
             $data['date_creation']  = htmlspecialchars(date("Y-m-d H:i:s"));
             $data['url_images']     = filter_input(INPUT_POST, 'url_images', FILTER_SANITIZE_STRING);
+            $data['user_id']        =  $this->session->getUserVar('id');
             MainModel::loadModel("Articles")->create($data);
 
         }

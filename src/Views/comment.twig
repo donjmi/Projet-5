@@ -4,7 +4,7 @@
     <div class="card" style="border-collapse: separate; border-spacing: 20px 5%; width: 100%;  border-width: 0px; border-color: #000000; border-style: ; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: 2px 4px 12px #666; -moz-box-shadow: 2px 4px 12px #666; box-shadow: 2px 4px 12px #666; margin-bottom: 20px"  cellspacing="15">
     <h6 class="card-header text-left">{{ item.pseudo }}  - <em>le {{ item.date_comment }}</em></h6>
     <div class="card-body">
-      <p class="card-text">{{ item.comment }}</p>
+      <p class="card-text">{{ item.comment|raw  }}</p>
     </div>
   </div>
    {% endif %}

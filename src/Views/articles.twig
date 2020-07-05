@@ -12,8 +12,8 @@
             </div>
             <div class="col-md-7">
                 <div class="card-body">
-                    <h5 class="card-title">{{article.title}}</h5>
-                    <p class="card-text">{{ article.slug}}
+                    <h5 class="card-title">{{article.title|raw }}</h5>
+                    <p class="card-text">{{ article.slug|raw }}
                         <a href="articles/read/{{article.id}}" class="badge badge-primary">Lire la suite</a>
                     </p>
                     <p class="card-text"><small class="text-muted">Créé par {{article.pseudo}} - le {{ article.date_creation|date("d/m/Y h\\h i\\m s\\s")}}</small></p>
